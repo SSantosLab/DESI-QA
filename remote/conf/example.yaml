@@ -1,0 +1,9 @@
+dryrun: False
+dev_by_bus: {'can22':[4852]}
+canlist: ['can22']
+th_lim: [0, 30] # physical limits
+ph_lim: [0, 30]
+~                        
+
+# >>> import fiposcontrol; fipos=FiposControl(['can22']); devbb = {'can22': [4852]}
+# fipos.set_pospwr(1)

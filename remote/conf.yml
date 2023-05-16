@@ -1,0 +1,22 @@
+dryrun: False
+dev_by_bus: {'can22':[4852]}
+canlist: ['can22']
+
+new_speed: {'theta':
+               {'cw': {'cruise':33, 'creep': 1}, 'ccw': {'cruise':33, 'creep': 1}},
+            'phi':
+               {'cw': {'cruise':33, 'creep': 1}, 'ccw': {'cruise':33, 'creep': 1}}
+            }
+
+new_ramps: {'theta':{'cw':{'up':12, 'down':12}, 'ccw':{'up':12, 'down':12}},
+            'phi':{'cw':{'up':6, 'down':6}, 'ccw':{'up':6, 'down':6}}}
+
+
+
+#new_speed: {'theta': 
+#                {'cw':  {'cruise': 33, 'spindown': 12, 'spinup': 12},}, 
+#                {'ccw': {'cruise': 33, 'spindown': 12, 'spinup': 12},},
+#          'phi': {'cruise': 33, 'spindown': 12, 'spinup': 12}}
+
+th_lim: [0, 30] # physical limits
+ph_lim: [0, 30]

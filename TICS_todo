@@ -1,0 +1,36 @@
+For xy test: 
+
+- [Done] add calibration in the configuration file
+- [Done] Modify connect4.py for reading xytable instead of movetable
+- [Done] Testing xy code
+- [Done] producing xy test 
+- [Done] unit tests for moves with rebekah 16-02
+- [Done] write all the infos 16-02- [todo] change database for sep =','
+- [Done] every cruise move should take in account the ramp (up/down). For standard case, we have 1.995 deg x2 
+- [Done] add backlash in direction 
+- [Done] solved a bug in xylib for args in arccos 3h
+- [Done] tested ramp fw 6.23  1h
+- [Done] tested speed fw 6.23  1h
+- [Done] implement speed flags 2h
+
+
+- [todo] make local code write the conf and copy it for the remote
+- [Done] test speed implementation
+- [todo] add is_target to database to differentiate what is approaching move, angle move and targeting move
+- [todo] unpark the positioner with a small creep move 
+- [todo] read params in remote
+- [todo] read params in local codes
+- [todo] Presentation checking histograms of xytest for different speed, ramp setup
+Report
+- [] calibration, R1, R2, arcs centers (phi, theta), stability of degrees in phi (residuals removing the hardstop  ) , check theta, measure the positioner backlash 
+- [] 
+
+POsitioner got stucked in (march 07) 
+         -0.330402, 2.661256 
+         1968.460930, 963.427600
+        dist_xy2c: 2.681687 mm
+        phi:  52.6055 deg
+
+
+https://docs.google.com/document/d/1psrhfsEzlISRBthvlSjvrAeMenjJScDf4Qp7cKSnIHw/edit?usp=sharing
+

@@ -1,0 +1,317 @@
+"""
+
+todo: 
+    deal with more positioners 
+    pass canbus and devbycan
+    now, all positioners are doing the same moves!
+    
+"""
+ 
+from src.phandler import ShellHandler
+import time 
+import sbigCam as sbc
+import time
+import sys
+import os
+from csv import reader
+import spotfinder
+import numpy as np
+import configparser
+
+
+sys.path.append('/data/common/software/products/tsmount-umich/python')
+import cem120func as cf
+
+
+def start_cam(exposure_time=3000, is_dark=False):
+    """Initialize sbigcam
+    """
+    cam = sbc.SBIGCam() 
+    try: 
+        cam.close_camera()
+    except Exception as err:
+        pass
+
+    cam.open_camera()
+    cam.select_camera('ST8300')
+    cam.set_exposure_time(exposure_time)
+    cam.set_dark(is_dark)
+    return cam 
+
+
+def get_picture(cam, imgname, rootout=None, dryrun=False):
+    """
+    cam (SBIG.cam() obj): object from sbc
+    """
+    image = cam.start_exposure()
+    # imgname = f"{rootout}/{time.strftime("%Y-%m-%d-%H%M%S")}"
+    cam.write_fits(image, name = f"{rootout}/{imgname}.fits")
+    print(f'Photo #{imgname} taken successfully.')
+
+
+def start_mount():
+    """
+    Instantiate the ts mount class
+    returns:
+        cem120 (serial obj): object for moving mount class
+
+    """
+    cem120 = cf.initialize_mount("/dev/ttyUSB0")
+    return cem120
+
+
+
+def movemount(mtpos):
+    """Place holder for mount
+    input:
+        mtpos (): list (?) with the mount position
+    """
+    pass
+
+
+def connect2pb():
+    """Starts ShellHandler and returns the sh object
+    """
+    with open("conninfo.txt", "r") as ff: 
+        pw = [i.strip('\n') for i in ff.readlines()]
+    sh = ShellHandler(pw[0], pw[1], pw[2])
+    print("Connection started")
+    return sh
+
+
+def read_movetable(ifn):
+    """
+    Read a positioners move table
+    ifn (str): Input File Name w/ rows like:
+                     'direction speed motor angle'
+            e.g.  'cw cruise phi 180'
+    """
+    movelines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
+    movetable = [ i for i in movelines]
+    for i, row in enumerate(movetable):
+        assert len(row)==4, \
+               f"Error: row {i} with {len(row)} Columns; should be 4!"
+    return movetable
+
+
+def read_mounttable(ifn):
+    """
+    Read a positioners move table
+    ifn (str): Input File Name w/ rows like:
+                     'direction speed motor angle'
+            e.g.  'cw cruise phi 180'
+    """
+    if ifn is None:
+        print("Mount table not found! Using home")
+        return [0]
+    mountlines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
+    mounttable = [ i for i in movelines]
+    for i, row in enumerate(movetable):
+        assert len(row)==1, \
+               f"Error: mount row {i} with {len(row)} Columns; should be 1!"
+    return mounttable
+
+
+def send_posmove(mvargs, remote_script="fao_arcseq.py", verbose=False):
+    """
+    Move a positioner 
+    mvargs (str): 
+        args for sequence
+        'cw cruise phi 0 somehash'
+    remote_script (str):
+        path and filename in Petal Box for the script that calls 
+        fiposcontroller.
+    """
+    cmd = f"cd {pbroot}; python3 {remote_script} {mvargs}"
+    sin, sout, serr = sh.execute(cmd)
+    if verbose:
+        sh.print(sout)
+        sh.print(serr, mark="::")
+    return sout, serr
+
+
+def get_remotehash(sh, hashfile="/home/msdos/pclight/trenz/umhash.txt"):
+    """ 
+    Read the last line of hash file to check if the fiposcontroller 
+    worked in remote Petal Box
+    hashfile (str):
+        path in PB to a file that saved hash after move
+    return:
+        hash (str)
+    """
+    sin, sout, serr = sh.execute(f"tail -n1 {hashfile}")
+
+    # Asserting no return error
+    if len(serr) !=0:
+        print("Error (manager):")
+        for line in serr:
+            print("\t\t", line.strip('\n'))
+        return None
+
+    return sout[-1].strip('\n')
+
+
+def confirm_move(ihash, ohash):
+    """
+    Compares remote output_hash (read from get_remotehash()) with 
+    input_hash
+    """
+    if ohash == f'#UM{ihash}fff':
+        print("Sucessful reply from PB")
+        return True
+    else:
+        print(ohash, f"#UM{ihash}fff")
+        print("Error in PB reply")
+        return False
+
+
+if __name__=='__main__':
+    #TODO: receive config as parsed argument
+    #      write logs at the end
+    #      close connections to cam, mount
+    # -------------------------------------------
+    # configuration:
+    
+    cfg = configparser.ConfigParser()
+    cfg.read('conf/example.ini')
+
+    pipeline = cfg.get('run', 'pipeline').split(" ")
+    dryrun = cfg.getbool('run', 'dryrun')
+    session_label = cfg.get('run', 'session_label')
+
+    pbroot = cfg.get('run', 'pbroot')
+    rootout = cfg.get('run', 'outroot')
+
+    hascam = 'cam' in pipeline
+    hasmount = 'mount' in pipeline
+    haspos = 'positioners' in pipeline
+    hasspot = 'spotfinder' in pipeline
+
+    if haspos: 
+        movetablefn = cfg.get('run', 'movetable') 
+    
+    if hasmount: 
+        mounttablefn = cfg.get('run', 'mounttable')
+    
+    if session_label is None:
+        session_label = time.strftime("%Y%m%d-%H%M%S")
+    
+   
+    print("--"*8)
+    print(pipeline)
+    print(session_label)
+    print()
+    print("--"*35,f"\n\t# {movetablefn}\n","--"*35 )
+
+
+    # -------------------------------------
+    # Session Setup
+    
+    # Connecting to PB
+    sh = connect2pb()
+
+    if hascam and (not dryrun):
+        cam = start_cam()
+
+    picpath = os.path.join(rootout, session_label)
+
+    if (not os.path.exists(picpath)) and (not dryrun):
+        os.makedirs(picpath)
+        print("----"*10 + "\nsession imgs in: ", picpath) 
+
+    sys_status=True
+
+    # 1. get_movetable
+    # 2. get_mounttable
+    # 3. PRINT Planning
+    """
+    LOOP MOUNT
+        LOOP POSITIONERS
+    """
+    mounttable = read_mounttable(mounttablefn)
+    movetable = read_movetable(movetablefn)
+    
+    print(f" Loop positioner size: {len(movetable)}" )
+
+    for i, imount in enumerate(mounttable):
+        if imount !=0:  
+            sys.exit("NotImplemented: Only position 0 for mount is allowed now")
+        else: 
+            print(f"starting positioners loop for MOUNT in {imount}")
+            movemount(imount)        
+
+
+        for j, imove in enumerate(movetable):
+
+            mvlabel = time.strftime("%Y%m%d-%H%M%S")
+
+            ihash = np.random.randint(100000,1000000-1 )
+            # example mvargs = f"cw cruise phi 0 {ihash}"
+
+            mvargs = f"{imove[0]} {imove[1]} {imove[2]} {imove[3]} {ihash}"
+            if not False: #dryrun
+                send_posmove(mvargs, verbose=True)    
+
+                # confirm remote
+                sys_status = confirm_move(ihash, get_remotehash(sh))
+
+
+            if not sys_status:
+                sys.exit(1)
+            elif not dryrun:
+                # 1. get_pic
+                # 2. __analyze pics
+                # 3. __sanity checks related to position
+                #       - there's a pic
+                #       - the spot was detected
+                #       - next move is not passing physical limits
+                #       - 
+                get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
+
+    if hascam and (not dryrun):
+        cam.close_camera()
+    # todo generate a log!!!
+
+
+    # print("Executing move sequence")
+    # for j, mtpos in enumerate(mountpos_table):
+    #     if mtpos !=0:  # noqa: W191
+    #         sys.exit("NotImplemented: Only zero position for mount is allowed now")
+    #     else: 
+    #         print(f"starting positioners loop for mount in {mtpos}")
+
+    #     movemount(mtpos)
+
+    #     for i, imove in enumerate(movetable):
+
+    #         #imove : direction speed motor angle 
+    #         idirection, imotor, ispeed, iangle = imove
+            
+    #         mvlabel = time.strftime("%Y%m%d-%H%M%S")
+    #         inp_hash = np.random.randint(10000)
+    #         mvargs = f"{idirection} {imotor} {ispeed} {iangle} {inp_hash}"
+    #         mvargs = f"{imove[0]} {imove[1]} {imove[2]} {imove[3]} {inp_hash}" # todo: remove me
+    #         print(i, mvargs, mvlabel)
+
+    #         cmd =f"python3 fao_arcseq.py {mvargs}" 
+
+    #         stdin, stdout, stderr = ssh.exec_command(f"cd /home/msdos/pclight/trenz; {cmd};")
+    #         output = stdout.readlines()
+    #         stdout.channel.set_combine_stderr(True)
+    #         print("pb:",i, output)
+
+    #         ret_hash = output[-1].replace('\n','')
+    #         print("************", inp_hash, ret_hash)
+    #         if "88"+str(inp_hash)+'88'== ret_hash:
+    #             print("\t Successfully talked to PB")
+    #         else:
+    #             sys_status=False
+    #             print()
+    #             sys.exit(f"Error: Problem in positioners or in PB during \nmove: {imove}")
+
+    #         if sys_status:
+    #             get_picture(cam, mvlabel, rootout=picpath)
+    #             pix_position = find_spot(f"{mvlabel}.fits", {picpath})
+    #             write_data(pix_position, mtpos, mvlabel, session_label, imotor, ispeed, idirection, iangle,  idpos)
+
+    # cam.close_camera() 

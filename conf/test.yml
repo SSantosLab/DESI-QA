@@ -1,0 +1,6 @@
+dryrun: True
+dev_by_bus: {'can22':[4852]}
+canlist: ['can22']
+th_lim: [0, 30] # physical limits
+ph_lim: [0, 30]
+

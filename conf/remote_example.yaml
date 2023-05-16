@@ -1,0 +1,8 @@
+dryrun: False
+dev_by_bus: {'can22':[4852]}
+#canlist: ['can22']
+new_speed: {'theta': {'cruise': 33, 'spindown': 12, 'spinup': 12}, 
+              'phi': {'cruise': 33, 'spindown': 12, 'spinup': 12}}
+
+th_lim: [0, 360] # increment limits 
+ph_lim: [0, 180]

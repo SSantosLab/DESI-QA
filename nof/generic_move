@@ -1,0 +1,24 @@
+import sys
+import time
+import fiposcontrol
+fipos = fiposcontrol.FiposControl(['can22'])
+devbb = {'can22':[4852]}
+fipos.move(devbb,'cw','cruise','phi',1); fipos.execute_movetable()
+time.sleep(5)
+i = 1
+while i <= 8:
+        fipos.move(devbb,'cw','cruise','theta',5); fipos.execute_movetable()
+        time.sleep(4)
+        print(f'Move #{i} done.')
+        i += 1
+else:
+        print('Done.')
+fipos.move(devbb,'ccw','cruise','theta',360); fipos.execute_movetable()
+fipos.move(devbb,'ccw','cruise','phi',180); fipos.execute_movetable()
+print('Returned home.')
+
+fipos.gentle_exit()
+print("Goodbye.")
+sys.exit()
+
+# fipos.move(devbb,'cw','cruise','phi',1); fipos.execute_movetable()

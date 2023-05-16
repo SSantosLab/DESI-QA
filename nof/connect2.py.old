@@ -1,0 +1,150 @@
+import paramiko
+import numpy as np
+import sbigCam as sbc
+import time
+import sys
+import os
+from csv import reader
+
+
+def send_move():
+	"""Place holder
+	"""
+	pass
+
+def movemount(mtpos):
+	"""Place holder for mount
+	mtpos (): 
+		list (?) with the mount position
+	"""
+	pass
+
+
+
+def get_picture(cam, imgname, rootout=None):
+	"""
+	cam (SBIG.cam() obj): object from sbc
+	"""
+	image = cam.start_exposure()
+	# imgname = f"{rootout}/{time.strftime("%Y-%m-%d-%H%M%S")}"
+	cam.write_fits(image, name = f"{rootout}/{imgname}.fits")
+	print(f'Photo #{imgname} taken successfully.')
+
+def write_data(loc_positioner, mtpos, mvlabel, session_label):
+	"""
+	place holder for data writing
+	"""
+
+	pass 
+
+sys_status=True
+
+print("WARNING: \t1.CHECK YOUR PHYSICAL LIMITS\n\t2.CHECK WITH POSITIONERS ARE IN HOME!")
+# HumanCheck = input("Have you checked it? (y|n)")
+# if HumanCheck.lower() !='y':
+# 	sys.exit("You shall not pass!!!")
+
+
+
+
+# ------------------
+# Connecting to PetalBOX:
+ip='141.211.99.73'
+port=22
+username='msdos'
+password='M@y@ll4m'
+
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy()) # surpass the known host polices
+ssh.connect(hostname = ip, port=port, username = username, password = password,
+	banner_timeout=100, auth_timeout=100)
+
+
+# ----------------
+# starting CAM
+# Start cam
+cam = sbc.SBIGCam() 
+try: 
+    cam.close_camera()
+except Exception as err:
+    pass
+
+cam.open_camera()
+cam.select_camera('ST8300')
+cam.set_exposure_time(3000)
+cam.set_dark(False)
+
+
+#Prepare output files  
+session_label = time.strftime("%Y%m%d-%H%M%S")
+rootout = '/home/msdos/um_scripts/sbigpics/'
+picpath = os.path.join(rootout, session_label)
+if not os.path.exists(picpath):
+        os.makedirs(picpath)
+print("session imgs in: ", picpath) 
+
+
+# loop here
+"""
+
+1) Move mount
+2) get coordinates:
+	generate label: session_label + move_label(time stamp) + move_mount pos, 
+	2.1) Move positioners
+	2.2) take pics
+	2.3) save pics with label and save nominal values for positioners move
+"""
+
+movetable = [('cw', 'cruise', 'theta', '10'),
+			 ('ccw', 'cruise', 'theta', '30'),
+			 ('cw', 'cruise', 'theta', '30'),
+			 ('ccw', 'cruise', 'theta', '10')]
+
+
+movetablefn ="movetables/movetest.txt"
+moves = reader(open(movetablefn), delimiter=' ')
+
+mountpos_table = [0]
+
+
+
+print("Starting move sequence")
+for j, mtpos in enumerate(mountpos_table):
+	if mtpos !=0: 
+		sys.exit("NotImplemented: Only zero position for mount is allowed now")
+	else: 
+		print(f"starting positioners loop for mount in {mtpos}")
+	movemount(mtpos)
+
+	for i, imove in enumerate(movetable):
+
+		#imove : direction speed motor angle 
+		
+		mvlabel = time.strftime("%Y%m%d-%H%M%S")
+		inp_hash = np.random.randint(10000)
+		
+		mvstring = f"{imove[0]} {imove[1]} {imove[2]} {imove[3]} {inp_hash}"
+		print(i, mvstring, mvlabel)
+
+		cmd =f"python3 fao_arcseq.py {mvstring}" 
+
+		stdin, stdout, stderr = ssh.exec_command(f"cd /home/msdos/pclight/trenz; {cmd};")
+		output = stdout.readlines()
+		stdout.channel.set_combine_stderr(True)
+		print(i, output)
+
+		ret_hash = output[-1].replace('\n','')
+		if "88"+str(inp_hash)+'88'== ret_hash:
+			print("\t Successfully talked to PB")
+		else:
+			sys_status=False
+			print()
+			sys.exit(f"Error: Problem in positioners or in PB during \nmove: {imove}")
+
+		if sys_status:
+			get_picture(cam, mvlabel, rootout=picpath)
+			find_spot = lambda xname: xname # spotfinder goes here
+			loc_positioner = find_spot(f"{picpath}/{mvlabel}.fits")
+			write_data(loc_positioner, mtpos, mvlabel, session_label, )
+
+cam.close_camera() 
