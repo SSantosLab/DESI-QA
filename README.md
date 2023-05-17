@@ -12,11 +12,15 @@ Usage:
     installed @ PBOX: /home/msdos/pclight/trenz
     
 `run_ang.py`: formerly connect5.py - main movement code (!)
+
+`run_xytest2.py`: more functions to run an xy test - main movement code (!)
     
-`XYtest.ipynb`: code by RAS to translate between angular arm positions and xy coords, includes functions to switch between coordinate systems and to calculate move tables
+`XYtest.ipynb`: code to translate between angular arm positions and xy coords, includes functions to switch between coordinate systems and to calculate move tables
     also includes some code and plots to check that this math is working
     
 `XYtestMovesFunction.ipynb`: essentially the same as XYtest, but with a lot of the excess code removed
+
+`xylib.py`: library built off of XYtest, all the functions to translate coordinates
 
 `fits look.ipynb`: look at a fits (image) file
 
@@ -26,7 +30,13 @@ Usage:
 
 `fao_seq.py`: moves the positioners and reads args and remote_conf
 
-`regions.reg`: used for spotfinder code, probably doesn't need to be here 
+`regions.reg`: used for spotfinder code, probably doesn't need to be here
+
+`tsmount.py`: mount test move (?)
+
+`write_data.ipynb`: for writing data to the database (?)
+
+`Check_a_picture.ipynb` and `TakePicsAndPlot.ipynb`: exactly what they sound like
 
 # Pipeline
 1. Install positioners:
