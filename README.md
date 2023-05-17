@@ -10,6 +10,23 @@ Usage:
 
 `fao_seq.py`: moves the positioners and reads args and remote_conf 
     installed @ PBOX: /home/msdos/pclight/trenz
+    
+`run_ang.py`: formerly connect5.py - main movement code (!)
+    
+`XYtest.ipynb`: code by RAS to translate between angular arm positions and xy coords, includes functions to switch between coordinate systems and to calculate move tables
+    also includes some code and plots to check that this math is working
+    
+`XYtestMovesFunction.ipynb`: essentially the same as XYtest, but with a lot of the excess code removed
+
+`fits look.ipynb`: look at a fits (image) file
+
+`gen_movetable.ipynb`: create a movetable and check plot to make sure it is safe
+
+`read_database.ipynb`: various examples of looking at data from the database
+
+`fao_seq.py`: moves the positioners and reads args and remote_conf
+
+`regions.reg`: used for spotfinder code, probably doesn't need to be here 
 
 # Pipeline
 1. Install positioners:
