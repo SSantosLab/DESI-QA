@@ -1,5 +1,5 @@
 # um_scripts
-Repo of scripts and code for the DESI telescope simulator - now in the Soares Santos lab organization 1.0!
+Repo of scripts and code for the DESI telescope simulator - now in the Soares Santos lab organization 1.1!
 
 # Files
 `connect4.py` : controls the execution of sequence (connection, remote_config, camera, mount, positioner, spotfinder, write_database) 
