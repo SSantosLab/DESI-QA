@@ -2,7 +2,7 @@
 Repo of scripts and code for the DESI telescope simulator - now in the Soares Santos lab organization 2.2!
 
 # Files
-`connect4.py` : controls the execution of sequence (connection, remote_config, camera, mount, positioner, spotfinder, write_database) 
+ `connect4.py` ( DEPRECATED- please use `run_ang.py`): controls the execution of sequence (connection, remote_config, camera, mount, positioner, spotfinder, write_database) 
 Usage:
 ```
 [msdos@msslab01 ~/um_scripts]$ python3 connect4.py -c conf/getcurrent.ini
