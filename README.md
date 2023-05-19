@@ -30,7 +30,7 @@ Usage:
 
 `fao_seq.py`: moves the positioners and reads args and remote_conf
 
-`regions.reg`: used for spotfinder code, probably doesn't need to be here
+`regions.reg`: used for spotfinder code
 
 `tsmount.py`: mount test move (?)
 
