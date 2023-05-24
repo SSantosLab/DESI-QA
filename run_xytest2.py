@@ -189,7 +189,7 @@ def angle_between(c, p1, p2):
     angle = np.arccos(cosine_angle)
     return np.degrees(angle)
 
-def send_posmove(mvargs, remote_script="fao_seq.py", verbose=False):
+def send_posmove(mvargs, remote_script="fao_seq20.py", verbose=False):
     """
     Move a positioner 
     mvargs (str): 
@@ -565,7 +565,7 @@ if __name__=='__main__':
             # write_db(session_label, imount, mvlabel, posid, jmove, centroids, 
             #          dbname=dbname)
             #fao todo: put this inside the rows loop for register steps
-            write_db(session_label, mtang1, mtang2, mvlabel, posid, imove, centroids, 
+            write_db(session_label, mtang1, mtang2, mvlabel, posid, jmove, centroids, 
                         xytgt=xytgt, dbname=dbname)            
 
             # corrections 
