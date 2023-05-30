@@ -101,8 +101,8 @@ def calc_moves(H,R_theta,R_phi, xc, yc, x0_inp,y0_inp,x_inp,y_inp):
         phi_cw = abs(delta_phi)
         phi_ccw = 0
     elif delta_phi < 0:
-        phi_cw = abs(delta_phi)
-        phi_ccw = 0
+        phi_cw = 0
+        phi_ccw = abs(delta_phi)
     
     theta_cw
     return theta_cw,theta_ccw,phi_cw,phi_ccw

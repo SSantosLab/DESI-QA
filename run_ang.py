@@ -272,13 +272,13 @@ if __name__=='__main__':
     import argparse
 
     # TODO: remove hardcoded stuff here
-    pix2mm = 0.035339 #0.035337
+    pix2mm = 0.03536752443853155 #0.035337
     # todo, pass this as dictionary per positioner
     posid = '4852' # string
-    hardstop_ang = {"4852": -163.07747} # in deg
-    R1 = {"4852": 2.9506121} # R theta
-    R2 = {"4852": 3.0686516} # R phi
-    center = {"4852":[ 69.887, 31.803]}#[ 69.91212, 31.49481]}
+    hardstop_ang = {"4852": -162.62196} # in deg
+    R1 = {"4852": 2.979753 } # R theta
+    R2 = {"4852": 3.0684968} # R phi
+    center = {"4852":[ 69.90464, 31.49369]}#[ 69.91212, 31.49481]}
 
     pos_speed = {"4852":{"cruise": 33, "spinramp": 12, }}#"spindown": 12}}
     pos_backlash = {"4852": 1.8}
