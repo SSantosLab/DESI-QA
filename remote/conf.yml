@@ -9,7 +9,7 @@ new_speed: {'theta':
             }
 
 new_ramps: {'theta':{'cw':{'up':12, 'down':12}, 'ccw':{'up':12, 'down':12}},
-            'phi':{'cw':{'up':6, 'down':6}, 'ccw':{'up':6, 'down':6}}}
+            'phi':{'cw':{'up':12, 'down':12}, 'ccw':{'up':12, 'down':12}}}
 
 
 

@@ -1,9 +1,11 @@
 import numpy as np
 
 
-def transform(H,R_theta,R_phi,x,y): 
+def transform(H,R_theta,R_phi,x,y,safe=True): 
     """
-    Function to output theta and phi angles based on coordinates relative to center 
+    Function to output theta and phi angles based on coordinates relative to center
+
+    SM - added safe=True, when set to False, will override patrol radius assertion. Only used for testing 
     """
     
     if x==0 and y==0:
@@ -12,8 +14,9 @@ def transform(H,R_theta,R_phi,x,y):
     
     H = H*np.pi/180
     d = np.sqrt(x**2 + y**2)
-    assert d <= R_theta+R_phi,\
-         f"d> out of reach {d}>{R_theta}+{R_phi}"
+    if safe:
+        assert d <= R_theta+R_phi,\
+             f"d> out of reach {d}>{R_theta}+{R_phi}"
     a = d*np.cos(H)
     b = d*np.sin(H)
     r = np.sqrt((x-a)**2 + (y-b)**2)
@@ -84,9 +87,9 @@ def calc_moves(H,R_theta,R_phi, xc, yc, x0_inp,y0_inp,x_inp,y_inp):
     
     
     #where you are
-    theta0,phi0 = transform(H,R_theta,R_phi,x0,y0)
+    theta0,phi0 = transform(H,R_theta,R_phi,x0,y0,safe=True)
     #where you want to be 
-    theta,phi = transform(H,R_theta,R_phi,x,y)
+    theta,phi = transform(H,R_theta,R_phi,x,y,safe=True)
     #difference
     delta_theta = theta-theta0
     delta_phi = phi-phi0
@@ -119,9 +122,9 @@ def calc_movetables(H,R_theta,R_phi,x0,y0,x,y):
 
 
     #where you are
-    theta0,phi0 = transform(H,R_theta,R_phi,x0,-y0)
+    theta0,phi0 = transform(H,R_theta,R_phi,x0,-y0,safe=False)
     #where you want to be 
-    theta,phi = transform(H,R_theta,R_phi,x,-y) # returning nan?
+    theta,phi = transform(H,R_theta,R_phi,x,-y,safe=False) # returning nan?
     #difference
     delta_theta = theta-theta0
     delta_phi = phi-phi0
