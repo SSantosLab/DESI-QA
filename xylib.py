@@ -3,26 +3,49 @@ import numpy as np
 
 def transform(H,R_theta,R_phi,x,y,safe=True): 
     """
-    Function to output theta and phi angles based on coordinates relative to center
+    Function to return theta and phi angles based on x and y coordinates relative to center, where center is defined as (0,0), with units in mm's
+    
+    INPUTS:    
+    H; The hardstop angle, given in degrees
+    R_theta; Radius of theta, given in mm
+    R_phi; Radius of phi, given in mm
+    x; current x position, given in mm
+    y; current x position, given in mm
+    safe=True; A flag for testing. When set to False, will override patrol radius assertion. Only used for testing moves near R_theta+R_phi. DO NOT SET TO True IF PERFORMING DESI MOVES
 
-    SM - added safe=True, when set to False, will override patrol radius assertion. Only used for testing 
+    OUTPUTS:
+    theta; The angle of the theta move
+    phi; the angle of the phi move
+    
+    NOTES;
+    I don't like this function name - it would be more intuitively named 'get_angle' or something similar
     """
     
+    # For (0,0), we should home the positioner to theta=0 and phi=0
     if x==0 and y==0:
-        theta = 0
-        phi = 0
+        x,y = 0,0
     
+    # Redefining the hardstop angle in radians, used for numpy functions
     H = H*np.pi/180
-    d = np.sqrt(x**2 + y**2)
+    
+    # Length of desired move from the center
+    d = np.sqrt(x**2 + y**2) 
+    
+    # Assertion to protect against moves outside of the patrol radius
+    # See documentation for 'safe' above
     if safe:
         assert d <= R_theta+R_phi,\
              f"d> out of reach {d}>{R_theta}+{R_phi}"
+    
+    # Defining components of the hardstop angle
     a = d*np.cos(H)
     b = d*np.sin(H)
-    r = np.sqrt((x-a)**2 + (y-b)**2)
-    alpha = 2*np.arcsin(r/(2*d))
-    #print(alpha*180/np.pi)
-    arg = (R_phi**2 + R_theta**2 - d**2)/(2*R_theta*R_phi)
+    r = np.sqrt((x-a)**2 + (y-b)**2) # Magnitude of vector between (x,y) and (a,b)
+    # FLAG
+    alpha = 2*np.arcsin(r/(2*d)) # I don't now what this angle represents. I think it's supposed to be the angle between d and r/2, where r=(x,y)? Need to verify math
+    
+    # FLAG - I am fairly sure this sequence is to find the angle for phi - 
+    arg = (R_phi**2 + R_theta**2 - d**2)/(2*R_theta*R_phi) # 
     arg = np.round(arg, 8) # avoid numerical residuals for x,y -> Physical Length
     try:
         phi = np.arccos(arg)
@@ -30,7 +53,9 @@ def transform(H,R_theta,R_phi,x,y,safe=True):
         print(err, f"arg={arg}")
     d_theta = np.arcsin(R_theta*np.sin(phi)/d)
 
+    # All of the below assumes the hardstop angle H is in the range [-180,180] - maybe should add while loop for abs(H)>180? to ensure we catch any edge cases?
     
+    # FLAG - verify math
     if abs(H) > np.pi/2:
         if y>(b/a)*x:
             theta = alpha + d_theta
@@ -42,10 +67,12 @@ def transform(H,R_theta,R_phi,x,y,safe=True):
         if y<=(b/a)*x:
             theta = alpha + d_theta 
     
+    # Converting theta and phi from radians to degrees
     theta = theta*180/np.pi
     phi = phi*180/np.pi
     
-    if theta>360:
+    # Reducing theta to a move within [0,360] 
+    while theta>360:
         theta = theta - 360
     
     return theta,phi
@@ -54,9 +81,21 @@ def refpix2pos(pix2mm, xc,yc, xpix, ypix):
     """
     Change of reference frame from pix (spotfinder) to
     positioners (mm in the center of theta arc)
+    
+    INPUTS
+    pix2mm; mm-pixel conversion factor
+    xc; x coordinate of origin in mm
+    yc; y coordinate of origin in mm
+    xpix; x coordinate of position in pixels
+    ypix; y coordinate of position in pixels
+    
+    OUTPUTS;
+    x2; New x coordinate in mm
+    y2; New y coordinate in mm
     """
     xmm, ymm = xpix*pix2mm, ypix*pix2mm
-    return xmm-xc, ymm-yc
+    x2,y2 = xmm-xc, ymm-yc
+    return x2,y2
 
 def prepare2xy(x0,y0, x1,y1):
     """
