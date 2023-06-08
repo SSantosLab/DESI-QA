@@ -89,7 +89,7 @@ def refpix2pos(pix2mm, xc,yc, xpix, ypix):
     xpix; x coordinate of position in pixels
     ypix; y coordinate of position in pixels
     
-    OUTPUTS;
+    OUTPUTS
     x2; New x coordinate in mm
     y2; New y coordinate in mm
     """
@@ -99,12 +99,27 @@ def refpix2pos(pix2mm, xc,yc, xpix, ypix):
 
 def prepare2xy(x0,y0, x1,y1):
     """
-    Simple coord change y-> -y
-    for consistency in fiposcontroller
+    Simple coord change y-> -y, for consistency in fiposcontroller
+    
+    INPUTS
+    x0; first x coordinate
+    y0; first y coordinate
+    x1; second x coordinate
+    y1; second y coordinate
+    
+    OUTPUTS
+    
+    u0; first x coordinate
+    v0; first y coordinate, flipped through axis
+    u1; second x coordinate
+    v1; second y coordinate, flipped through axis
+    
+    NOTES
+    
     """
-    u0, v0 = x0, y0
-    u1, v1 = x1, y1
-    return u0, -v0, u1, -v1
+    u0, v0 = x0, -y0
+    u1, v1 = x1, -y1
+    return u0, v0, u1, v1
 
 
 #version of the function to give moves
@@ -156,14 +171,12 @@ def calc_movetables(H,R_theta,R_phi,x0,y0,x,y):
     if speed=='cruise' and angle < 2* ramp, it is not possible to do a move
     """
 
-    #fao 2
-    H = H
-
+    x0,y0,x,y = prepare2xy(x0,y0,x,y)
 
     #where you are
-    theta0,phi0 = transform(H,R_theta,R_phi,x0,-y0,safe=False)
+    theta0,phi0 = transform(H,R_theta,R_phi,x0,y0,safe=False)
     #where you want to be 
-    theta,phi = transform(H,R_theta,R_phi,x,-y,safe=False) # returning nan?
+    theta,phi = transform(H,R_theta,R_phi,x,y,safe=False) # returning nan?
     #difference
     delta_theta = theta-theta0
     delta_phi = phi-phi0
