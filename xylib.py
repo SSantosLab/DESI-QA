@@ -41,8 +41,7 @@ def transform(H,R_theta,R_phi,x,y,safe=True):
     a = d*np.cos(H)
     b = d*np.sin(H)
     r = np.sqrt((x-a)**2 + (y-b)**2) # Magnitude of vector between (x,y) and (a,b)
-    # FLAG
-    alpha = 2*np.arcsin(r/(2*d)) # I don't now what this angle represents. I think it's supposed to be the angle between d and r/2, where r=(x,y)? Need to verify math
+    alpha = 2*np.arcsin(r/(2*d)) # FLAG - I don't now what this angle represents. I think it's supposed to be the angle between d and r/2, where r=(x,y)? Need to verify math
     
     # FLAG - I am fairly sure this sequence is to find the angle for phi - 
     arg = (R_phi**2 + R_theta**2 - d**2)/(2*R_theta*R_phi) # 
@@ -124,7 +123,7 @@ def prepare2xy(x0,y0, x1,y1):
 
 
 #version of the function to give moves
-def calc_moves(H,R_theta,R_phi, xc, yc, x0_inp,y0_inp,x_inp,y_inp,buffer=0.1):
+def calc_moves(H,R_theta,R_phi, xc, yc, x0_inp,y0_inp,x_inp,y_inp,buffer=0.1,precision=1e-2):
     """
     Function to output moves in theta and phi 
     
@@ -139,12 +138,13 @@ def calc_moves(H,R_theta,R_phi, xc, yc, x0_inp,y0_inp,x_inp,y_inp,buffer=0.1):
     x_inp; x coordinate of final positioner position, given in mm
     y_inp; y coordinate of final positioner position, given in mm
     buffer=0.1; distance between R_theta+R_phi that is a 'no-go' zone, gives a
+    precision=1e-2; the angular precision, if the angular move in one or either motor is < the precision, the delta_angle is set to 0
     
     OUTPUTS
-    theta_cw; The theta cw move from the 
-    theta_ccw;
-    phi_cw;
-    phi_ccw;
+    theta_cw; The theta cw move to change positioner from (x0_inp,y0_inp) to (x_inp,y_inp)
+    theta_ccw; The theta ccw move to change positioner from (x0_inp,y0_inp) to (x_inp,y_inp)
+    phi_cw; The phi cw move to change positioner from (x0_inp,y0_inp) to (x_inp,y_inp)
+    phi_ccw; The phi ccw move to change positioner from (x0_inp,y0_inp) to (x_inp,y_inp)
 
     NOTES
     BEFORE YOU PASS: 
@@ -152,7 +152,7 @@ def calc_moves(H,R_theta,R_phi, xc, yc, x0_inp,y0_inp,x_inp,y_inp,buffer=0.1):
      - Use mms for units, not pixels
      - Invert the y axis, keep the x axis intact - FLAG - this is done with prepare2xy function, so don't actually do this I think?
      
-    TODO: Round the number for close to Zero!
+    TODO: Round the number for close to Zero! - FLAG - explanation for this? I did this in the function
     """
     x0,y0,x,y = prepare2xy(x0_inp,y0_inp,x_inp,y_inp)
 
@@ -169,21 +169,27 @@ def calc_moves(H,R_theta,R_phi, xc, yc, x0_inp,y0_inp,x_inp,y_inp,buffer=0.1):
     delta_theta = theta-theta0
     delta_phi = phi-phi0
     
+    # Do the rounding for the minimal angular moves
+    if delta_theta <= precision: # FLAG - Why do we need this here? and why do we round below? is there an issue with moves < 0.01º?
+        delta_theta = 0
+    if delta_phi <= precision:
+        delta_phi = 0
+    
     # logic for theta
     if delta_theta >= 0:
-        theta_cw = abs(delta_theta)
+        theta_cw = delta_theta
         theta_ccw = 0
     elif delta_theta < 0:
         theta_cw = 0
-        theta_ccw = abs(delta_theta)
+        theta_ccw = -delta_theta
 
     # logic for theta        
     if delta_phi >= 0:
-        phi_cw = abs(delta_phi)
+        phi_cw = delta_phi
         phi_ccw = 0
     elif delta_phi < 0:
         phi_cw = 0
-        phi_ccw = abs(delta_phi)
+        phi_ccw = -delta_phi
 
     # I don't know why this is here -- testing reasons? I will remove
 #     theta_cw
@@ -191,81 +197,126 @@ def calc_moves(H,R_theta,R_phi, xc, yc, x0_inp,y0_inp,x_inp,y_inp,buffer=0.1):
     return theta_cw,theta_ccw,phi_cw,phi_ccw
 
 #version that does move tables
-def calc_movetables(H,R_theta,R_phi,x0,y0,x,y): 
+def calc_movetables(H,R_theta,R_phi,x0,y0,x,y,precision=1e-2): 
     """
     Function to output moves in theta and phi (pos being cw)
+    
+    INPUTS
+    H; The hardstop angle, given in degrees
+    R_theta; Radius of theta, given in mm
+    R_phi; Radius of phi, given in mm
+    x0; x coordinate of intial positioner position, given in mm
+    y0; y coordinate of intial positioner position, given in mm
+    x; x coordinate of final positioner position, given in mm
+    y; y coordinate of final positioner position, given in mm
+    precision=1e-2; the precision in the angle 
+    
+    OUTPUTS
+    rows; An array containing the motor directions and angles for the desired move
+    
+    format of rows; rows = [direc1,motor1,angle1,direc2,motor2,angle2]
+    direc1; 'cw' or 'ccw' for clockwise or counter clockwise
+    motor1; 'theta' or 'phi' for theta or phi motor
+    angle1; Angle in degrees for motor1 to move in direc1
+    direc2; 'cw' or 'ccw' for clockwise or counter clockwise
+    motor2; 'phi' or None for phi motor or no secondary motor movement
+    angle2; Angle in degrees for motor2 to move in direc2
+    
+    NOTES
     if speed=='cruise' and angle < 2* ramp, it is not possible to do a move
     """
 
     x0,y0,x,y = prepare2xy(x0,y0,x,y)
 
-    #where you are
-    theta0,phi0 = transform(H,R_theta,R_phi,x0,y0,safe=False)
-    #where you want to be 
-    theta,phi = transform(H,R_theta,R_phi,x,y,safe=False) # returning nan?
-    #difference
+    # Using transform, calculate where you are
+    theta0,phi0 = transform(H,R_theta,R_phi,x0,y0,safe=True)
+    # Using transform, calculate where you want to be 
+    theta,phi = transform(H,R_theta,R_phi,x,y,safe=True)
+    # take the difference
     delta_theta = theta-theta0
     delta_phi = phi-phi0
-    
-    # fao:
-    angle1 = 0
-    angle2 = 0
 
-
-    #optional logic
+    # logic for theta
     if delta_theta >= 0:
         direc1 = "cw"
         motor1 = "theta"
-        angle1 = abs(delta_theta)
-    elif delta_theta < 0:
+        angle1 = delta_theta
+    else:
         direc1 = "ccw"
         motor1 = "theta"
-        angle1 = abs(delta_theta)
+        angle1 = -delta_theta
+
+    # logic for phi
     if delta_phi >= 0:
         direc2 = "cw"
         motor2 = "phi"
-        angle2 = abs(delta_phi)
-    elif delta_phi < 0:
+        angle2 = delta_phi
+    else:
         direc2 = "ccw"
         motor2 = "phi"
-        angle2 = abs(delta_phi)
+        angle2 = -delta_phi
 
+    # Create row array to store move
     rows=[]
-    if angle1 >= 1e-2:
+    if angle1 >= precision: # FLAG - Why do we need this here? and why do we round below? is there an issue with moves < 0.01º?
         rows.append([direc1, motor1, np.round(angle1, 8)])
-    if angle2 >= 1e-2:
+    if angle2 >= precision:
         rows.append([direc2, motor2, np.round(angle2, 8)])
 
-    return rows # direc1,motor1,angle1,direc2,motor2,angle2
+    return rows 
 
 
-def xy2move(calc):
+def xy2move(calc,precision=1e-2):
     """
-    Interface between calc_moves and command 
-    to fiposcontroller
-    Input:
-    calc: (list):
-        output from calc_moves with
-        [th_cw, th_ccw, ph_cw, ph_ccw]
-    Returns:
-        list with direction(str), motor(str), angle (float)
+    Interface between calc_moves and command to fiposcontroller
+    
+    INPUTS
+    calc; Array containing results passed from calc_moves function call
+    precision=1e-2; the radial precision in degrees that must be exceeded to store a move
+    
+    Format of calc; calc = [theta_cw,theta_ccw,phi_cw,phi_ccw]
+    theta_cw; The theta cw move to change positioner from (x0_inp,y0_inp) to (x_inp,y_inp)
+    theta_ccw; The theta ccw move to change positioner from (x0_inp,y0_inp) to (x_inp,y_inp)
+    phi_cw; The phi cw move to change positioner from (x0_inp,y0_inp) to (x_inp,y_inp)
+    phi_ccw; The phi ccw move to change positioner from (x0_inp,y0_inp) to (x_inp,y_inp)
+
+    OUTPUTS
+    row; An array containing the motor directions and angles
+    
+    format of row; row = [direc1,motor1,angle1,direc2,motor2,angle2]
+    direc1; 'cw' or 'ccw' for clockwise or counter clockwise
+    motor1; 'theta' or 'phi' for theta or phi motor
+    angle1; Angle in degrees for motor1 to move in direc1
+    direc2; None or 'cw' or 'ccw' for clockwise or counter clockwise
+    motor2; 'phi' or None for phi motor or no secondary motor movement
+    angle2; None or Angle in degrees for motor2 to move in direc2
+    
+    NOTES
+    
     """
 
+    # Defining directions
     _dir = ['cw','ccw']
+    
+    # Define ith as 0 if the theta move is in the cw direction. If not, ith is defined as 1
     ith = [0 if calc[0] > calc[1] else 1][0]
+    # Define iph as 0 if the phi move is in the cw direction. If not, iph is defined as 1
     iph = [0 if calc[2] > calc[3] else 1][0]
+    
+    # Defining theta and phi as the theta and phi moves from calc array
     theta = calc[ith]
     phi  = calc[iph+2]
-    row = []
-    if abs(theta) >=1e-2:
+    
+    row = [] # FLAG - why do we use this precision rounding process, same as end of calc_movetables
+    if abs(theta) >=precision:
         row.append([_dir[ith], 'theta', theta])
-    if abs(phi) >=1e-2:
+    if abs(phi) >=precision:
         row.append([_dir[iph], 'phi', phi])
     return row
     
 
 
-
+# We don't use this, so should we remove everything below here?
 if __name__=="__main__":
 
     Testme=True
