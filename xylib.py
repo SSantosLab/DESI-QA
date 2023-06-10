@@ -5,7 +5,7 @@ def transform(H,R_theta,R_phi,x,y,safe=True):
     """
     Function to return theta and phi angles based on x and y coordinates relative to center, where center is defined as (0,0), with units in mm's
     
-    INPUTS:    
+    INPUTS    
     H; The hardstop angle, given in degrees
     R_theta; Radius of theta, given in mm
     R_phi; Radius of phi, given in mm
@@ -13,17 +13,17 @@ def transform(H,R_theta,R_phi,x,y,safe=True):
     y; current x position, given in mm
     safe=True; A flag for testing. When set to False, will override patrol radius assertion. Only used for testing moves near R_theta+R_phi. DO NOT SET TO True IF PERFORMING DESI MOVES
 
-    OUTPUTS:
+    OUTPUTS
     theta; The angle of the theta move
     phi; the angle of the phi move
     
-    NOTES;
+    NOTES
     I don't like this function name - it would be more intuitively named 'get_angle' or something similar
     """
     
     # For (0,0), we should home the positioner to theta=0 and phi=0
     if x==0 and y==0:
-        x,y = 0,0
+        theta,phi = 0,0
     
     # Redefining the hardstop angle in radians, used for numpy functions
     H = H*np.pi/180
@@ -92,6 +92,8 @@ def refpix2pos(pix2mm, xc,yc, xpix, ypix):
     OUTPUTS
     x2; New x coordinate in mm
     y2; New y coordinate in mm
+    
+    NOTES
     """
     xmm, ymm = xpix*pix2mm, ypix*pix2mm
     x2,y2 = xmm-xc, ymm-yc
@@ -108,7 +110,6 @@ def prepare2xy(x0,y0, x1,y1):
     y1; second y coordinate
     
     OUTPUTS
-    
     u0; first x coordinate
     v0; first y coordinate, flipped through axis
     u1; second x coordinate
@@ -123,45 +124,70 @@ def prepare2xy(x0,y0, x1,y1):
 
 
 #version of the function to give moves
-def calc_moves(H,R_theta,R_phi, xc, yc, x0_inp,y0_inp,x_inp,y_inp):
+def calc_moves(H,R_theta,R_phi, xc, yc, x0_inp,y0_inp,x_inp,y_inp,buffer=0.1):
     """
     Function to output moves in theta and phi 
+    
+    INPUTS
+    H; The hardstop angle, given in degrees
+    R_theta; Radius of theta, given in mm
+    R_phi; Radius of phi, given in mm
+    xc; x coordinate of center of positioner, given in mm
+    yc; y coordinate of center of positioner, given in mm 
+    x0_inp; x coordinate of intial positioner position, given in mm
+    y0_inp; y coordinate of intial positioner position, given in mm
+    x_inp; x coordinate of final positioner position, given in mm
+    y_inp; y coordinate of final positioner position, given in mm
+    buffer=0.1; distance between R_theta+R_phi that is a 'no-go' zone, gives a
+    
+    OUTPUTS
+    theta_cw; The theta cw move from the 
+    theta_ccw;
+    phi_cw;
+    phi_ccw;
+
+    NOTES
     BEFORE YOU PASS: 
-     - Change the center of coordinate system to the center of theta arc
-     - Invert the y axis, keep the x axis intact
-     - 
+     - Change the center of coordinate system to the center of theta arc, so that xc, yc, x0_inp, y0_inp, x_inp, and y_inp are in the same coordinate frame
+     - Use mms for units, not pixels
+     - Invert the y axis, keep the x axis intact - FLAG - this is done with prepare2xy function, so don't actually do this I think?
+     
     TODO: Round the number for close to Zero!
     """
     x0,y0,x,y = prepare2xy(x0_inp,y0_inp,x_inp,y_inp)
 
-    assert np.hypot( x, y) -0.1 <= R_theta+R_phi, \
+    assert np.hypot( x, y) - buffer <= R_theta+R_phi, \
             f'out of reach move {np.hypot(x,y)} >{R_theta+R_phi}'
-    assert np.hypot(x0,y0) -0.1 <= R_theta+R_phi, \
+    assert np.hypot(x0,y0) - buffer <= R_theta+R_phi, \
             f'out of reach move {np.hypot(x0,y0)<=R_theta+R_phi}>{R_theta+R_phi}'
     
-    
-    #where you are
+    # Using transform, compute where you are
     theta0,phi0 = transform(H,R_theta,R_phi,x0,y0,safe=True)
-    #where you want to be 
+    #Using transform, compute where you want to be 
     theta,phi = transform(H,R_theta,R_phi,x,y,safe=True)
-    #difference
+    # Take the difference
     delta_theta = theta-theta0
     delta_phi = phi-phi0
-    #logic
+    
+    # logic for theta
     if delta_theta >= 0:
         theta_cw = abs(delta_theta)
         theta_ccw = 0
     elif delta_theta < 0:
         theta_cw = 0
         theta_ccw = abs(delta_theta)
+
+    # logic for theta        
     if delta_phi >= 0:
         phi_cw = abs(delta_phi)
         phi_ccw = 0
     elif delta_phi < 0:
         phi_cw = 0
         phi_ccw = abs(delta_phi)
-    
-    theta_cw
+
+    # I don't know why this is here -- testing reasons? I will remove
+#     theta_cw
+
     return theta_cw,theta_ccw,phi_cw,phi_ccw
 
 #version that does move tables
