@@ -33,10 +33,14 @@ def transform(H,R_theta,R_phi,x,y,safe=True):
     
     # Assertion to protect against moves outside of the patrol radius
     # See documentation for 'safe' above
-    if safe:
-        assert d <= R_theta+R_phi,\
-             f"d> out of reach {d}>{R_theta}+{R_phi}"
-    
+    if not safe:
+        d1=0
+    else:
+        d1=d
+        
+    assert d1 <= R_theta+R_phi,\
+         f"d> out of reach {d1}>{R_theta}+{R_phi}"
+
     # Defining components of the hardstop angle
     a = d*np.cos(H)
     b = d*np.sin(H)
