@@ -165,11 +165,12 @@ def argscorrection(direc, speed, motor, ang, def_speed, prevdir, val_backlash=No
         cruise = def_speed['cruise']
         ramp = def_speed['spinramp']
         add_ramp = ramp_angle(cruise, ramp)
-        if cruise==33 and ramp== 12:
-            assert np.isclose(add_ramp, 1.99549), "Inconsistent ramp_ang"
-        else:
-            print("NotImplemented spin and cruise")
-            return None
+        # if cruise==33 and ramp== 12:
+        #     assert np.isclose(add_ramp, 1.99549), "Inconsistent ramp_ang"
+        # else:
+        #     print("NotImplemented spin and cruise")
+        #     return None
+        # This should be updated for new parameters in testing
     ang2 = ang + add_backlash - 2*add_ramp
     print("------->", ang2)
     if (speed==cruise) and (ang2 < add_backlash+ 5e-2) :
@@ -356,12 +357,12 @@ if __name__=='__main__':
     pix2mm = 0.03536752443853155 #0.035337
     # todo, pass this as dictionary per positioner
     posid = '4852' # string
-    hardstop_ang = {"4852": -163.18292} # in deg
-    R1 = {"4852": 2.9516541} # R theta
-    R2 = {"4852": 3.0709603} # R phi
-    center = {"4852": [69.89952, 31.50792]} # in mm
+    hardstop_ang = {"4852": -163.15746} # in deg
+    R1 = {"4852": 2.9510995} # R theta
+    R2 = {"4852": 3.0712471} # R phi
+    center = {"4852": [69.93287, 31.49778]} # in mm
 
-    pos_speed = {"4852":{"cruise": 33, "spinramp": 12, }}#"spindown": 12}}
+    pos_speed = {"4852":{"cruise": 66, "spinramp": 2, }}#"spindown": 12}}
     pos_backlash = {"4852": 1.9}
 
     # Todo: copy session config to remote
