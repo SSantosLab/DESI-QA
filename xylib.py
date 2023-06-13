@@ -54,7 +54,7 @@ def transform(H,R_theta,R_phi,x,y,safe=True):
         phi = np.arccos(arg)
     except Exception as err:
         print(err, f"arg={arg}")
-    d_theta = np.arcsin(R_theta*np.sin(phi)/d)
+    d_theta = np.arcsin(R_phi*np.sin(phi)/d)
 
     # All of the below assumes the hardstop angle H is in the range [-180,180] - maybe should add while loop for abs(H)>180? to ensure we catch any edge cases?
     
