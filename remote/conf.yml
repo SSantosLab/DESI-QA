@@ -3,13 +3,13 @@ dev_by_bus: {'can22':[4852]}
 canlist: ['can22']
 
 new_speed: {'theta': 
-               {'cw': {'cruise':66, 'creep': 1}, 'ccw': {'cruise':66, 'creep': 1}},
+               {'cw': {'cruise':33, 'creep': 1}, 'ccw': {'cruise':33, 'creep': 1}},
             'phi':
-               {'cw': {'cruise':66, 'creep': 1}, 'ccw': {'cruise':66, 'creep': 1}}
+               {'cw': {'cruise':33, 'creep': 1}, 'ccw': {'cruise':33, 'creep': 1}}
             }
 
-new_ramps: {'theta':{'cw':{'up':2, 'down':3}, 'ccw':{'up':2, 'down':3}}, 
-            'phi':{'cw':{'up':2, 'down':3}, 'ccw':{'up':2,'down':3}}}
+new_ramps: {'theta':{'cw':{'up':12, 'down':12}, 'ccw':{'up':12, 'down':12}}, 
+            'phi':{'cw':{'up':12, 'down':12}, 'ccw':{'up':12,'down':12}}}
 
 
 

@@ -278,10 +278,10 @@ if __name__=='__main__':
     hardstop_ang = {"4852": -162.62196} # in deg
     R1 = {"4852": 2.979753 } # R theta
     R2 = {"4852": 3.0684968} # R phi
-    center = {"4852":[ 69.90464, 31.49369]}#[ 69.91212, 31.49481]}
+    center = {"4852":[69.9818905407083,30.903346062054347]}#[ 69.91212, 31.49481]}
 
     pos_speed = {"4852":{"cruise": 33, "spinramp": 12, }}#"spindown": 12}}
-    pos_backlash = {"4852": 1.8}
+    pos_backlash = {"4852": 1.9}
 
     # Todo: copy session config to remote
     #  session db should have
