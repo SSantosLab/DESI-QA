@@ -11,18 +11,16 @@ todo:
 """
  
 from src.phandler import ShellHandler
-import time 
 import sbigCam as sbc
-import time
-import sys
-import os
-from csv import reader
 from spotfinder import spotfinder
+import xylib as xylib
+from csv import reader
 import numpy as np
 import configparser
-import xylib as xylib
-
-
+import time 
+from datetime import datetime
+import sys
+import os
 sys.path.append('/data/common/software/products/tsmount-umich/python')
 import cem120func as cf
 
@@ -61,16 +59,48 @@ def start_mount():
 
     """
     cem120 = cf.initialize_mount("/dev/ttyUSB0")
+    cf.set_alt_lim(cem120, -89)
+    cf.slew_rate(cem120, 9)
     return cem120
 
 
-
-def movemount(mtpos):
+def movemount(mtpos, cem120=cem120):
     """Place holder for mount
     input:
         mtpos (): list (?) with the mount position
+        move mount as Mount_[NOTSAFE].ipynb
+    example: position up 
+    #CAM UP
     """
-    pass
+    if mtpos==(90,90):
+        mount_posdown(cem120)
+    elif mtpos==(-90,90) or mtpos==(90,-90):
+        mount_posup(cem120)
+    elif mtpos==(0,0):
+        cf.home(cem120)
+    else:
+        raise NotImplementedError("Only 0, 90, -90 positions are allowed now")
+        
+    return mtpos
+    
+def mount_posdown(cem120=cem120):
+    """positioners down sequence, from home position
+
+    Args:
+        cem120 (_type_, optional): _description_. Defaults to cem120.
+    """
+    cf.home(cem120)
+    cf.move_90(cem120, 0., 1, 0)
+    cf.move_90(cem120, (cf.get_ra_dec(cem120)[0]-324000)%1296000, 0, 1) 
+
+def mount_posup(cem120=cem120):
+    """positioners up sequence, from home position
+    """
+    cf.home(cem120)
+
+    # Position 8 - U   -> HOME->7->8 CAM UP  eixo 1  = x
+    cf.move_90(cem120, 0., 1, 1)
+    cf.move_90(cem120, (cf.get_ra_dec(cem120)[0]-324000)%1296000, 0, 1) 
 
 
 def connect2pb():
@@ -380,7 +410,8 @@ if __name__=='__main__':
     netphi = 0
     for i, imount in enumerate(mounttable):
         if imount !=0:  
-            sys.exit("NotImplemented: Only position 0 for mount is allowed now")
+            print(f"starting positioners loop for MOUNT in {imount}")
+            mtang1, mtang2 = movemount(imount)
         else:
             mtang1, mtang2 = 0, 0
 
@@ -415,10 +446,10 @@ if __name__=='__main__':
 
             if not sys_status:
                 sys.exit(1)
-            elif not dryrun:
+            elif (not dryrun):
                 # 1. get_pic
-                # 2. __analyze pics
-                # 3. __sanity checks related to position
+                # 2. analyze pics
+                # 3. sanity checks related to position:
                 #       - there's a pic
                 #       - the spot was detected
                 #       - next move is not passing physical limits
