@@ -4,3 +4,5 @@ desiarc-main/
 sbigpics/
 conninfo.txt
 spotfinder/
+.ipynb_checkpoints/
+src/__pycache__/

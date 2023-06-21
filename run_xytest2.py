@@ -6,21 +6,19 @@ todo:
     now, all positioners are doing the same moves!
     
 """
- 
-from src.phandler import ShellHandler
-import time 
-import sbigCam as sbc
-import sys
-import os
-from csv import reader
-from spotfinder import spotfinder
 import numpy as np
+from csv import reader
 import configparser
-import xylib as xylib
-
-
+import time 
+from datetime import datetime
+import os
+import sys
 sys.path.append('/data/common/software/products/tsmount-umich/python')
 import cem120func as cf
+from src.phandler import ShellHandler
+import sbigCam as sbc
+from spotfinder import spotfinder
+import xylib as xylib
 
 
 def start_cam(exposure_time=3000, is_dark=False):
@@ -66,6 +64,7 @@ def movemount(mtpos):
     input:
         mtpos (): list (?) with the mount position
     """
+
     pass
 
 
@@ -189,6 +188,7 @@ def angle_between(c, p1, p2):
     cosine_angle = np.dot(ba, bc) / (np.linalg.norm(ba) * np.linalg.norm(bc))
     angle = np.arccos(cosine_angle)
     return np.degrees(angle)
+
 
 def send_posmove(mvargs, remote_script="fao_seq20.py", verbose=False):
     """

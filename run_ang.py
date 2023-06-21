@@ -9,22 +9,56 @@ todo:
     now, all positioners are doing the same moves!
     
 """
- 
+import numpy as np
+from csv import reader
+import configparser
+import time 
+from datetime import datetime
+import os
+import sys
+sys.path.append('/data/common/software/products/tsmount-umich/python')
+import cem120func as cf
 from src.phandler import ShellHandler
 import sbigCam as sbc
 from spotfinder import spotfinder
 import xylib as xylib
-from csv import reader
-import numpy as np
-import configparser
-import time 
-from datetime import datetime
-import sys
-import os
-sys.path.append('/data/common/software/products/tsmount-umich/python')
-import cem120func as cf
 
 
+# I/O Session: 
+def read_movetable(ifn):
+    """
+    Read a positioners move table
+    ifn (str): Input File Name w/ rows like:
+                     'direction speed motor angle'
+            e.g.  'cw cruise phi 180'
+    """
+    movelines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
+    movetable = [ i for i in movelines]
+    for i, row in enumerate(movetable):
+        assert len(row)==4, \
+               f"Error: row {i} with {len(row)} Columns; should be 4!"
+    return movetable
+
+
+def read_mounttable(ifn):
+    """
+    Read a positioners move table
+    ifn (str): Input File Name w/ rows like:
+                     'direction speed motor angle'
+            e.g.  'cw cruise phi 180'
+    """
+    if (ifn is None) or ifn=='':
+        print("Mount table not found! Using home")
+        return [0]
+    mountlines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
+    mounttable = [ i for i in movelines]
+    for i, row in enumerate(movetable):
+        assert len(row)==1, \
+               f"Error: mount row {i} with {len(row)} Columns; should be 1!"
+    return mounttable
+
+
+# Cam session:
 def start_cam(exposure_time=3000, is_dark=False):
     """Initialize sbigcam
     """
@@ -51,6 +85,7 @@ def get_picture(cam, imgname, rootout=None, dryrun=False):
     print(f'Photo #{imgname} taken successfully.')
 
 
+# Mount Session
 def start_mount():
     """
     Instantiate the ts mount class
@@ -67,7 +102,7 @@ def start_mount():
 def movemount(mtpos, cem120=cem120):
     """Place holder for mount
     input:
-        mtpos (): list (?) with the mount position
+        mtpos (): row (?) with the mount position
         move mount as Mount_[NOTSAFE].ipynb
     example: position up 
     #CAM UP
@@ -103,6 +138,7 @@ def mount_posup(cem120=cem120):
     cf.move_90(cem120, (cf.get_ra_dec(cem120)[0]-324000)%1296000, 0, 1) 
 
 
+# Petal Box Session:
 def connect2pb():
     """Starts ShellHandler and returns the sh object
     """
@@ -111,39 +147,6 @@ def connect2pb():
     sh = ShellHandler(pw[0], pw[1], pw[2])
     print("Connection started")
     return sh
-
-
-def read_movetable(ifn):
-    """
-    Read a positioners move table
-    ifn (str): Input File Name w/ rows like:
-                     'direction speed motor angle'
-            e.g.  'cw cruise phi 180'
-    """
-    movelines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
-    movetable = [ i for i in movelines]
-    for i, row in enumerate(movetable):
-        assert len(row)==4, \
-               f"Error: row {i} with {len(row)} Columns; should be 4!"
-    return movetable
-
-
-def read_mounttable(ifn):
-    """
-    Read a positioners move table
-    ifn (str): Input File Name w/ rows like:
-                     'direction speed motor angle'
-            e.g.  'cw cruise phi 180'
-    """
-    if (ifn is None) or ifn=='':
-        print("Mount table not found! Using home")
-        return [0]
-    mountlines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
-    mounttable = [ i for i in movelines]
-    for i, row in enumerate(movetable):
-        assert len(row)==1, \
-               f"Error: mount row {i} with {len(row)} Columns; should be 1!"
-    return mounttable
 
 
 def send_posmove(mvargs, remote_script="fao_seq20.py", verbose=False):
@@ -199,7 +202,7 @@ def confirm_move(ihash, ohash):
         print("Error in PB reply")
         return False
 
-
+# Analysis Session:
 def get_spot(fitsname, fitspath,  
               expected_spot_count=1, 
               regionsname='regions.reg', 
@@ -283,15 +286,20 @@ def print_info(centroids, posid):
     print(f"\t\tx,y:\n {x_pos:4.6f}, {y_pos:4.6f} \n {x_here:.6f}, {y_here:.6f}")
     print(f"dist_xy2c: {rc:.6f} mm\nphi: {netphi: .4f} deg")
     return netphi, rc
-    # ------------------------------------------------------------------------
 
-def savedata(session_label, move_label, fields):
-    """
-    Place holder for data 
-    """
-
-
-
+# def create_log(session_label):
+#     """
+#     Create a log file with the session information
+#     """
+#     logfile = f"logs/{session_label}.log"
+#     if os.isfile(logfile):
+#         print("warning: log file already exists")
+        
+#     with open logfile as flog:
+#         flog.write("")
+#     pass  
+    
+    
 if __name__=='__main__':
     #TODO: receive config as parsed argument
     #      write logs at the end
