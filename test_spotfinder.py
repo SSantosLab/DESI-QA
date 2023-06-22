@@ -56,6 +56,14 @@ def select_fidregion(centroids, xmin=1036, xmax=1216, ymin=794, ymax=974):
            (centroids['y'] > fidregy[0]) & (centroids['y'] < fidregy[1])
     return mask
 
+def get_spotpos(posid, centroids, reg=reg ):
+    mask=  (centroids['x'] >= reg[posid]['x'][0]) & \
+    (centroids['x'] <= reg[posid]['x'][1]) &\
+    (centroids['y'] >= reg[posid]['y'][0]) & \
+    (centroids['y'] <= reg[posid]['y'][1])
+    cent = {k:v[mask] for k,v in centroids.items()}
+
+    return cent
 
 def get_xyfid(centroids, mask, fidlabel=[1,0,2,3]):
     """
@@ -106,7 +114,7 @@ def test_fiddetection(fitsname = "test_fidpos.fits",
     xfid, yfid = get_xyfid(centroids, fidmask)
     
     assert np.allclose(xtst, xfid), 'Error in xfid'
-    assert np.allclose(xtst, xfid), 'Error in yfid'
+    assert np.allclose(ytst, yfid), 'Error in yfid'
     print("Passed")
 
 if __name__=="__main__":
