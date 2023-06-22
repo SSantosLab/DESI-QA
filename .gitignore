@@ -3,4 +3,5 @@ sbigCam.py
 desiarc-main/
 sbigpics/
 conninfo.txt
-spotfinder/
+spotfinder/__pycache__/*
+spotfinder/*
