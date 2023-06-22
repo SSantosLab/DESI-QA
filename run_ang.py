@@ -21,6 +21,8 @@ from spotfinder import spotfinder
 import numpy as np
 import configparser
 import xylib as xylib
+import test_spotfinder as ts
+import tslib as tslib
 
 
 sys.path.append('/data/common/software/products/tsmount-umich/python')
@@ -171,7 +173,7 @@ def confirm_move(ihash, ohash):
 
 
 def get_spot(fitsname, fitspath,  
-              expected_spot_count=1, 
+              expected_spot_count=5, 
               regionsname='regions.reg', 
               verbose=False):
     """
@@ -185,11 +187,11 @@ def get_spot(fitsname, fitspath,
         centroids (dict): raw output from spotfinder
 
     """
-    assert isinstance(fitsname, str)
+    assert isinstance(fitsname, str), "fitsname should be a string"
 
     _ifn = f"{fitspath}/{fitsname}"
 
-    if expected_spot_count != 1:
+    if expected_spot_count > 5:
         raise NotImplementedError("This mode wasn't tested here")
     try: 
         sf=spotfinder.SpotFinder(_ifn, expected_spot_count)
@@ -282,6 +284,10 @@ if __name__=='__main__':
 
     pos_speed = {"4852":{"cruise": 33, "spinramp": 12, }}#"spindown": 12}}
     pos_backlash = {"4852": 1.9}
+    
+    # Region of interest for positioner
+    reg = {'4852': { 'x':[1890,2070], 'y':[800,980]}}
+
 
     # Todo: copy session config to remote
     #  session db should have
@@ -397,15 +403,6 @@ if __name__=='__main__':
             mvargs = f"{imove[0]} {imove[1]} {imove[2]} {imove[3]} {ihash}"
             dang = [float(imove[3]) if imove[0]=='phi' else 0][0]
 
-            # todo: remove comments below
-            # if (dang +netphi > 200) and (imove[0]=='cw'):
-            #     print("Error: Max Hardstop phi reached! ")
-            #     sys.exit(1)
-            # if (dang -netphi > -0.05) and (imove[0]=='ccw'):
-            #     print("Error: Min Hardstop phi reached! ")    
-            #     sys.exit(1)
-
-
             if haspos: #dryrun
                 send_posmove(mvargs, verbose=False)    
 
@@ -423,8 +420,18 @@ if __name__=='__main__':
                 #       - the spot was detected
                 #       - next move is not passing physical limits
                 get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
-                centroids = get_spot(f"{mvlabel}.fits", f"sbigpics/{session_label}", verbose=False)
-
+                centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                        f"sbigpics/{session_label}", 
+                                        expected_spot_count=5,
+                                        verbose=False)
+                
+                fidmask = ts.select_fidregion(centroidall)
+                xfid, yfid = ts.get_xyfid(centroids, fidmask)
+                pix2mm, sigpix2mm  = ts.get_pix2mm(xfid, yfid)
+                tslib.write_fiddb(session_label, xfid, yfid, pix2mm, sigpix2mm)
+    
+                centroids = ts.get_spotpos("4852", centroidall, reg=reg)
+                
                 netphi, dist2center = print_info(centroids, posid)
                 thobs, phobs = xylib.transform(hardstop_ang['4852'], 
                     R1['4852'], R2['4852'] + 0.15, 

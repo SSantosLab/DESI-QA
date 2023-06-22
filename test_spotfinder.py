@@ -83,6 +83,8 @@ def get_pix2mm(xfid, yfid):
     Assuming: 
         Fiducials are on
         In the vblock region 
+    Args:
+        xfid (np.array): ORDERED x position of fiducials
     """
     # Blueprint of fiducials
     dphys = { (3,2):1,(3,1):2, (3,0):1.6, (2,1):1, (2,0):1,  (1,0):1.2 }

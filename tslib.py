@@ -1,11 +1,23 @@
 """Test Stand Library
 """
 import os 
+
 def write_fiddb(session_label, xfid, yfid, pix2mm, sigpix2mm, dbname="output/fiddb.csv"):
+    """write fiducial database
+
+    Args:
+        session_label (float): _description_
+        xfid (array or list): _description_
+        yfid (array or list): _description_
+        pix2mm (float): _description_
+        sigpix2mm (float): _description_
+        dbname (str, optional): _description_. Defaults to "output/fiddb.csv".
+
+    """
     if not os.path.isfile(dbname):
         print(f"DB file not found. Initializing a new one at {dbname}")
         with open(dbname, 'w') as ndb:
-            ndb.write("label,x0,y0,x1,y1,x2,y2,x3,y3,pix2mm, sigpix2mm\n")
+            ndb.write("label,x0,y0,x1,y1,x2,y2,x3,y3,pix2mm,sigpix2mm\n")
             
     with open(dbname, 'a') as fdb:
         fdb.write(f"{session_label},")
