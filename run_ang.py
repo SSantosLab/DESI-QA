@@ -428,7 +428,7 @@ if __name__=='__main__':
                 fidmask = ts.select_fidregion(centroidall)
                 xfid, yfid = ts.get_xyfid(centroids, fidmask)
                 pix2mm, sigpix2mm  = ts.get_pix2mm(xfid, yfid)
-                tslib.write_fiddb(session_label, xfid, yfid, pix2mm, sigpix2mm)
+                tslib.write_fiddb(session_label, mvlabel, xfid, yfid, pix2mm, sigpix2mm)
     
                 centroids = ts.get_spotpos("4852", centroidall, reg=reg)
                 
