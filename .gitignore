@@ -6,3 +6,4 @@ conninfo.txt
 spotfinder/__pycache__/*
 spotfinder/*
 *.pyc
+regions.reg

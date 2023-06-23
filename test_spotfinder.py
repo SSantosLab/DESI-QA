@@ -50,19 +50,16 @@ def select_fidregion(centroids, xmin=1036, xmax=1216, ymin=794, ymax=974):
     Returns:
         mask  (np.array):         
     """
-    fidregx = np.array([xmin, xmax])
-    fidregy = np.array([ymin, ymax])
-    mask = (centroids['x'] > fidregx[0]) & (centroids['x'] < fidregx[1]) & \
-           (centroids['y'] > fidregy[0]) & (centroids['y'] < fidregy[1])
+    mask = (centroids['x'] > xmin) & (centroids['x'] < xmax) & \
+           (centroids['y'] > ymin) & (centroids['y'] < ymax)
     return mask
 
 def get_spotpos(posid, centroids, reg=None ):
-    mask=  (centroids['x'] >= reg[posid]['x'][0]) & \
-    (centroids['x'] <= reg[posid]['x'][1]) &\
-    (centroids['y'] >= reg[posid]['y'][0]) & \
-    (centroids['y'] <= reg[posid]['y'][1])
+    mask=   (centroids['x'] >= reg[posid]['x'][0]) & \
+            (centroids['x'] <= reg[posid]['x'][1]) & \
+            (centroids['y'] >= reg[posid]['y'][0]) & \
+            (centroids['y'] <= reg[posid]['y'][1])
     cent = {k:v[mask] for k,v in centroids.items()}
-
     return cent
 
 def get_xyfid(centroids, mask, fidlabel=[1,0,2,3]):
