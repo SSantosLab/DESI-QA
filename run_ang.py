@@ -426,7 +426,7 @@ if __name__=='__main__':
                                         verbose=False)
                 
                 fidmask = ts.select_fidregion(centroidall)
-                xfid, yfid = ts.get_xyfid(centroids, fidmask)
+                xfid, yfid = ts.get_xyfid(centroidall, fidmask)
                 pix2mm, sigpix2mm  = ts.get_pix2mm(xfid, yfid)
                 tslib.write_fiddb(session_label, mvlabel, xfid, yfid, pix2mm, sigpix2mm)
     

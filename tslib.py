@@ -20,7 +20,7 @@ def write_fiddb(session_label, mvlabel, xfid, yfid, pix2mm, sigpix2mm, dbname="o
             ndb.write("session,mvlabel,x0,y0,x1,y1,x2,y2,x3,y3,pix2mm,sigpix2mm\n")
             
     with open(dbname, 'a') as fdb:
-        fdb.write(f"{session_label},{mvlabel}")
+        fdb.write(f"{session_label},{mvlabel},")
         for i in range(4):
             fdb.write(f"{xfid[i]:.6f},{yfid[i]:.6f},")
         fdb.write(f"{pix2mm:.6f},{sigpix2mm:.6f}\n")
