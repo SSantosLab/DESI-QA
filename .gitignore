@@ -5,3 +5,4 @@ sbigpics/
 conninfo.txt
 spotfinder/__pycache__/*
 spotfinder/*
+*.pyc

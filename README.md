@@ -28,11 +28,11 @@ Usage:
 
 `read_database.ipynb`: various examples of looking at data from the database
 
-`fao_seq.py`: moves the positioners and reads args and remote_conf
+`fao_seq20.py`: moves the positioners and reads args and remote_conf (seq20 refers to firmware >=6.20)
 
 `regions.reg`: used for spotfinder code
 
-`tsmount.py`: mount test move (?)
+`tsmount.py`: mount movement controller, installed in ICS environment
 
 `write_data.ipynb`: for writing data to the database (?)
 

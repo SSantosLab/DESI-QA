@@ -67,7 +67,15 @@ def get_spotpos(posid, centroids, reg=None ):
 
 def get_xyfid(centroids, mask, fidlabel=[1,0,2,3]):
     """
-    In unit of PIX
+    Get x,y position of fiducials, assuming the position of fiducials in Jun 2023.
+    Args:
+        centroids (dict): output from spotfinder treated for return np.array 
+        mask (np.array): mask of fiducial region
+        fidlabel (list): order of fiducials as in the Jun 2023 positions.
+    
+    Returns:
+        xfid (np.array): x position of fiducials. In unit of PIX
+        yfid (np.array): y position of fiducials. In unit of PIX
     """
     yorder = np.argsort(centroids['y'][mask])
     centroids['y'][mask][yorder]
