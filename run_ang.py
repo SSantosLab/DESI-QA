@@ -101,7 +101,8 @@ def start_mount():
     return cem120
 
 
-def movemount(mtpos, cem120=cem120):
+
+def movemount(mtpos, cem120):
     """Place holder for mount
     input:
         mtpos (): row (?) with the mount position
@@ -120,18 +121,21 @@ def movemount(mtpos, cem120=cem120):
         
     return mtpos
     
-def mount_posdown(cem120=cem120):
+def mount_posdown(cem120):
     """positioners down sequence, from home position
 
     Args:
-        cem120 (_type_, optional): _description_. Defaults to cem120.
+        cem120 (_type_, optional): cem120 object (from Tsmount Class).
     """
     cf.home(cem120)
     cf.move_90(cem120, 0., 1, 0)
     cf.move_90(cem120, (cf.get_ra_dec(cem120)[0]-324000)%1296000, 0, 1) 
 
-def mount_posup(cem120=cem120):
+def mount_posup(cem120):
     """positioners up sequence, from home position
+    
+    Args:
+        cem120 (object): cem120 object (from Tsmount Class).
     """
     cf.home(cem120)
 
@@ -236,11 +240,11 @@ def get_spot(fitsname, fitspath,
         print("Warning: spot not found ")
         print(f"\terr: {err}")
         inval_number = np.nan
-        return {  'peaks': [inval_number], 
-                      'x': [inval_number], 
-                      'y': [inval_number], 
-                   'fwhm': [inval_number], 
-                 'energy': [inval_number]} 
+        return {  'peaks': np.array([inval_number]*expected_spot_count), 
+                      'x': np.array([inval_number]*expected_spot_count), 
+                      'y': np.array([inval_number]*expected_spot_count), 
+                   'fwhm': np.array([inval_number]*expected_spot_count), 
+                 'energy': np.array([inval_number]*expected_spot_count)} 
     return centroids
 
 
