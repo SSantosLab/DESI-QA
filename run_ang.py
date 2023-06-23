@@ -67,12 +67,46 @@ def start_mount():
 
 
 
-def movemount(mtpos):
+def movemount(mtpos, cem120):
     """Place holder for mount
     input:
-        mtpos (): list (?) with the mount position
+        mtpos (): row (?) with the mount position
+        move mount as Mount_[NOTSAFE].ipynb
+    example: position up 
+    #CAM UP
     """
-    pass
+    if mtpos==(90,90):
+        mount_posdown(cem120)
+    elif mtpos==(-90,90) or mtpos==(90,-90):
+        mount_posup(cem120)
+    elif mtpos==(0,0):
+        cf.home(cem120)
+    else:
+        raise NotImplementedError("Only 0, 90, -90 positions are allowed now")
+        
+    return mtpos
+    
+def mount_posdown(cem120):
+    """positioners down sequence, from home position
+
+    Args:
+        cem120 (_type_, optional): cem120 object (from Tsmount Class).
+    """
+    cf.home(cem120)
+    cf.move_90(cem120, 0., 1, 0)
+    cf.move_90(cem120, (cf.get_ra_dec(cem120)[0]-324000)%1296000, 0, 1) 
+
+def mount_posup(cem120):
+    """positioners up sequence, from home position
+    
+    Args:
+        cem120 (object): cem120 object (from Tsmount Class).
+    """
+    cf.home(cem120)
+
+    # Position 8 - U   -> HOME->7->8 CAM UP  eixo 1  = x
+    cf.move_90(cem120, 0., 1, 1)
+    cf.move_90(cem120, (cf.get_ra_dec(cem120)[0]-324000)%1296000, 0, 1) 
 
 
 def connect2pb():
