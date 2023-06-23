@@ -9,82 +9,24 @@ todo:
     now, all positioners are doing the same moves!
     
 """
- 
-from src.phandler import ShellHandler
-import time 
-import sbigCam as sbc
-import time
-import sys
-import os
-from csv import reader
-from spotfinder import spotfinder
 import numpy as np
+from csv import reader
 import configparser
+import time 
+from datetime import datetime
+import os
+import sys
+sys.path.append('/data/common/software/products/tsmount-umich/python')
+import cem120func as cf
+from src.phandler import ShellHandler
+import sbigCam as sbc
+from spotfinder import spotfinder
 import xylib as xylib
 import test_spotfinder as ts
 import tslib as tslib
 
 
-sys.path.append('/data/common/software/products/tsmount-umich/python')
-import cem120func as cf
-
-
-def start_cam(exposure_time=3000, is_dark=False):
-    """Initialize sbigcam
-    """
-    cam = sbc.SBIGCam() 
-    try: 
-        cam.close_camera()
-    except Exception as err:
-        pass
-
-    cam.open_camera()
-    cam.select_camera('ST8300')
-    cam.set_exposure_time(exposure_time)
-    cam.set_dark(is_dark)
-    return cam 
-
-
-def get_picture(cam, imgname, rootout=None, dryrun=False):
-    """
-    cam (SBIG.cam() obj): object from sbc
-    """
-    image = cam.start_exposure()
-    # imgname = f"{rootout}/{time.strftime("%Y-%m-%d-%H%M%S")}"
-    cam.write_fits(image, name = f"{rootout}/{imgname}.fits")
-    print(f'Photo #{imgname} taken successfully.')
-
-
-def start_mount():
-    """
-    Instantiate the ts mount class
-    returns:
-        cem120 (serial obj): object for moving mount class
-
-    """
-    cem120 = cf.initialize_mount("/dev/ttyUSB0")
-    return cem120
-
-
-
-def movemount(mtpos):
-    """Place holder for mount
-    input:
-        mtpos (): list (?) with the mount position
-    """
-    pass
-
-
-def connect2pb():
-    """Starts ShellHandler and returns the sh object
-    """
-    with open("conninfo.txt", "r") as ff: 
-        pw = [i.strip('\n') for i in ff.readlines()]
-    sh = ShellHandler(pw[0], pw[1], pw[2])
-    print("Connection started")
-    return sh
-
-
+# I/O Session: 
 def read_movetable(ifn):
     """
     Read a positioners move table
@@ -116,6 +58,97 @@ def read_mounttable(ifn):
         assert len(row)==1, \
                f"Error: mount row {i} with {len(row)} Columns; should be 1!"
     return mounttable
+
+
+# Cam session:
+def start_cam(exposure_time=3000, is_dark=False):
+    """Initialize sbigcam
+    """
+    cam = sbc.SBIGCam() 
+    try: 
+        cam.close_camera()
+    except Exception as err:
+        pass
+
+    cam.open_camera()
+    cam.select_camera('ST8300')
+    cam.set_exposure_time(exposure_time)
+    cam.set_dark(is_dark)
+    return cam 
+
+
+def get_picture(cam, imgname, rootout=None, dryrun=False):
+    """
+    cam (SBIG.cam() obj): object from sbc
+    """
+    image = cam.start_exposure()
+    # imgname = f"{rootout}/{time.strftime("%Y-%m-%d-%H%M%S")}"
+    cam.write_fits(image, name = f"{rootout}/{imgname}.fits")
+    print(f'Photo #{imgname} taken successfully.')
+
+
+# Mount Session
+def start_mount():
+    """
+    Instantiate the ts mount class
+    returns:
+        cem120 (serial obj): object for moving mount class
+
+    """
+    cem120 = cf.initialize_mount("/dev/ttyUSB0")
+    cf.set_alt_lim(cem120, -89)
+    cf.slew_rate(cem120, 9)
+    return cem120
+
+
+def movemount(mtpos, cem120=cem120):
+    """Place holder for mount
+    input:
+        mtpos (): row (?) with the mount position
+        move mount as Mount_[NOTSAFE].ipynb
+    example: position up 
+    #CAM UP
+    """
+    if mtpos==(90,90):
+        mount_posdown(cem120)
+    elif mtpos==(-90,90) or mtpos==(90,-90):
+        mount_posup(cem120)
+    elif mtpos==(0,0):
+        cf.home(cem120)
+    else:
+        raise NotImplementedError("Only 0, 90, -90 positions are allowed now")
+        
+    return mtpos
+    
+def mount_posdown(cem120=cem120):
+    """positioners down sequence, from home position
+
+    Args:
+        cem120 (_type_, optional): _description_. Defaults to cem120.
+    """
+    cf.home(cem120)
+    cf.move_90(cem120, 0., 1, 0)
+    cf.move_90(cem120, (cf.get_ra_dec(cem120)[0]-324000)%1296000, 0, 1) 
+
+def mount_posup(cem120=cem120):
+    """positioners up sequence, from home position
+    """
+    cf.home(cem120)
+
+    # Position 8 - U   -> HOME->7->8 CAM UP  eixo 1  = x
+    cf.move_90(cem120, 0., 1, 1)
+    cf.move_90(cem120, (cf.get_ra_dec(cem120)[0]-324000)%1296000, 0, 1) 
+
+
+# Petal Box Session:
+def connect2pb():
+    """Starts ShellHandler and returns the sh object
+    """
+    with open("conninfo.txt", "r") as ff: 
+        pw = [i.strip('\n') for i in ff.readlines()]
+    sh = ShellHandler(pw[0], pw[1], pw[2])
+    print("Connection started")
+    return sh
 
 
 def send_posmove(mvargs, remote_script="fao_seq20.py", verbose=False):
@@ -171,7 +204,7 @@ def confirm_move(ihash, ohash):
         print("Error in PB reply")
         return False
 
-
+# Analysis Session:
 def get_spot(fitsname, fitspath,  
               expected_spot_count=5, 
               regionsname='regions.reg', 
@@ -255,15 +288,20 @@ def print_info(centroids, posid):
     print(f"\t\tx,y:\n {x_pos:4.6f}, {y_pos:4.6f} \n {x_here:.6f}, {y_here:.6f}")
     print(f"dist_xy2c: {rc:.6f} mm\nphi: {netphi: .4f} deg")
     return netphi, rc
-    # ------------------------------------------------------------------------
 
-def savedata(session_label, move_label, fields):
-    """
-    Place holder for data 
-    """
-
-
-
+# def create_log(session_label):
+#     """
+#     Create a log file with the session information
+#     """
+#     logfile = f"logs/{session_label}.log"
+#     if os.isfile(logfile):
+#         print("warning: log file already exists")
+        
+#     with open logfile as flog:
+#         flog.write("")
+#     pass  
+    
+    
 if __name__=='__main__':
     #TODO: receive config as parsed argument
     #      write logs at the end
@@ -386,7 +424,8 @@ if __name__=='__main__':
     netphi = 0
     for i, imount in enumerate(mounttable):
         if imount !=0:  
-            sys.exit("NotImplemented: Only position 0 for mount is allowed now")
+            print(f"starting positioners loop for MOUNT in {imount}")
+            mtang1, mtang2 = movemount(imount)
         else:
             mtang1, mtang2 = 0, 0
 
@@ -412,10 +451,10 @@ if __name__=='__main__':
 
             if not sys_status:
                 sys.exit(1)
-            elif not dryrun:
+            elif (not dryrun):
                 # 1. get_pic
-                # 2. __analyze pics
-                # 3. __sanity checks related to position
+                # 2. analyze pics
+                # 3. sanity checks related to position:
                 #       - there's a pic
                 #       - the spot was detected
                 #       - next move is not passing physical limits
