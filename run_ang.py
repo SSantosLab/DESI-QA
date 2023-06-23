@@ -53,10 +53,10 @@ def read_mounttable(ifn):
         print("Mount table not found! Using home")
         return [0]
     mountlines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
-    mounttable = [ i for i in movelines]
-    for i, row in enumerate(movetable):
-        assert len(row)==1, \
-               f"Error: mount row {i} with {len(row)} Columns; should be 1!"
+    mounttable = [ i for i in mountlines]
+    for i, row in enumerate(mounttable):
+        assert (len(row)==2), \
+               f"Error: mount row {i} with {len(row)} Columns; should be 2!"
     return mounttable
 
 
@@ -88,14 +88,14 @@ def get_picture(cam, imgname, rootout=None, dryrun=False):
 
 
 # Mount Session
-def start_mount():
+def start_mount(port='/dev/ttyUSB1'):
     """
     Instantiate the ts mount class
     returns:
         cem120 (serial obj): object for moving mount class
 
     """
-    cem120 = cf.initialize_mount("/dev/ttyUSB0")
+    cem120 = cf.initialize_mount(port)
     cf.set_alt_lim(cem120, -89)
     cf.slew_rate(cem120, 9)
     return cem120
@@ -110,6 +110,8 @@ def movemount(mtpos, cem120):
     example: position up 
     #CAM UP
     """
+    mtpos = tuple(np.array(mtpos, dtype=float))
+
     if mtpos==(90,90):
         mount_posdown(cem120)
     elif mtpos==(-90,90) or mtpos==(90,-90):
@@ -391,6 +393,9 @@ if __name__=='__main__':
     # -------------------------------------
     # Session Setup
     
+    # Start mount
+    cem120 = start_mount()
+
     # Connecting to PB
     sh = connect2pb()
 
@@ -429,12 +434,12 @@ if __name__=='__main__':
     for i, imount in enumerate(mounttable):
         if imount !=0:  
             print(f"starting positioners loop for MOUNT in {imount}")
-            mtang1, mtang2 = movemount(imount)
+            mtang1, mtang2 = movemount(imount, cem120)
         else:
             mtang1, mtang2 = 0, 0
 
             print(f"starting positioners loop for MOUNT in {imount}")
-            movemount(imount)        
+            movemount(imount, cem120)
 
 
         for j, imove in enumerate(movetable):
