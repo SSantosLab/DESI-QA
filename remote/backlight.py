@@ -10,7 +10,6 @@ devbb = {'can22':[_fiducial, _positioner]}
 fipos =  fiposcontrol.FiposControl(['can22'])
 fipos.set_fiducial_duty(devbb,100) 
 
-# TODO : gracefully exit
 fipos.gentle_exit()
 
 
