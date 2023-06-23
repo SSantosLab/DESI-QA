@@ -473,7 +473,7 @@ if __name__=='__main__':
                 
                 netphi, dist2center = print_info(centroids, posid)
                 thobs, phobs = xylib.transform(hardstop_ang['4852'], 
-                    R1['4852'], R2['4852'] + 0.15, 
+                    R1['4852'], R2['4852'] + 0.15, # prevent stopping the run due to miscalibration
                     centroids['x'][0]*pix2mm - center['4852'][0],
                     -(centroids['y'][0]*pix2mm -center['4852'][1]) )
 
