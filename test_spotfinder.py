@@ -56,7 +56,7 @@ def select_fidregion(centroids, xmin=1036, xmax=1216, ymin=794, ymax=974):
            (centroids['y'] > fidregy[0]) & (centroids['y'] < fidregy[1])
     return mask
 
-def get_spotpos(posid, centroids, reg=reg ):
+def get_spotpos(posid, centroids, reg=None ):
     mask=  (centroids['x'] >= reg[posid]['x'][0]) & \
     (centroids['x'] <= reg[posid]['x'][1]) &\
     (centroids['y'] >= reg[posid]['y'][0]) & \
