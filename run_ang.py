@@ -51,7 +51,7 @@ def read_mounttable(ifn):
     """
     if (ifn is None) or ifn=='':
         print("Mount table not found! Using home")
-        return [0]
+        return [(0, 0)]
     mountlines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
     mounttable = [ i for i in mountlines]
     for i, row in enumerate(mounttable):
@@ -172,24 +172,24 @@ def read_movetable(ifn):
     return movetable
 
 
-def read_mounttable(ifn):
-    """
-    Read a positioners move table
-    ifn (str): Input File Name w/ rows like:
-                     'direction speed motor angle'
-            e.g.  'cw cruise phi 180'
-    Returns:
-        mounttable (list): list of rows with mount positions
-    """
-    if (ifn is None) or ifn=='':
-        print("Mount table not found! Using home")
-        return [0]
-    mountlines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
-    mounttable = [ i for i in movelines]
-    for i, row in enumerate(movetable):
-        assert len(row)==1, \
-               f"Error: mount row {i} with {len(row)} Columns; should be 1!"
-    return mounttable
+# def read_mounttable(ifn):
+#     """
+#     Read a positioners move table
+#     ifn (str): Input File Name w/ rows like:
+#                      'direction speed motor angle'
+#             e.g.  'cw cruise phi 180'
+#     Returns:
+#         mounttable (list): list of rows with mount positions
+#     """
+#     if (ifn is None) or ifn=='':
+#         print("Mount table not found! Using home")
+#         return [0]
+#     mountlines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
+#     mounttable = [ i for i in mountlines]
+#     for i, row in enumerate(mounttable):
+#         assert len(row)==2, \
+#                f"Error: mount row {i} with {len(row)} Columns; should be 1!"
+#     return mounttable
 
 
 def send_posmove(mvargs, remote_script="fao_seq20.py", verbose=False):
@@ -389,7 +389,7 @@ if __name__=='__main__':
     # e.g. example.ini
 
 
-    cfg = configparser.ConfigParser()
+    cfg = configparser.SafeConfigParser()
     cfg.read(f'{sess_config}')
 
     pipeline = cfg.get('run', 'pipeline').split(" ")
@@ -406,8 +406,11 @@ if __name__=='__main__':
 
     # if haspos: 
     movetablefn = cfg.get('run', 'movetable') 
-    ncycle = cfg.getint('run', 'repeatcyle')
-            
+    try: 
+        ncycle = cfg.getint('run', 'repeatcycle')
+    except Exception as err:
+        ncycle = 1
+        print(f">> Err: {err}\n>> ncycle set as 1 ")
     
     # if hasmount: 
     mounttablefn = cfg.get('run', 'mounttable')
@@ -422,6 +425,7 @@ if __name__=='__main__':
     print("--"*8)
     print(pipeline)
     print(session_label)
+    print(f"!! Number of Cycle(s): {ncycle}")
     print()
     print("--"*35,f"\n\t# {movetablefn}\n","--"*35 )
 
