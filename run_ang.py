@@ -481,6 +481,7 @@ if __name__=='__main__':
     print(f" Loop positioner size: {len(movetable)}" )
     netphi = 0
     for i, imount in enumerate(mounttable):
+        print(f"\n>>  Mount move #{i}: {imount}\n")
         if imount !=0:  
             print(f"starting positioners loop for MOUNT in {imount}")
             mtang1, mtang2 = movemount(imount, cem120)
