@@ -9,26 +9,58 @@ todo:
     now, all positioners are doing the same moves!
     
 """
- 
-from src.phandler import ShellHandler
-import time 
-import sbigCam as sbc
-import time
-import sys
-import os
-from csv import reader
-from spotfinder import spotfinder
 import numpy as np
+from csv import reader
 import configparser
+import time 
+from datetime import datetime
+import os
+import sys
+sys.path.append('/data/common/software/products/tsmount-umich/python')
+import cem120func as cf
+from src.phandler import ShellHandler
+import sbigCam as sbc
+from spotfinder import spotfinder
 import xylib as xylib
 import test_spotfinder as ts
 import tslib as tslib
 
 
-sys.path.append('/data/common/software/products/tsmount-umich/python')
-import cem120func as cf
+# I/O Session: 
+def read_movetable(ifn):
+    """
+    Read a positioners move table
+    ifn (str): Input File Name w/ rows like:
+                     'direction speed motor angle'
+            e.g.  'cw cruise phi 180'
+    """
+    movelines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
+    movetable = [ i for i in movelines]
+    for i, row in enumerate(movetable):
+        assert len(row)==4, \
+               f"Error: row {i} with {len(row)} Columns; should be 4!"
+    return movetable
 
 
+def read_mounttable(ifn):
+    """
+    Read a positioners move table
+    ifn (str): Input File Name w/ rows like:
+                     'direction speed motor angle'
+            e.g.  'cw cruise phi 180'
+    """
+    if (ifn is None) or ifn=='':
+        print("Mount table not found! Using home")
+        return [0]
+    mountlines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
+    mounttable = [ i for i in mountlines]
+    for i, row in enumerate(mounttable):
+        assert (len(row)==2), \
+               f"Error: mount row {i} with {len(row)} Columns; should be 2!"
+    return mounttable
+
+
+# Cam session:
 def start_cam(exposure_time=3000, is_dark=False):
     """Initialize sbigcam
     """
@@ -55,14 +87,17 @@ def get_picture(cam, imgname, rootout=None, dryrun=False):
     print(f'Photo #{imgname} taken successfully.')
 
 
-def start_mount():
+# Mount Session
+def start_mount(port='/dev/ttyUSB1'):
     """
     Instantiate the ts mount class
     returns:
         cem120 (serial obj): object for moving mount class
 
     """
-    cem120 = cf.initialize_mount("/dev/ttyUSB0")
+    cem120 = cf.initialize_mount(port)
+    cf.set_alt_lim(cem120, -89)
+    cf.slew_rate(cem120, 9)
     return cem120
 
 
@@ -75,6 +110,8 @@ def movemount(mtpos, cem120):
     example: position up 
     #CAM UP
     """
+    mtpos = tuple(np.array(mtpos, dtype=float))
+
     if mtpos==(90,90):
         mount_posdown(cem120)
     elif mtpos==(-90,90) or mtpos==(90,-90):
@@ -109,6 +146,7 @@ def mount_posup(cem120):
     cf.move_90(cem120, (cf.get_ra_dec(cem120)[0]-324000)%1296000, 0, 1) 
 
 
+# Petal Box Session:
 def connect2pb():
     """Starts ShellHandler and returns the sh object
     """
@@ -207,7 +245,7 @@ def confirm_move(ihash, ohash):
         print("Error in PB reply")
         return False
 
-
+# Analysis Session:
 def get_spot(fitsname, fitspath,  
               expected_spot_count=5, 
               regionsname='regions.reg', 
@@ -239,11 +277,11 @@ def get_spot(fitsname, fitspath,
         print("Warning: spot not found ")
         print(f"\terr: {err}")
         inval_number = np.nan
-        return {  'peaks': [inval_number], 
-                      'x': [inval_number], 
-                      'y': [inval_number], 
-                   'fwhm': [inval_number], 
-                 'energy': [inval_number]} 
+        return {  'peaks': np.array([inval_number]*expected_spot_count), 
+                      'x': np.array([inval_number]*expected_spot_count), 
+                      'y': np.array([inval_number]*expected_spot_count), 
+                   'fwhm': np.array([inval_number]*expected_spot_count), 
+                 'energy': np.array([inval_number]*expected_spot_count)} 
     return centroids
 
 
@@ -291,15 +329,20 @@ def print_info(centroids, posid):
     print(f"\t\tx,y:\n {x_pos:4.6f}, {y_pos:4.6f} \n {x_here:.6f}, {y_here:.6f}")
     print(f"dist_xy2c: {rc:.6f} mm\nphi: {netphi: .4f} deg")
     return netphi, rc
-    # ------------------------------------------------------------------------
 
-def savedata(session_label, move_label, fields):
-    """
-    Place holder for data 
-    """
-
-
-
+# def create_log(session_label):
+#     """
+#     Create a log file with the session information
+#     """
+#     logfile = f"logs/{session_label}.log"
+#     if os.isfile(logfile):
+#         print("warning: log file already exists")
+        
+#     with open logfile as flog:
+#         flog.write("")
+#     pass  
+    
+    
 if __name__=='__main__':
     #TODO: receive config as parsed argument
     #      write logs at the end
@@ -387,6 +430,9 @@ if __name__=='__main__':
     # -------------------------------------
     # Session Setup
     
+    # Start mount
+    cem120 = start_mount()
+
     # Connecting to PB
     sh = connect2pb()
 
@@ -429,12 +475,13 @@ if __name__=='__main__':
     netphi = 0
     for i, imount in enumerate(mounttable):
         if imount !=0:  
-            sys.exit("NotImplemented: Only position 0 for mount is allowed now")
+            print(f"starting positioners loop for MOUNT in {imount}")
+            mtang1, mtang2 = movemount(imount, cem120)
         else:
             mtang1, mtang2 = 0, 0
 
             print(f"starting positioners loop for MOUNT in {imount}")
-            movemount(imount)        
+            movemount(imount, cem120)
 
 
         for j, imove in enumerate(movetable):
@@ -455,10 +502,10 @@ if __name__=='__main__':
 
             if not sys_status:
                 sys.exit(1)
-            elif not dryrun:
+            elif (not dryrun):
                 # 1. get_pic
-                # 2. __analyze pics
-                # 3. __sanity checks related to position
+                # 2. analyze pics
+                # 3. sanity checks related to position:
                 #       - there's a pic
                 #       - the spot was detected
                 #       - next move is not passing physical limits

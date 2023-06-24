@@ -3,7 +3,13 @@ sbigCam.py
 desiarc-main/
 sbigpics/
 conninfo.txt
+<<<<<<< HEAD
 spotfinder/__pycache__/*
 spotfinder/*
 *.pyc
 regions.reg
+=======
+spotfinder/
+.ipynb_checkpoints/
+src/__pycache__/
+>>>>>>> fc087d19ab2dd249b381c91b33f1e99d18a204a0
