@@ -459,11 +459,14 @@ if __name__=='__main__':
     """
     mounttable = read_mounttable(mounttablefn)
     movetable = read_movetable(movetablefn)
+    n_posmov = len(movetable)
     
     # Repeat cycle
     if isinstance(ncycle, int):
         print(f">> Repeating cycle {ncycle} times")
         movetable = movetable * ncycle
+        assert isinstance(movetable, list), "move table is not a list"
+        assert len(movetable) == n_posmov * ncycle, "move table is not the right size"
     
     #unpark theta and phi
     if False:
