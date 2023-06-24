@@ -140,6 +140,8 @@ def read_mounttable(ifn):
     ifn (str): Input File Name w/ rows like:
                      'direction speed motor angle'
             e.g.  'cw cruise phi 180'
+    Returns:
+        mounttable (list): list of rows with mount positions
     """
     if (ifn is None) or ifn=='':
         print("Mount table not found! Using home")
@@ -361,6 +363,8 @@ if __name__=='__main__':
 
     # if haspos: 
     movetablefn = cfg.get('run', 'movetable') 
+    ncycle = cfg.getint('run', 'repeatcyle')
+            
     
     # if hasmount: 
     mounttablefn = cfg.get('run', 'mounttable')
@@ -409,6 +413,11 @@ if __name__=='__main__':
     """
     mounttable = read_mounttable(mounttablefn)
     movetable = read_movetable(movetablefn)
+    
+    # Repeat cycle
+    if isinstance(ncycle, int):
+        print(f">> Repeating cycle {ncycle} times")
+        movetable = movetable * ncycle
     
     #unpark theta and phi
     if False:
