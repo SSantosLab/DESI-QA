@@ -365,7 +365,13 @@ if __name__=='__main__':
     pos_backlash = {"4852": 1.9}
     
     # Region of interest for positioner
-    reg = {'4852': { 'x':[1890,2070], 'y':[800,980]}}
+
+    # SM: I increased these limits (within reason) to encompass all configs of the single positioner
+    # I think initial limits were determined off of restrictive bounds.
+    # New limits were determined using arctheta sequence from 2023-06-14 12:19:00 -> x:[1750,2200], y:[700,1100], 
+    # and accounting for variance in x & y pixels in different configs -> delta_x:10, delta_y:50 [pixels]
+    # IF adding another positioner, we would have to make more restrictive bounds, or think of a new way to do this
+    reg = {'4852': { 'x':[1740,2210], 'y':[650,1150]}}
 
 
     # Todo: copy session config to remote
@@ -534,7 +540,7 @@ if __name__=='__main__':
                 thobs, phobs = xylib.transform(hardstop_ang['4852'], 
                     R1['4852'], R2['4852'] + 0.15, # prevent stopping the run due to miscalibration
                     centroids['x'][0]*pix2mm - center['4852'][0],
-                    -(centroids['y'][0]*pix2mm -center['4852'][1]) )
+                    -(centroids['y'][0]*pix2mm -center['4852'][1]) , safe=True)
 
                 print(f"(th, ph): {thobs:.4f}, {phobs:.4f}")
                 write_db(session_label, mtang1, mtang2, mvlabel, posid, imove, centroids, 
