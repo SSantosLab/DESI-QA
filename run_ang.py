@@ -528,13 +528,25 @@ if __name__=='__main__':
                                         f"sbigpics/{session_label}", 
                                         expected_spot_count=5,
                                         verbose=False)
+                centroids = ts.get_spotpos("4852", centroidall, reg=reg)
+
+                while len(centroids)!=5: # This is to catch any instances where the camera takes a flat image
+                    # repeat get_pic and retrieving centroids
+                    print("No centroids found, taking another image")
+                    get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
+                    centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                            f"sbigpics/{session_label}", 
+                                            expected_spot_count=5,
+                                            verbose=False)
+                    centroids = ts.get_spotpos("4852", centroidall, reg=reg)                    
+
                 
                 fidmask = ts.select_fidregion(centroidall)
                 xfid, yfid = ts.get_xyfid(centroidall, fidmask)
                 pix2mm, sigpix2mm  = ts.get_pix2mm(xfid, yfid)
                 tslib.write_fiddb(session_label, mvlabel, xfid, yfid, pix2mm, sigpix2mm)
     
-                centroids = ts.get_spotpos("4852", centroidall, reg=reg)
+
                 
                 netphi, dist2center = print_info(centroids, posid)
                 thobs, phobs = xylib.transform(hardstop_ang['4852'], 
@@ -545,6 +557,10 @@ if __name__=='__main__':
                 print(f"(th, ph): {thobs:.4f}, {phobs:.4f}")
                 write_db(session_label, mtang1, mtang2, mvlabel, posid, imove, centroids, 
                         xytgt=0, dbname=dbname)
+
+                # Add a condition here to delete the .fits file
+
+
                 # placeholder: _last_position = []
                 # sanity_check_for_phys_lim(_last_position, next_pos, arccenter_posid, returns:sys_status)
 
