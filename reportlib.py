@@ -327,7 +327,7 @@ def getMeans(df,label='Alpha'):
     for sessionNum in np.unique(df['ArcSession']):
         maskedDF = df[df['ArcSession']==sessionNum]
         session_means = np.append(session_means, np.repeat(np.mean(maskedDF[label]),len(df[df['ArcSession']==sessionNum])))
-        session_stds = np.append(session_stds, np.repeat(np.std(maskedDF[label]),len(df[df['ArcSession']==sessionNum])))
+        session_stds = np.append(session_stds, np.repeat(np.std(maskedDF[label],ddof=1),len(df[df['ArcSession']==sessionNum])))
         means = np.append(means, np.mean(maskedDF[label]))
-        stds = np.append(stds, np.std(maskedDF[label]))
+        stds = np.append(stds, np.std(maskedDF[label],ddof=1))
     return session_means,session_stds,means,stds
