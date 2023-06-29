@@ -51,7 +51,7 @@ def read_mounttable(ifn):
     """
     if (ifn is None) or ifn=='':
         print("Mount table not found! Using home")
-        return [0]
+        return [(0, 0)]
     mountlines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
     mounttable = [ i for i in mountlines]
     for i, row in enumerate(mounttable):
@@ -172,24 +172,24 @@ def read_movetable(ifn):
     return movetable
 
 
-def read_mounttable(ifn):
-    """
-    Read a positioners move table
-    ifn (str): Input File Name w/ rows like:
-                     'direction speed motor angle'
-            e.g.  'cw cruise phi 180'
-    Returns:
-        mounttable (list): list of rows with mount positions
-    """
-    if (ifn is None) or ifn=='':
-        print("Mount table not found! Using home")
-        return [0]
-    mountlines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
-    mounttable = [ i for i in movelines]
-    for i, row in enumerate(movetable):
-        assert len(row)==1, \
-               f"Error: mount row {i} with {len(row)} Columns; should be 1!"
-    return mounttable
+# def read_mounttable(ifn):
+#     """
+#     Read a positioners move table
+#     ifn (str): Input File Name w/ rows like:
+#                      'direction speed motor angle'
+#             e.g.  'cw cruise phi 180'
+#     Returns:
+#         mounttable (list): list of rows with mount positions
+#     """
+#     if (ifn is None) or ifn=='':
+#         print("Mount table not found! Using home")
+#         return [0]
+#     mountlines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
+#     mounttable = [ i for i in mountlines]
+#     for i, row in enumerate(mounttable):
+#         assert len(row)==2, \
+#                f"Error: mount row {i} with {len(row)} Columns; should be 1!"
+#     return mounttable
 
 
 def send_posmove(mvargs, remote_script="fao_seq20.py", verbose=False):
@@ -365,7 +365,13 @@ if __name__=='__main__':
     pos_backlash = {"4852": 1.9}
     
     # Region of interest for positioner
-    reg = {'4852': { 'x':[1890,2070], 'y':[800,980]}}
+
+    # SM: I increased these limits (within reason) to encompass all configs of the single positioner
+    # I think initial limits were determined off of restrictive bounds.
+    # New limits were determined using arctheta sequence from 2023-06-14 12:19:00 -> x:[1750,2200], y:[700,1100], 
+    # and accounting for variance in x & y pixels in different configs -> delta_x:10, delta_y:50 [pixels]
+    # IF adding another positioner, we would have to make more restrictive bounds, or think of a new way to do this
+    reg = {'4852': { 'x':[1740,2210], 'y':[650,1150]}}
 
 
     # Todo: copy session config to remote
@@ -389,7 +395,7 @@ if __name__=='__main__':
     # e.g. example.ini
 
 
-    cfg = configparser.ConfigParser()
+    cfg = configparser.SafeConfigParser()
     cfg.read(f'{sess_config}')
 
     pipeline = cfg.get('run', 'pipeline').split(" ")
@@ -406,8 +412,11 @@ if __name__=='__main__':
 
     # if haspos: 
     movetablefn = cfg.get('run', 'movetable') 
-    ncycle = cfg.getint('run', 'repeatcyle')
-            
+    try: 
+        ncycle = cfg.getint('run', 'repeatcycle')
+    except Exception as err:
+        ncycle = 1
+        print(f">> Err: {err}\n>> ncycle set as 1 ")
     
     # if hasmount: 
     mounttablefn = cfg.get('run', 'mounttable')
@@ -422,6 +431,7 @@ if __name__=='__main__':
     print("--"*8)
     print(pipeline)
     print(session_label)
+    print(f"!! Number of Cycle(s): {ncycle}")
     print()
     print("--"*35,f"\n\t# {movetablefn}\n","--"*35 )
 
@@ -477,6 +487,7 @@ if __name__=='__main__':
     print(f" Loop positioner size: {len(movetable)}" )
     netphi = 0
     for i, imount in enumerate(mounttable):
+        print(f"\n>>  Mount move #{i}: {imount}\n")
         if imount !=0:  
             print(f"starting positioners loop for MOUNT in {imount}")
             mtang1, mtang2 = movemount(imount, cem120)
@@ -517,23 +528,39 @@ if __name__=='__main__':
                                         f"sbigpics/{session_label}", 
                                         expected_spot_count=5,
                                         verbose=False)
+                centroids = ts.get_spotpos("4852", centroidall, reg=reg)
+
+                while len(centroids)!=5: # This is to catch any instances where the camera takes a flat image
+                    # repeat get_pic and retrieving centroids
+                    print("No centroids found, taking another image")
+                    get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
+                    centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                            f"sbigpics/{session_label}", 
+                                            expected_spot_count=5,
+                                            verbose=False)
+                    centroids = ts.get_spotpos("4852", centroidall, reg=reg)                    
+
                 
                 fidmask = ts.select_fidregion(centroidall)
                 xfid, yfid = ts.get_xyfid(centroidall, fidmask)
                 pix2mm, sigpix2mm  = ts.get_pix2mm(xfid, yfid)
                 tslib.write_fiddb(session_label, mvlabel, xfid, yfid, pix2mm, sigpix2mm)
     
-                centroids = ts.get_spotpos("4852", centroidall, reg=reg)
+
                 
                 netphi, dist2center = print_info(centroids, posid)
                 thobs, phobs = xylib.transform(hardstop_ang['4852'], 
                     R1['4852'], R2['4852'] + 0.15, # prevent stopping the run due to miscalibration
                     centroids['x'][0]*pix2mm - center['4852'][0],
-                    -(centroids['y'][0]*pix2mm -center['4852'][1]) )
+                    -(centroids['y'][0]*pix2mm -center['4852'][1]) , safe=True)
 
                 print(f"(th, ph): {thobs:.4f}, {phobs:.4f}")
                 write_db(session_label, mtang1, mtang2, mvlabel, posid, imove, centroids, 
                         xytgt=0, dbname=dbname)
+
+                # Add a condition here to delete the .fits file
+
+
                 # placeholder: _last_position = []
                 # sanity_check_for_phys_lim(_last_position, next_pos, arccenter_posid, returns:sys_status)
 

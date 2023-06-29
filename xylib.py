@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def transform(H,R_theta,R_phi,x,y,safe=True): 
+def transform(H,R_theta,R_phi,x,y,safe=False): 
     """
     Function to return theta and phi angles based on x and y coordinates relative to center, where center is defined as (0,0), with units in mm's
     
@@ -11,7 +11,7 @@ def transform(H,R_theta,R_phi,x,y,safe=True):
     R_phi; Radius of phi, given in mm
     x; current x position, given in mm
     y; current x position, given in mm
-    safe=True; A flag for testing. When set to False, will override patrol radius assertion. Only used for testing moves near R_theta+R_phi. DO NOT SET TO True IF PERFORMING DESI MOVES
+    safe=False; A flag for testing. When set to True, will override patrol radius assertion. Only used for testing moves near R_theta+R_phi. DO NOT SET TO True IF PERFORMING DESI MOVES
 
     OUTPUTS
     theta; The angle of the theta move
@@ -33,12 +33,7 @@ def transform(H,R_theta,R_phi,x,y,safe=True):
     
     # Assertion to protect against moves outside of the patrol radius
     # See documentation for 'safe' above
-    if not safe:
-        d1=0
-    else:
-        d1=d
-        
-    assert d1 <= R_theta+R_phi,\
+    assert (safe or d1 <= R_theta+R_phi),\
          f"d> out of reach {d1}>{R_theta}+{R_phi}"
 
     # Defining components of the hardstop angle
