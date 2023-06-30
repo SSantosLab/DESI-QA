@@ -15299,3 +15299,1870 @@ Traceback (most recent call last):
   File "run_ang.py", line 231, in get_remotehash
     return sout[-1].strip('\n')
 IndexError: list index out of range
+----------------
+['positioners', 'cam']
+arcth30_180-20230629-123719
+!! Number of Cycle(s): 10
+
+---------------------------------------------------------------------- 
+	# movetables/arcth30_180cap.txt
+ ----------------------------------------------------------------------
+Successfully connected to CEM120
+Altitude Limit set to -89 degrees
+Slew rate set to MAX (960x)
+SSH started
+Connection started
+Code 20: device already closed.
+Code 20: driver already closed.
+{'camerasFound': 1,
+ 'updated': True,
+ 'usbInfo': [{'cameraFound': True,
+              'cameraType': 'STF',
+              'deviceType': 'USB1',
+              'name': 'SBIG STF-8300 CCD Camera',
+              'serialNumber': '83F011779'}]}
+----------------------------------------
+session imgs in:  /home/msdos/DESI-QA/sbigpics/arcth30_180-20230629-123719
+>> Repeating cycle 10 times
+ Loop positioner size: 130
+
+>>  Mount move #0: ['90', '90']
+
+starting positioners loop for MOUNT in ['90', '90']
+Slewing to home position...
+Mount stopped at home position
+home at (175.8, 90.0) deg
+Moving to specified angle...
+All movement stopped
+Moving to specified angle...
+All movement stopped
+Sucessful reply from PB
+Photo #20230629-123926 taken successfully.
+peak = 83350.83206270498 brightness appears out of expected range
+peak = 82335.92604047575 brightness appears out of expected range
+peak = 81435.74932023343 brightness appears out of expected range
+peak = 75948.10830866896 brightness appears out of expected range
+peak = 72766.6881838318 brightness appears out of expected range
+here
+		x,y:
+ -1.121156, -6.436996 
+ 1940.607087, 709.218567
+dist_xy2c: 6.533905 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-123934 taken successfully.
+peak = 83385.95304551476 brightness appears out of expected range
+peak = 82338.88452040992 brightness appears out of expected range
+peak = 81051.22304233171 brightness appears out of expected range
+peak = 76674.93934388793 brightness appears out of expected range
+peak = 72743.9535659035 brightness appears out of expected range
+here
+		x,y:
+ 2.221713, -6.277196 
+ 2035.019093, 713.709692
+dist_xy2c: 6.658769 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-123943 taken successfully.
+peak = 83326.38074042818 brightness appears out of expected range
+peak = 82482.52324460608 brightness appears out of expected range
+peak = 79891.61236832757 brightness appears out of expected range
+peak = 76802.07696176616 brightness appears out of expected range
+peak = 72602.0257351904 brightness appears out of expected range
+here
+		x,y:
+ 5.066412, -4.220668 
+ 2115.645136, 771.916534
+dist_xy2c: 6.594132 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-123952 taken successfully.
+peak = 83308.04015469295 brightness appears out of expected range
+peak = 82396.94573272738 brightness appears out of expected range
+peak = 80649.34164960052 brightness appears out of expected range
+peak = 76484.18634019388 brightness appears out of expected range
+peak = 72717.69760373337 brightness appears out of expected range
+here
+		x,y:
+ 6.294850, -0.913413 
+ 2149.982483, 865.245839
+dist_xy2c: 6.360775 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124001 taken successfully.
+peak = 83586.10900355552 brightness appears out of expected range
+peak = 82373.21343689584 brightness appears out of expected range
+peak = 78346.7179400903 brightness appears out of expected range
+peak = 76523.79630358685 brightness appears out of expected range
+peak = 72883.58669061978 brightness appears out of expected range
+here
+		x,y:
+ 5.458360, 2.500131 
+ 2126.353711, 961.723072
+dist_xy2c: 6.003694 mm
+phi:  166.0722 deg
+(th, ph): 236.9588, 151.1911
+Sucessful reply from PB
+Photo #20230629-124010 taken successfully.
+peak = 83359.79108579215 brightness appears out of expected range
+peak = 82456.54905535815 brightness appears out of expected range
+peak = 79188.85749988895 brightness appears out of expected range
+peak = 76872.69552148419 brightness appears out of expected range
+peak = 72904.09095021436 brightness appears out of expected range
+here
+		x,y:
+ 2.842738, 4.873780 
+ 2052.417539, 1028.799147
+dist_xy2c: 5.642241 mm
+phi:  137.7655 deg
+(th, ph): 282.6017, 131.0539
+Sucessful reply from PB
+Photo #20230629-124019 taken successfully.
+peak = 83346.37247899156 brightness appears out of expected range
+peak = 82424.62524607485 brightness appears out of expected range
+peak = 80757.75454527566 brightness appears out of expected range
+peak = 76570.11718024129 brightness appears out of expected range
+peak = 72693.1163898582 brightness appears out of expected range
+here
+		x,y:
+ -0.635584, 5.374648 
+ 1954.003630, 1042.894970
+dist_xy2c: 5.412099 mm
+phi:  126.9631 deg
+(th, ph): 324.5504, 121.6097
+Sucessful reply from PB
+Photo #20230629-124028 taken successfully.
+peak = 83406.28651942806 brightness appears out of expected range
+peak = 82443.47076966897 brightness appears out of expected range
+peak = 80283.20430639076 brightness appears out of expected range
+peak = 76900.27045838995 brightness appears out of expected range
+peak = 72796.35927024565 brightness appears out of expected range
+here
+		x,y:
+ 2.682269, 4.950985 
+ 2047.747954, 1030.913393
+dist_xy2c: 5.630881 mm
+phi:  137.1722 deg
+(th, ph): 284.6727, 130.5485
+Sucessful reply from PB
+Photo #20230629-124037 taken successfully.
+peak = 83386.38784127506 brightness appears out of expected range
+peak = 82189.83507325679 brightness appears out of expected range
+peak = 79854.70827691308 brightness appears out of expected range
+peak = 77215.37108943069 brightness appears out of expected range
+peak = 72544.45223165704 brightness appears out of expected range
+here
+		x,y:
+ 5.365765, 2.653254 
+ 2123.696846, 966.032370
+dist_xy2c: 5.985916 mm
+phi:  163.5364 deg
+(th, ph): 239.3347, 149.8963
+Sucessful reply from PB
+Photo #20230629-124045 taken successfully.
+peak = 83346.50297994238 brightness appears out of expected range
+peak = 82470.96003748613 brightness appears out of expected range
+peak = 79862.1393301133 brightness appears out of expected range
+peak = 76963.60784975757 brightness appears out of expected range
+peak = 72746.78528615409 brightness appears out of expected range
+here
+		x,y:
+ 6.303707, -0.735033 
+ 2150.142954, 870.250781
+dist_xy2c: 6.346415 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124054 taken successfully.
+peak = 83553.31238292156 brightness appears out of expected range
+peak = 82079.57559447248 brightness appears out of expected range
+peak = 80137.87614645078 brightness appears out of expected range
+peak = 76749.20995846196 brightness appears out of expected range
+peak = 72684.93001820584 brightness appears out of expected range
+here
+		x,y:
+ 5.187810, -4.065845 
+ 2118.852699, 776.210811
+dist_xy2c: 6.591242 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124103 taken successfully.
+peak = 83320.12694204286 brightness appears out of expected range
+peak = 82501.78316278399 brightness appears out of expected range
+peak = 80583.09103445268 brightness appears out of expected range
+peak = 76852.45050715496 brightness appears out of expected range
+peak = 72592.98960426773 brightness appears out of expected range
+here
+		x,y:
+ 2.397655, -6.215049 
+ 2039.939819, 715.447951
+dist_xy2c: 6.661500 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124112 taken successfully.
+peak = 83550.68764565817 brightness appears out of expected range
+peak = 82158.97839119764 brightness appears out of expected range
+peak = 81771.78839820717 brightness appears out of expected range
+peak = 72883.82690487833 brightness appears out of expected range
+peak = 76937.8929924396 brightness appears out of expected range
+here
+		x,y:
+ -1.115032, -6.434224 
+ 1940.642301, 709.246534
+dist_xy2c: 6.530125 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124121 taken successfully.
+peak = 83397.27940540685 brightness appears out of expected range
+peak = 82231.67079992345 brightness appears out of expected range
+peak = 81789.08576048515 brightness appears out of expected range
+peak = 77245.66420899787 brightness appears out of expected range
+peak = 72796.41919364757 brightness appears out of expected range
+here
+		x,y:
+ -1.116937, -6.434472 
+ 1940.627657, 709.253856
+dist_xy2c: 6.530695 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124130 taken successfully.
+peak = 83425.14424503183 brightness appears out of expected range
+peak = 82444.76079730665 brightness appears out of expected range
+peak = 81148.712779406 brightness appears out of expected range
+peak = 76802.73877244789 brightness appears out of expected range
+peak = 72682.73610850963 brightness appears out of expected range
+here
+		x,y:
+ 2.228605, -6.274692 
+ 2035.057780, 713.725727
+dist_xy2c: 6.658712 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124139 taken successfully.
+peak = 83325.21114712564 brightness appears out of expected range
+peak = 82147.60123244357 brightness appears out of expected range
+peak = 80273.0585275294 brightness appears out of expected range
+peak = 77247.62878716266 brightness appears out of expected range
+peak = 72671.21380507995 brightness appears out of expected range
+here
+		x,y:
+ 5.083665, -4.214373 
+ 2115.672545, 771.926532
+dist_xy2c: 6.603377 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124148 taken successfully.
+peak = 83255.6563065034 brightness appears out of expected range
+peak = 82475.06001991619 brightness appears out of expected range
+peak = 80562.38678476676 brightness appears out of expected range
+peak = 76783.95667285232 brightness appears out of expected range
+peak = 72925.83105079105 brightness appears out of expected range
+here
+		x,y:
+ 6.289040, -0.915669 
+ 2149.982092, 865.248024
+dist_xy2c: 6.355350 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124157 taken successfully.
+peak = 83430.64201405393 brightness appears out of expected range
+peak = 82407.36652838744 brightness appears out of expected range
+peak = 78631.1863683156 brightness appears out of expected range
+peak = 77188.3944938124 brightness appears out of expected range
+peak = 72866.17199643927 brightness appears out of expected range
+here
+		x,y:
+ 5.465126, 2.504169 
+ 2126.337257, 961.743244
+dist_xy2c: 6.011528 mm
+phi:  167.3694 deg
+(th, ph): 236.6604, 151.7801
+Sucessful reply from PB
+Photo #20230629-124205 taken successfully.
+peak = 83373.30513400624 brightness appears out of expected range
+peak = 82422.66961791996 brightness appears out of expected range
+peak = 79486.77409069399 brightness appears out of expected range
+peak = 76705.30710821124 brightness appears out of expected range
+peak = 72712.78519093705 brightness appears out of expected range
+here
+		x,y:
+ 2.833003, 4.869504 
+ 2052.416525, 1028.815708
+dist_xy2c: 5.633647 mm
+phi:  137.3157 deg
+(th, ph): 282.8656, 130.6711
+Sucessful reply from PB
+Photo #20230629-124214 taken successfully.
+peak = 83365.3005143457 brightness appears out of expected range
+peak = 82379.60872940016 brightness appears out of expected range
+peak = 80871.03520517364 brightness appears out of expected range
+peak = 76725.85286938504 brightness appears out of expected range
+peak = 72907.92631027217 brightness appears out of expected range
+here
+		x,y:
+ -0.641171, 5.372199 
+ 1953.993974, 1042.904849
+dist_xy2c: 5.410325 mm
+phi:  126.8914 deg
+(th, ph): 324.6475, 121.5424
+Sucessful reply from PB
+Photo #20230629-124223 taken successfully.
+peak = 83304.49878280988 brightness appears out of expected range
+peak = 82423.4741546464 brightness appears out of expected range
+peak = 80172.54355645883 brightness appears out of expected range
+peak = 77246.8261292535 brightness appears out of expected range
+peak = 72604.1318739147 brightness appears out of expected range
+here
+		x,y:
+ 2.690181, 4.955626 
+ 2047.726049, 1030.920952
+dist_xy2c: 5.638733 mm
+phi:  137.5868 deg
+(th, ph): 284.4420, 130.8972
+Sucessful reply from PB
+Photo #20230629-124232 taken successfully.
+peak = 83570.35944411576 brightness appears out of expected range
+peak = 82172.73817957201 brightness appears out of expected range
+peak = 79712.03433028352 brightness appears out of expected range
+peak = 77218.83206853906 brightness appears out of expected range
+peak = 72637.3432892465 brightness appears out of expected range
+here
+		x,y:
+ 5.367607, 2.655302 
+ 2123.678277, 966.058152
+dist_xy2c: 5.988475 mm
+phi:  163.8837 deg
+(th, ph): 239.2492, 150.0793
+Sucessful reply from PB
+Photo #20230629-124241 taken successfully.
+peak = 83352.41266783928 brightness appears out of expected range
+peak = 82430.12049266695 brightness appears out of expected range
+peak = 79835.95978091391 brightness appears out of expected range
+peak = 77276.16660785729 brightness appears out of expected range
+peak = 72566.16234599787 brightness appears out of expected range
+here
+		x,y:
+ 6.305593, -0.733897 
+ 2150.136605, 870.258743
+dist_xy2c: 6.348158 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124250 taken successfully.
+peak = 83313.47071879971 brightness appears out of expected range
+peak = 82501.04510439279 brightness appears out of expected range
+peak = 80159.70282421313 brightness appears out of expected range
+peak = 77401.04816109546 brightness appears out of expected range
+peak = 72640.85935920075 brightness appears out of expected range
+here
+		x,y:
+ 5.199626, -4.060725 
+ 2118.842047, 776.229290
+dist_xy2c: 6.597393 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124259 taken successfully.
+peak = 83345.90529664619 brightness appears out of expected range
+peak = 82482.20886646457 brightness appears out of expected range
+peak = 80619.868177602 brightness appears out of expected range
+peak = 76698.19651852828 brightness appears out of expected range
+peak = 72852.26664089979 brightness appears out of expected range
+here
+		x,y:
+ 2.398973, -6.214830 
+ 2039.907714, 715.429811
+dist_xy2c: 6.661771 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124308 taken successfully.
+peak = 83370.11184082068 brightness appears out of expected range
+peak = 82096.5465497745 brightness appears out of expected range
+peak = 81700.08137869333 brightness appears out of expected range
+peak = 76750.06559155212 brightness appears out of expected range
+peak = 72665.47237457261 brightness appears out of expected range
+here
+		x,y:
+ -1.118901, -6.435081 
+ 1940.609471, 709.250285
+dist_xy2c: 6.531631 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124317 taken successfully.
+peak = 83326.73862620565 brightness appears out of expected range
+peak = 82460.0704178399 brightness appears out of expected range
+peak = 81699.946006373 brightness appears out of expected range
+peak = 77236.85179241573 brightness appears out of expected range
+peak = 72662.65585557767 brightness appears out of expected range
+here
+		x,y:
+ -1.109088, -6.431452 
+ 1940.595823, 709.246498
+dist_xy2c: 6.526381 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124325 taken successfully.
+peak = 83409.07336025075 brightness appears out of expected range
+peak = 82431.48145485877 brightness appears out of expected range
+peak = 81074.6388020998 brightness appears out of expected range
+peak = 76865.09785177305 brightness appears out of expected range
+peak = 72739.81345205383 brightness appears out of expected range
+here
+		x,y:
+ 2.222748, -6.276676 
+ 2035.034798, 713.719641
+dist_xy2c: 6.658624 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124334 taken successfully.
+peak = 83353.91452712685 brightness appears out of expected range
+peak = 82481.59413044999 brightness appears out of expected range
+peak = 79783.20690128337 brightness appears out of expected range
+peak = 76749.7094260156 brightness appears out of expected range
+peak = 72731.61757282523 brightness appears out of expected range
+here
+		x,y:
+ 5.077736, -4.216700 
+ 2115.629693, 771.906280
+dist_xy2c: 6.600300 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124343 taken successfully.
+peak = 83413.56174807897 brightness appears out of expected range
+peak = 82396.62978131651 brightness appears out of expected range
+peak = 80609.16134570772 brightness appears out of expected range
+peak = 76767.05463845817 brightness appears out of expected range
+peak = 72597.31622499457 brightness appears out of expected range
+here
+		x,y:
+ 6.289709, -0.914268 
+ 2149.974888, 865.277108
+dist_xy2c: 6.355811 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124352 taken successfully.
+peak = 83395.97692065142 brightness appears out of expected range
+peak = 82448.90273430257 brightness appears out of expected range
+peak = 79100.8161111491 brightness appears out of expected range
+peak = 76504.28148351375 brightness appears out of expected range
+peak = 72706.39322805702 brightness appears out of expected range
+here
+		x,y:
+ 5.461336, 2.503535 
+ 2126.322690, 961.767204
+dist_xy2c: 6.007818 mm
+phi:  166.7302 deg
+(th, ph): 236.8159, 151.4997
+Sucessful reply from PB
+Photo #20230629-124401 taken successfully.
+peak = 83391.85242414339 brightness appears out of expected range
+peak = 82439.69862403152 brightness appears out of expected range
+peak = 79558.9602514646 brightness appears out of expected range
+peak = 76695.14652036704 brightness appears out of expected range
+peak = 72624.8712500626 brightness appears out of expected range
+here
+		x,y:
+ 2.836477, 4.872028 
+ 2052.405231, 1028.832169
+dist_xy2c: 5.637576 mm
+phi:  137.5274 deg
+(th, ph): 282.7566, 130.8457
+Sucessful reply from PB
+Photo #20230629-124410 taken successfully.
+peak = 83387.65655439993 brightness appears out of expected range
+peak = 82479.21549723978 brightness appears out of expected range
+peak = 80698.051878292 brightness appears out of expected range
+peak = 77292.44548083977 brightness appears out of expected range
+peak = 72626.06215563051 brightness appears out of expected range
+here
+		x,y:
+ -0.623309, 5.381930 
+ 1953.998073, 1042.912639
+dist_xy2c: 5.417904 mm
+phi:  127.2145 deg
+(th, ph): 324.2965, 121.8305
+Sucessful reply from PB
+Photo #20230629-124419 taken successfully.
+peak = 83355.58792328044 brightness appears out of expected range
+peak = 82631.2656335064 brightness appears out of expected range
+peak = 80178.86235784795 brightness appears out of expected range
+peak = 76928.58706087171 brightness appears out of expected range
+peak = 72660.34787350682 brightness appears out of expected range
+here
+		x,y:
+ 2.690695, 4.955724 
+ 2047.730067, 1030.918415
+dist_xy2c: 5.639064 mm
+phi:  137.6038 deg
+(th, ph): 284.4301, 130.9120
+Sucessful reply from PB
+Photo #20230629-124428 taken successfully.
+peak = 83263.76064526978 brightness appears out of expected range
+peak = 82448.97204976075 brightness appears out of expected range
+peak = 79687.60785353452 brightness appears out of expected range
+peak = 72490.82014642081 brightness appears out of expected range
+peak = 76802.43317657092 brightness appears out of expected range
+here
+		x,y:
+ 5.357182, 2.651461 
+ 2123.647258, 966.069493
+dist_xy2c: 5.977428 mm
+phi:  162.4397 deg
+(th, ph): 239.6679, 149.2969
+Sucessful reply from PB
+Photo #20230629-124437 taken successfully.
+peak = 83334.45400570227 brightness appears out of expected range
+peak = 82410.72629942976 brightness appears out of expected range
+peak = 79877.49549074114 brightness appears out of expected range
+peak = 76357.68019903169 brightness appears out of expected range
+peak = 72488.46160412935 brightness appears out of expected range
+here
+		x,y:
+ 6.299086, -0.735609 
+ 2150.130143, 870.282167
+dist_xy2c: 6.341893 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124445 taken successfully.
+peak = 83382.13229845483 brightness appears out of expected range
+peak = 82438.24998234285 brightness appears out of expected range
+peak = 80127.62465527012 brightness appears out of expected range
+peak = 76924.42488640506 brightness appears out of expected range
+peak = 72719.88212886514 brightness appears out of expected range
+here
+		x,y:
+ 5.189261, -4.064590 
+ 2118.846750, 776.229083
+dist_xy2c: 6.591610 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124454 taken successfully.
+peak = 83290.18231506477 brightness appears out of expected range
+peak = 82488.20219729494 brightness appears out of expected range
+peak = 80577.08547593845 brightness appears out of expected range
+peak = 76457.24764100919 brightness appears out of expected range
+peak = 72579.51005261789 brightness appears out of expected range
+here
+		x,y:
+ 2.400215, -6.214486 
+ 2039.915406, 715.429933
+dist_xy2c: 6.661897 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124503 taken successfully.
+peak = 83277.99486632325 brightness appears out of expected range
+peak = 82607.26899259283 brightness appears out of expected range
+peak = 81580.7930058106 brightness appears out of expected range
+peak = 75808.87055737761 brightness appears out of expected range
+peak = 72608.1320224704 brightness appears out of expected range
+here
+		x,y:
+ -1.112066, -6.432833 
+ 1940.579312, 709.232194
+dist_xy2c: 6.528249 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124512 taken successfully.
+peak = 83274.51805377933 brightness appears out of expected range
+peak = 82394.83202107855 brightness appears out of expected range
+peak = 81694.94968871874 brightness appears out of expected range
+peak = 76751.12282836423 brightness appears out of expected range
+peak = 72831.6643972618 brightness appears out of expected range
+here
+		x,y:
+ -1.119978, -6.436259 
+ 1940.625138, 709.233830
+dist_xy2c: 6.532977 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124521 taken successfully.
+peak = 83277.22717778283 brightness appears out of expected range
+peak = 82379.16131390251 brightness appears out of expected range
+peak = 81135.97604466692 brightness appears out of expected range
+peak = 76116.4552482109 brightness appears out of expected range
+peak = 72655.8973430733 brightness appears out of expected range
+here
+		x,y:
+ 2.230198, -6.273828 
+ 2035.047329, 713.730692
+dist_xy2c: 6.658431 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124530 taken successfully.
+peak = 83387.64117865142 brightness appears out of expected range
+peak = 82474.84869594955 brightness appears out of expected range
+peak = 79933.78421540312 brightness appears out of expected range
+peak = 76074.4360377249 brightness appears out of expected range
+peak = 72592.98303272582 brightness appears out of expected range
+here
+		x,y:
+ 5.076813, -4.216704 
+ 2115.649457, 771.922885
+dist_xy2c: 6.599593 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124539 taken successfully.
+peak = 83345.4291696128 brightness appears out of expected range
+peak = 82620.63876726365 brightness appears out of expected range
+peak = 80496.54999448195 brightness appears out of expected range
+peak = 76195.42276139825 brightness appears out of expected range
+peak = 72683.23222540654 brightness appears out of expected range
+here
+		x,y:
+ 6.291605, -0.913761 
+ 2149.968424, 865.267271
+dist_xy2c: 6.357614 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124548 taken successfully.
+peak = 83286.43136229133 brightness appears out of expected range
+peak = 82429.62869593006 brightness appears out of expected range
+peak = 79329.97145708735 brightness appears out of expected range
+peak = 75873.37820571323 brightness appears out of expected range
+peak = 72520.50047575984 brightness appears out of expected range
+here
+		x,y:
+ 5.460693, 2.504017 
+ 2126.302428, 961.779861
+dist_xy2c: 6.007435 mm
+phi:  166.6804 deg
+(th, ph): 236.8377, 151.4708
+Sucessful reply from PB
+Photo #20230629-124557 taken successfully.
+peak = 83342.8604239641 brightness appears out of expected range
+peak = 82461.71841149182 brightness appears out of expected range
+peak = 79244.18838196779 brightness appears out of expected range
+peak = 76016.33967264098 brightness appears out of expected range
+peak = 72657.62938055694 brightness appears out of expected range
+here
+		x,y:
+ 2.839626, 4.873576 
+ 2052.380758, 1028.819048
+dist_xy2c: 5.640498 mm
+phi:  137.6803 deg
+(th, ph): 282.6687, 130.9760
+Sucessful reply from PB
+Photo #20230629-124605 taken successfully.
+peak = 83280.3683010495 brightness appears out of expected range
+peak = 82401.25563702759 brightness appears out of expected range
+peak = 80873.8665041753 brightness appears out of expected range
+peak = 76661.31574303054 brightness appears out of expected range
+peak = 72614.92189051857 brightness appears out of expected range
+here
+		x,y:
+ -0.642403, 5.371596 
+ 1953.989650, 1042.904114
+dist_xy2c: 5.409873 mm
+phi:  126.8699 deg
+(th, ph): 324.6703, 121.5253
+Sucessful reply from PB
+Photo #20230629-124614 taken successfully.
+peak = 83283.26261968014 brightness appears out of expected range
+peak = 82411.21107122787 brightness appears out of expected range
+peak = 80307.09580883467 brightness appears out of expected range
+peak = 75724.20962151064 brightness appears out of expected range
+peak = 72661.32468288994 brightness appears out of expected range
+here
+		x,y:
+ 2.679906, 4.949741 
+ 2047.728377, 1030.901992
+dist_xy2c: 5.628662 mm
+phi:  137.0627 deg
+(th, ph): 284.7392, 130.4503
+Sucessful reply from PB
+Photo #20230629-124623 taken successfully.
+peak = 83392.07459032674 brightness appears out of expected range
+peak = 82474.52547080422 brightness appears out of expected range
+peak = 79692.24262001835 brightness appears out of expected range
+peak = 76116.28269518955 brightness appears out of expected range
+peak = 72680.8163315677 brightness appears out of expected range
+here
+		x,y:
+ 5.362060, 2.652927 
+ 2123.668091, 966.057685
+dist_xy2c: 5.982450 mm
+phi:  163.0776 deg
+(th, ph): 239.4758, 149.6501
+Sucessful reply from PB
+Photo #20230629-124632 taken successfully.
+peak = 83253.16681713368 brightness appears out of expected range
+peak = 82455.07451924728 brightness appears out of expected range
+peak = 79947.16754506688 brightness appears out of expected range
+peak = 76163.23461311619 brightness appears out of expected range
+peak = 72725.63235644528 brightness appears out of expected range
+here
+		x,y:
+ 6.301033, -0.735177 
+ 2150.129677, 870.271924
+dist_xy2c: 6.343776 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124641 taken successfully.
+peak = 83369.41337391634 brightness appears out of expected range
+peak = 82399.74563352365 brightness appears out of expected range
+peak = 80065.99782664742 brightness appears out of expected range
+peak = 75643.82620073005 brightness appears out of expected range
+peak = 72756.52565194317 brightness appears out of expected range
+here
+		x,y:
+ 5.191851, -4.063741 
+ 2118.841507, 776.224322
+dist_xy2c: 6.593126 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124650 taken successfully.
+peak = 83347.12259302202 brightness appears out of expected range
+peak = 82425.06004755027 brightness appears out of expected range
+peak = 80507.23677341091 brightness appears out of expected range
+peak = 76069.88631741602 brightness appears out of expected range
+peak = 72669.27402354835 brightness appears out of expected range
+here
+		x,y:
+ 2.397735, -6.216066 
+ 2039.885687, 715.399452
+dist_xy2c: 6.662477 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124659 taken successfully.
+peak = 83227.72844448728 brightness appears out of expected range
+peak = 82471.23794875488 brightness appears out of expected range
+peak = 81429.70387059543 brightness appears out of expected range
+peak = 75598.65055634605 brightness appears out of expected range
+peak = 73008.70576734706 brightness appears out of expected range
+here
+		x,y:
+ -1.119678, -6.436666 
+ 1940.604308, 709.211619
+dist_xy2c: 6.533326 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124708 taken successfully.
+peak = 83216.94904508388 brightness appears out of expected range
+peak = 82385.81239639342 brightness appears out of expected range
+peak = 81525.40971065857 brightness appears out of expected range
+peak = 75571.23490661476 brightness appears out of expected range
+peak = 72894.57736715463 brightness appears out of expected range
+here
+		x,y:
+ -1.116710, -6.435924 
+ 1940.601721, 709.200974
+dist_xy2c: 6.532087 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124717 taken successfully.
+peak = 83279.98838532677 brightness appears out of expected range
+peak = 82414.35963081742 brightness appears out of expected range
+peak = 81070.82240905448 brightness appears out of expected range
+peak = 75584.10248951091 brightness appears out of expected range
+peak = 72927.3159552276 brightness appears out of expected range
+here
+		x,y:
+ 2.224707, -6.276665 
+ 2035.030360, 713.699003
+dist_xy2c: 6.659267 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124725 taken successfully.
+peak = 83275.46792897441 brightness appears out of expected range
+peak = 82365.26693898183 brightness appears out of expected range
+peak = 79788.02250908069 brightness appears out of expected range
+peak = 75864.20002527743 brightness appears out of expected range
+peak = 73084.63789351117 brightness appears out of expected range
+here
+		x,y:
+ 5.077720, -4.217245 
+ 2115.614350, 771.885423
+dist_xy2c: 6.600636 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124734 taken successfully.
+peak = 83231.61236910027 brightness appears out of expected range
+peak = 82385.38179294694 brightness appears out of expected range
+peak = 80507.07281809996 brightness appears out of expected range
+peak = 75636.00810417304 brightness appears out of expected range
+peak = 72799.44197407055 brightness appears out of expected range
+here
+		x,y:
+ 6.289929, -0.914562 
+ 2149.962907, 865.261477
+dist_xy2c: 6.356071 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124743 taken successfully.
+peak = 83302.63349840848 brightness appears out of expected range
+peak = 82655.01208215219 brightness appears out of expected range
+peak = 79202.10705540323 brightness appears out of expected range
+peak = 75482.41668348228 brightness appears out of expected range
+peak = 72668.56954158151 brightness appears out of expected range
+here
+		x,y:
+ 5.454039, 2.500428 
+ 2126.285158, 961.755683
+dist_xy2c: 5.999890 mm
+phi:  165.4891 deg
+(th, ph): 237.1253, 150.9093
+Sucessful reply from PB
+Photo #20230629-124752 taken successfully.
+peak = 83271.76159539454 brightness appears out of expected range
+peak = 82451.10379784707 brightness appears out of expected range
+peak = 79123.3720745931 brightness appears out of expected range
+peak = 75492.92834516725 brightness appears out of expected range
+peak = 72812.10978172102 brightness appears out of expected range
+here
+		x,y:
+ 2.836774, 4.871494 
+ 2052.356645, 1028.788530
+dist_xy2c: 5.637264 mm
+phi:  137.5104 deg
+(th, ph): 282.7585, 130.8318
+Sucessful reply from PB
+Photo #20230629-124801 taken successfully.
+peak = 83168.39665247133 brightness appears out of expected range
+peak = 82406.8814973991 brightness appears out of expected range
+peak = 80548.30961423954 brightness appears out of expected range
+peak = 75708.58348694915 brightness appears out of expected range
+peak = 73088.516115271 brightness appears out of expected range
+here
+		x,y:
+ -0.651760, 5.365370 
+ 1953.981009, 1042.864681
+dist_xy2c: 5.404812 mm
+phi:  126.6553 deg
+(th, ph): 324.8773, 121.3337
+Sucessful reply from PB
+Photo #20230629-124810 taken successfully.
+peak = 83242.3542670986 brightness appears out of expected range
+peak = 82242.7566677298 brightness appears out of expected range
+peak = 79864.31894651706 brightness appears out of expected range
+peak = 75396.27341055179 brightness appears out of expected range
+peak = 73017.51722426225 brightness appears out of expected range
+here
+		x,y:
+ 2.671670, 4.946580 
+ 2047.662428, 1030.896619
+dist_xy2c: 5.621964 mm
+phi:  136.7190 deg
+(th, ph): 284.9521, 130.1551
+Sucessful reply from PB
+Photo #20230629-124819 taken successfully.
+peak = 83256.61578035193 brightness appears out of expected range
+peak = 82309.60414825323 brightness appears out of expected range
+peak = 79382.83258140484 brightness appears out of expected range
+peak = 75435.23456361605 brightness appears out of expected range
+peak = 73002.51727104704 brightness appears out of expected range
+here
+		x,y:
+ 5.353657, 2.648783 
+ 2123.630546, 966.031519
+dist_xy2c: 5.973081 mm
+phi:  161.9155 deg
+(th, ph): 239.8174, 148.9943
+Sucessful reply from PB
+Photo #20230629-124828 taken successfully.
+peak = 83256.8554496021 brightness appears out of expected range
+peak = 82616.09949842175 brightness appears out of expected range
+peak = 79905.70783018299 brightness appears out of expected range
+peak = 75410.98806743744 brightness appears out of expected range
+peak = 72996.90194971436 brightness appears out of expected range
+here
+		x,y:
+ 6.295283, -0.738417 
+ 2150.125910, 870.244609
+dist_xy2c: 6.338442 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124837 taken successfully.
+peak = 83218.32780144269 brightness appears out of expected range
+peak = 82355.48707740984 brightness appears out of expected range
+peak = 80000.88805710603 brightness appears out of expected range
+peak = 75408.15037236542 brightness appears out of expected range
+peak = 73043.84359073173 brightness appears out of expected range
+here
+		x,y:
+ 5.187765, -4.066131 
+ 2118.816591, 776.189980
+dist_xy2c: 6.591382 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124845 taken successfully.
+peak = 83149.421891444 brightness appears out of expected range
+peak = 82364.82125109214 brightness appears out of expected range
+peak = 80551.91955969147 brightness appears out of expected range
+peak = 75150.24347793518 brightness appears out of expected range
+peak = 73048.54281802455 brightness appears out of expected range
+here
+		x,y:
+ 2.390267, -6.219870 
+ 2039.885423, 715.365860
+dist_xy2c: 6.663344 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124854 taken successfully.
+peak = 83211.01924353298 brightness appears out of expected range
+peak = 82380.8481633388 brightness appears out of expected range
+peak = 81269.454952764 brightness appears out of expected range
+peak = 75387.84051739768 brightness appears out of expected range
+peak = 73025.9507122284 brightness appears out of expected range
+here
+		x,y:
+ -1.117071, -6.437045 
+ 1940.604992, 709.174247
+dist_xy2c: 6.533253 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124903 taken successfully.
+peak = 83140.04724133284 brightness appears out of expected range
+peak = 82354.74624536723 brightness appears out of expected range
+peak = 81273.08962921597 brightness appears out of expected range
+peak = 75449.96158596757 brightness appears out of expected range
+peak = 73040.14908066404 brightness appears out of expected range
+here
+		x,y:
+ -1.117543, -6.437071 
+ 1940.605543, 709.178580
+dist_xy2c: 6.533359 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124912 taken successfully.
+peak = 83195.71241635947 brightness appears out of expected range
+peak = 82298.68700291305 brightness appears out of expected range
+peak = 81155.2297165899 brightness appears out of expected range
+peak = 75306.66378894045 brightness appears out of expected range
+peak = 73129.24389669132 brightness appears out of expected range
+here
+		x,y:
+ 2.226369, -6.278029 
+ 2035.056017, 713.652978
+dist_xy2c: 6.661108 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124921 taken successfully.
+peak = 83211.32121117692 brightness appears out of expected range
+peak = 82387.7347634223 brightness appears out of expected range
+peak = 79907.66889633345 brightness appears out of expected range
+peak = 75062.23402350103 brightness appears out of expected range
+peak = 73027.16680104418 brightness appears out of expected range
+here
+		x,y:
+ 5.074117, -4.219527 
+ 2115.621629, 771.860736
+dist_xy2c: 6.599324 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124930 taken successfully.
+peak = 83117.78623596039 brightness appears out of expected range
+peak = 82256.41557952299 brightness appears out of expected range
+peak = 80688.51770736005 brightness appears out of expected range
+peak = 75479.14747924845 brightness appears out of expected range
+peak = 73543.1349221441 brightness appears out of expected range
+here
+		x,y:
+ 6.287156, -0.916467 
+ 2149.963191, 865.239289
+dist_xy2c: 6.353600 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-124939 taken successfully.
+peak = 83126.65730550836 brightness appears out of expected range
+peak = 82355.12713837165 brightness appears out of expected range
+peak = 78971.09064055476 brightness appears out of expected range
+peak = 75398.38699558756 brightness appears out of expected range
+peak = 72992.71916250444 brightness appears out of expected range
+here
+		x,y:
+ 5.441158, 2.493988 
+ 2126.270285, 961.731622
+dist_xy2c: 5.985497 mm
+phi:  163.4759 deg
+(th, ph): 237.6636, 149.8664
+Sucessful reply from PB
+Photo #20230629-124948 taken successfully.
+peak = 83152.19586758029 brightness appears out of expected range
+peak = 82373.13579270955 brightness appears out of expected range
+peak = 79403.93383845827 brightness appears out of expected range
+peak = 75273.61660967425 brightness appears out of expected range
+peak = 73141.7335425131 brightness appears out of expected range
+here
+		x,y:
+ 2.827991, 4.866389 
+ 2052.342157, 1028.761394
+dist_xy2c: 5.628434 mm
+phi:  137.0459 deg
+(th, ph): 283.0146, 130.4403
+Sucessful reply from PB
+Photo #20230629-124957 taken successfully.
+peak = 83156.873797453 brightness appears out of expected range
+peak = 82347.49343140253 brightness appears out of expected range
+peak = 80426.0448970253 brightness appears out of expected range
+peak = 75233.79887277631 brightness appears out of expected range
+peak = 73300.49927822164 brightness appears out of expected range
+here
+		x,y:
+ -0.644281, 5.368732 
+ 1953.966955, 1042.839371
+dist_xy2c: 5.407252 mm
+phi:  126.7625 deg
+(th, ph): 324.7458, 121.4260
+Sucessful reply from PB
+Photo #20230629-125005 taken successfully.
+peak = 83202.87795370056 brightness appears out of expected range
+peak = 82414.4323198873 brightness appears out of expected range
+peak = 79845.02149675871 brightness appears out of expected range
+peak = 75321.88569110645 brightness appears out of expected range
+peak = 73207.3095130414 brightness appears out of expected range
+here
+		x,y:
+ 2.669804, 4.944736 
+ 2047.655959, 1030.867805
+dist_xy2c: 5.619455 mm
+phi:  136.5854 deg
+(th, ph): 285.0176, 130.0450
+Sucessful reply from PB
+Photo #20230629-125014 taken successfully.
+peak = 83185.33051116556 brightness appears out of expected range
+peak = 82302.62125528799 brightness appears out of expected range
+peak = 79552.78870784504 brightness appears out of expected range
+peak = 75554.28190844446 brightness appears out of expected range
+peak = 73374.29381976745 brightness appears out of expected range
+here
+		x,y:
+ 5.361383, 2.650676 
+ 2123.659391, 965.998837
+dist_xy2c: 5.980845 mm
+phi:  162.8819 deg
+(th, ph): 239.5184, 149.5368
+Sucessful reply from PB
+Photo #20230629-125023 taken successfully.
+peak = 83105.8395457723 brightness appears out of expected range
+peak = 82382.57742797917 brightness appears out of expected range
+peak = 79918.47813670705 brightness appears out of expected range
+peak = 75235.70633809658 brightness appears out of expected range
+peak = 73262.4951682989 brightness appears out of expected range
+here
+		x,y:
+ 6.299316, -0.737998 
+ 2150.127987, 870.211141
+dist_xy2c: 6.342399 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125032 taken successfully.
+peak = 83145.97213174225 brightness appears out of expected range
+peak = 82303.29920956626 brightness appears out of expected range
+peak = 80350.96627531038 brightness appears out of expected range
+peak = 75415.69721398925 brightness appears out of expected range
+peak = 73330.85523457086 brightness appears out of expected range
+here
+		x,y:
+ 5.186155, -4.067698 
+ 2118.848402, 776.174012
+dist_xy2c: 6.591082 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125041 taken successfully.
+peak = 83264.05100384896 brightness appears out of expected range
+peak = 82393.46018108008 brightness appears out of expected range
+peak = 80591.89585442125 brightness appears out of expected range
+peak = 75346.43577547619 brightness appears out of expected range
+peak = 73285.83783394311 brightness appears out of expected range
+here
+		x,y:
+ 2.386661, -6.221972 
+ 2039.890896, 715.344112
+dist_xy2c: 6.664014 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125050 taken successfully.
+peak = 83134.58466027188 brightness appears out of expected range
+peak = 82381.38341242349 brightness appears out of expected range
+peak = 81080.08948381743 brightness appears out of expected range
+peak = 75204.3337011129 brightness appears out of expected range
+peak = 73891.05445844408 brightness appears out of expected range
+here
+		x,y:
+ -1.118630, -6.438977 
+ 1940.604773, 709.135665
+dist_xy2c: 6.535423 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125059 taken successfully.
+peak = 83214.35160060423 brightness appears out of expected range
+peak = 82448.67615979978 brightness appears out of expected range
+peak = 81236.08294099834 brightness appears out of expected range
+peak = 75247.46182449527 brightness appears out of expected range
+peak = 73443.89330159515 brightness appears out of expected range
+here
+		x,y:
+ -1.113735, -6.436982 
+ 1940.600092, 709.139767
+dist_xy2c: 6.532621 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125108 taken successfully.
+peak = 82986.29093825357 brightness appears out of expected range
+peak = 82299.09228851611 brightness appears out of expected range
+peak = 81100.24131134621 brightness appears out of expected range
+peak = 75347.12903823881 brightness appears out of expected range
+peak = 73557.45151976337 brightness appears out of expected range
+here
+		x,y:
+ 2.226898, -6.278787 
+ 2035.065501, 713.629630
+dist_xy2c: 6.662000 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125117 taken successfully.
+peak = 83040.75012401376 brightness appears out of expected range
+peak = 82322.56343734461 brightness appears out of expected range
+peak = 79950.81887668352 brightness appears out of expected range
+peak = 75328.88570811375 brightness appears out of expected range
+peak = 73803.55808621067 brightness appears out of expected range
+here
+		x,y:
+ 5.076841, -4.219276 
+ 2115.639419, 771.846244
+dist_xy2c: 6.601258 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125125 taken successfully.
+peak = 82939.74486675105 brightness appears out of expected range
+peak = 82354.7192637523 brightness appears out of expected range
+peak = 80816.59374298301 brightness appears out of expected range
+peak = 75269.29527924692 brightness appears out of expected range
+peak = 73622.10172503185 brightness appears out of expected range
+here
+		x,y:
+ 6.297389, -0.913434 
+ 2149.958210, 865.206603
+dist_xy2c: 6.363291 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125134 taken successfully.
+peak = 82908.79534325078 brightness appears out of expected range
+peak = 82315.1451108625 brightness appears out of expected range
+peak = 78951.75921252184 brightness appears out of expected range
+peak = 75164.5387449831 brightness appears out of expected range
+peak = 73719.65356952102 brightness appears out of expected range
+here
+		x,y:
+ 5.460398, 2.501614 
+ 2126.262450, 961.697648
+dist_xy2c: 6.006165 mm
+phi:  166.4828 deg
+(th, ph): 236.8676, 151.3756
+Sucessful reply from PB
+Photo #20230629-125143 taken successfully.
+peak = 82961.90932023941 brightness appears out of expected range
+peak = 82264.1856644207 brightness appears out of expected range
+peak = 78775.02237644618 brightness appears out of expected range
+peak = 75060.92649970514 brightness appears out of expected range
+peak = 73417.89800648637 brightness appears out of expected range
+here
+		x,y:
+ 2.831977, 4.866684 
+ 2052.326147, 1028.705263
+dist_xy2c: 5.630693 mm
+phi:  137.1638 deg
+(th, ph): 282.9287, 130.5402
+Sucessful reply from PB
+Photo #20230629-125152 taken successfully.
+peak = 83106.82425726639 brightness appears out of expected range
+peak = 82339.64373904915 brightness appears out of expected range
+peak = 80373.71151987053 brightness appears out of expected range
+peak = 75280.75938583097 brightness appears out of expected range
+peak = 73705.55924705017 brightness appears out of expected range
+here
+		x,y:
+ -0.650209, 5.364669 
+ 1953.972401, 1042.816856
+dist_xy2c: 5.403928 mm
+phi:  126.6196 deg
+(th, ph): 324.8794, 121.3003
+Sucessful reply from PB
+Photo #20230629-125201 taken successfully.
+peak = 83090.2405170723 brightness appears out of expected range
+peak = 82326.53412799769 brightness appears out of expected range
+peak = 79623.14877605194 brightness appears out of expected range
+peak = 75288.34827802217 brightness appears out of expected range
+peak = 73729.08751433315 brightness appears out of expected range
+here
+		x,y:
+ 2.664457, 4.941018 
+ 2047.666700, 1030.844218
+dist_xy2c: 5.613643 mm
+phi:  136.2861 deg
+(th, ph): 285.1807, 129.7908
+Sucessful reply from PB
+Photo #20230629-125210 taken successfully.
+peak = 83183.39929222073 brightness appears out of expected range
+peak = 82352.77234344238 brightness appears out of expected range
+peak = 79697.292053043 brightness appears out of expected range
+peak = 75200.4424019609 brightness appears out of expected range
+peak = 73636.20005584488 brightness appears out of expected range
+here
+		x,y:
+ 5.362327, 2.650175 
+ 2123.657057, 965.971480
+dist_xy2c: 5.981470 mm
+phi:  162.9599 deg
+(th, ph): 239.4871, 149.5809
+Sucessful reply from PB
+Photo #20230629-125219 taken successfully.
+peak = 82905.2336497407 brightness appears out of expected range
+peak = 82305.40574013436 brightness appears out of expected range
+peak = 79947.58580667213 brightness appears out of expected range
+peak = 75455.63793526996 brightness appears out of expected range
+peak = 73947.66909711681 brightness appears out of expected range
+here
+		x,y:
+ 6.293776, -0.741435 
+ 2150.133674, 870.179690
+dist_xy2c: 6.337298 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125228 taken successfully.
+peak = 82937.42572695964 brightness appears out of expected range
+peak = 82267.73007152611 brightness appears out of expected range
+peak = 80360.8721766835 brightness appears out of expected range
+peak = 75184.8491127379 brightness appears out of expected range
+peak = 73756.51270889558 brightness appears out of expected range
+here
+		x,y:
+ 5.196620, -4.064782 
+ 2118.832853, 776.142384
+dist_xy2c: 6.597523 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125237 taken successfully.
+peak = 82920.49049923298 brightness appears out of expected range
+peak = 82258.37730677635 brightness appears out of expected range
+peak = 80599.0027678207 brightness appears out of expected range
+peak = 75165.85621161699 brightness appears out of expected range
+peak = 73812.87512014828 brightness appears out of expected range
+here
+		x,y:
+ 2.405643, -6.216789 
+ 2039.889878, 715.302095
+dist_xy2c: 6.666002 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125245 taken successfully.
+peak = 82955.31983509188 brightness appears out of expected range
+peak = 82302.23176659671 brightness appears out of expected range
+peak = 80976.50022155064 brightness appears out of expected range
+peak = 75450.82763439098 brightness appears out of expected range
+peak = 73931.36530019011 brightness appears out of expected range
+here
+		x,y:
+ -1.111096, -6.437417 
+ 1940.614786, 709.105590
+dist_xy2c: 6.532601 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125254 taken successfully.
+peak = 82889.2591299979 brightness appears out of expected range
+peak = 82354.10879221036 brightness appears out of expected range
+peak = 81138.96017245862 brightness appears out of expected range
+peak = 75268.20996300915 brightness appears out of expected range
+peak = 74203.51346157043 brightness appears out of expected range
+here
+		x,y:
+ -1.109960, -6.436763 
+ 1940.596916, 709.105817
+dist_xy2c: 6.531763 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125303 taken successfully.
+peak = 82728.36070712541 brightness appears out of expected range
+peak = 82229.87234710442 brightness appears out of expected range
+peak = 81298.00088368128 brightness appears out of expected range
+peak = 75185.42483745918 brightness appears out of expected range
+peak = 74146.94390987876 brightness appears out of expected range
+here
+		x,y:
+ 2.236471, -6.277097 
+ 2035.060060, 713.580601
+dist_xy2c: 6.663614 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125312 taken successfully.
+peak = 82897.0374239754 brightness appears out of expected range
+peak = 82284.65952704137 brightness appears out of expected range
+peak = 79463.5931769332 brightness appears out of expected range
+peak = 75293.90287848857 brightness appears out of expected range
+peak = 73904.77399599866 brightness appears out of expected range
+here
+		x,y:
+ 5.085609, -4.217853 
+ 2115.645062, 771.798122
+dist_xy2c: 6.607095 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125321 taken successfully.
+peak = 82955.15563137675 brightness appears out of expected range
+peak = 82291.58917089131 brightness appears out of expected range
+peak = 80853.59845596175 brightness appears out of expected range
+peak = 75466.33220455164 brightness appears out of expected range
+peak = 74275.47149077397 brightness appears out of expected range
+here
+		x,y:
+ 6.299705, -0.913749 
+ 2149.983667, 865.181624
+dist_xy2c: 6.365628 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125330 taken successfully.
+peak = 82880.55963048161 brightness appears out of expected range
+peak = 82337.5920190279 brightness appears out of expected range
+peak = 78614.08948851045 brightness appears out of expected range
+peak = 75356.62383476426 brightness appears out of expected range
+peak = 74329.24251838554 brightness appears out of expected range
+here
+		x,y:
+ 5.457197, 2.498577 
+ 2126.277056, 961.659338
+dist_xy2c: 6.001991 mm
+phi:  165.8128 deg
+(th, ph): 237.0158, 151.0645
+Sucessful reply from PB
+Photo #20230629-125339 taken successfully.
+peak = 82828.75550004873 brightness appears out of expected range
+peak = 82240.06813507821 brightness appears out of expected range
+peak = 78616.41237505942 brightness appears out of expected range
+peak = 75184.49239382682 brightness appears out of expected range
+peak = 74050.96746744092 brightness appears out of expected range
+here
+		x,y:
+ 2.849827, 4.874803 
+ 2052.344782, 1028.691198
+dist_xy2c: 5.646700 mm
+phi:  138.0047 deg
+(th, ph): 282.4403, 131.2535
+Sucessful reply from PB
+Photo #20230629-125348 taken successfully.
+peak = 82904.90336225307 brightness appears out of expected range
+peak = 82342.67490396081 brightness appears out of expected range
+peak = 80309.56567586763 brightness appears out of expected range
+peak = 75360.32851060243 brightness appears out of expected range
+peak = 74080.77033434839 brightness appears out of expected range
+here
+		x,y:
+ -0.634220, 5.372682 
+ 1953.971978, 1042.801943
+dist_xy2c: 5.409986 mm
+phi:  126.8771 deg
+(th, ph): 324.5806, 121.5296
+Sucessful reply from PB
+Photo #20230629-125357 taken successfully.
+peak = 82862.85038385377 brightness appears out of expected range
+peak = 82212.4755983394 brightness appears out of expected range
+peak = 79492.0053913041 brightness appears out of expected range
+peak = 75354.43097157005 brightness appears out of expected range
+peak = 74460.05705354582 brightness appears out of expected range
+here
+		x,y:
+ 2.678976, 4.946814 
+ 2047.682942, 1030.809613
+dist_xy2c: 5.625644 mm
+phi:  136.9032 deg
+(th, ph): 284.8030, 130.3171
+Sucessful reply from PB
+Photo #20230629-125405 taken successfully.
+peak = 82873.37372106231 brightness appears out of expected range
+peak = 82279.8432867913 brightness appears out of expected range
+peak = 79657.55495804356 brightness appears out of expected range
+peak = 75309.053636597 brightness appears out of expected range
+peak = 74153.40848739778 brightness appears out of expected range
+here
+		x,y:
+ 5.373482, 2.654530 
+ 2123.654329, 965.949913
+dist_xy2c: 5.993400 mm
+phi:  164.5579 deg
+(th, ph): 239.0327, 150.4346
+Sucessful reply from PB
+Photo #20230629-125414 taken successfully.
+peak = 82920.42989168919 brightness appears out of expected range
+peak = 82280.00840341958 brightness appears out of expected range
+peak = 79911.730398768 brightness appears out of expected range
+peak = 75521.3213215714 brightness appears out of expected range
+peak = 74483.9710064489 brightness appears out of expected range
+here
+		x,y:
+ 6.300164, -0.739500 
+ 2150.143735, 870.165379
+dist_xy2c: 6.343416 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125423 taken successfully.
+peak = 82839.21837894729 brightness appears out of expected range
+peak = 82239.77677961953 brightness appears out of expected range
+peak = 80253.51368535218 brightness appears out of expected range
+peak = 75157.11969527016 brightness appears out of expected range
+peak = 74218.49240821635 brightness appears out of expected range
+here
+		x,y:
+ 5.198012, -4.064865 
+ 2118.831152, 776.124988
+dist_xy2c: 6.598671 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125432 taken successfully.
+peak = 82857.8555357661 brightness appears out of expected range
+peak = 82174.85653360414 brightness appears out of expected range
+peak = 80492.17547240369 brightness appears out of expected range
+peak = 75615.27261870279 brightness appears out of expected range
+peak = 74674.00464911468 brightness appears out of expected range
+here
+		x,y:
+ 2.410910, -6.215823 
+ 2039.933205, 715.292418
+dist_xy2c: 6.667003 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125441 taken successfully.
+peak = 82877.2201832226 brightness appears out of expected range
+peak = 82333.34441169034 brightness appears out of expected range
+peak = 81037.53657040706 brightness appears out of expected range
+peak = 75277.53839565704 brightness appears out of expected range
+peak = 74296.64791853864 brightness appears out of expected range
+here
+		x,y:
+ -1.109274, -6.437132 
+ 1940.609900, 709.093053
+dist_xy2c: 6.532010 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125450 taken successfully.
+peak = 82896.50187026217 brightness appears out of expected range
+peak = 82295.09352524314 brightness appears out of expected range
+peak = 81017.19563137932 brightness appears out of expected range
+peak = 75502.29972392175 brightness appears out of expected range
+peak = 74409.68033029868 brightness appears out of expected range
+here
+		x,y:
+ -1.106542, -6.436515 
+ 1940.630371, 709.089734
+dist_xy2c: 6.530939 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125459 taken successfully.
+peak = 82840.56234823183 brightness appears out of expected range
+peak = 82283.08609475837 brightness appears out of expected range
+peak = 81305.63169931999 brightness appears out of expected range
+peak = 75435.92238438515 brightness appears out of expected range
+peak = 74611.30310824614 brightness appears out of expected range
+here
+		x,y:
+ 2.237478, -6.277210 
+ 2035.061691, 713.568018
+dist_xy2c: 6.664058 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125508 taken successfully.
+peak = 82852.423478886 brightness appears out of expected range
+peak = 82297.31348698691 brightness appears out of expected range
+peak = 79372.7983259025 brightness appears out of expected range
+peak = 75221.73812539528 brightness appears out of expected range
+peak = 74435.23819520483 brightness appears out of expected range
+here
+		x,y:
+ 5.097098, -4.213877 
+ 2115.628575, 771.786023
+dist_xy2c: 6.613408 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125517 taken successfully.
+peak = 82754.1364541655 brightness appears out of expected range
+peak = 82233.6157591533 brightness appears out of expected range
+peak = 80865.79263550758 brightness appears out of expected range
+peak = 75224.832191887 brightness appears out of expected range
+peak = 74146.13555557719 brightness appears out of expected range
+here
+		x,y:
+ 6.303591, -0.912394 
+ 2149.968480, 865.169612
+dist_xy2c: 6.369279 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125525 taken successfully.
+peak = 82795.85729530407 brightness appears out of expected range
+peak = 82335.07981299442 brightness appears out of expected range
+peak = 78454.53363199566 brightness appears out of expected range
+peak = 75282.07404330462 brightness appears out of expected range
+peak = 74439.85469905622 brightness appears out of expected range
+here
+		x,y:
+ 5.468671, 2.503351 
+ 2126.267575, 961.643319
+dist_xy2c: 6.014410 mm
+phi:  167.8773 deg
+(th, ph): 236.5249, 151.9998
+Sucessful reply from PB
+Photo #20230629-125534 taken successfully.
+peak = 82800.80812075197 brightness appears out of expected range
+peak = 82301.10575104412 brightness appears out of expected range
+peak = 78313.51952866006 brightness appears out of expected range
+peak = 75599.9471566053 brightness appears out of expected range
+peak = 74707.84342723731 brightness appears out of expected range
+here
+		x,y:
+ 2.849891, 4.873733 
+ 2052.355882, 1028.665626
+dist_xy2c: 5.645809 mm
+phi:  137.9534 deg
+(th, ph): 282.4552, 131.2135
+Sucessful reply from PB
+Photo #20230629-125543 taken successfully.
+peak = 82832.42852651316 brightness appears out of expected range
+peak = 82262.6119227786 brightness appears out of expected range
+peak = 80201.35600582203 brightness appears out of expected range
+peak = 75483.89001745611 brightness appears out of expected range
+peak = 74348.76872273377 brightness appears out of expected range
+here
+		x,y:
+ -0.626387, 5.376275 
+ 1953.967640, 1042.783040
+dist_xy2c: 5.412642 mm
+phi:  126.9846 deg
+(th, ph): 324.4408, 121.6304
+Sucessful reply from PB
+Photo #20230629-125552 taken successfully.
+peak = 82825.4563640718 brightness appears out of expected range
+peak = 82232.53299810582 brightness appears out of expected range
+peak = 79497.5411218876 brightness appears out of expected range
+peak = 75362.65050127832 brightness appears out of expected range
+peak = 74384.2962624798 brightness appears out of expected range
+here
+		x,y:
+ 2.686758, 4.950252 
+ 2047.686191, 1030.797714
+dist_xy2c: 5.632376 mm
+phi:  137.2565 deg
+(th, ph): 284.5943, 130.6147
+Sucessful reply from PB
+Photo #20230629-125601 taken successfully.
+peak = 82856.71692409183 brightness appears out of expected range
+peak = 82219.01498429067 brightness appears out of expected range
+peak = 79606.88769868907 brightness appears out of expected range
+peak = 75542.98022285388 brightness appears out of expected range
+peak = 74743.75043424313 brightness appears out of expected range
+here
+		x,y:
+ 5.377269, 2.656307 
+ 2123.661424, 965.954678
+dist_xy2c: 5.997582 mm
+phi:  165.1500 deg
+(th, ph): 238.8731, 150.7396
+Sucessful reply from PB
+Photo #20230629-125610 taken successfully.
+peak = 82806.03554251241 brightness appears out of expected range
+peak = 82288.67575089293 brightness appears out of expected range
+peak = 79937.66635272154 brightness appears out of expected range
+peak = 75661.81098984763 brightness appears out of expected range
+peak = 74434.84438278212 brightness appears out of expected range
+here
+		x,y:
+ 6.310734, -0.735631 
+ 2150.150076, 870.156383
+dist_xy2c: 6.353465 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125619 taken successfully.
+peak = 82816.02942813857 brightness appears out of expected range
+peak = 82275.36095667843 brightness appears out of expected range
+peak = 80403.96462316372 brightness appears out of expected range
+peak = 75467.90983970795 brightness appears out of expected range
+peak = 74610.35828202743 brightness appears out of expected range
+here
+		x,y:
+ 5.208006, -4.062018 
+ 2118.846277, 776.107536
+dist_xy2c: 6.604795 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125628 taken successfully.
+peak = 82876.4108953582 brightness appears out of expected range
+peak = 82241.64706466711 brightness appears out of expected range
+peak = 80597.04492489046 brightness appears out of expected range
+peak = 75586.23078101648 brightness appears out of expected range
+peak = 74705.94054339961 brightness appears out of expected range
+here
+		x,y:
+ 2.414680, -6.214796 
+ 2039.912479, 715.276784
+dist_xy2c: 6.667412 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125637 taken successfully.
+peak = 82757.78760268439 brightness appears out of expected range
+peak = 82229.87548300964 brightness appears out of expected range
+peak = 81019.97518759448 brightness appears out of expected range
+peak = 75646.32567828926 brightness appears out of expected range
+peak = 75018.74185973986 brightness appears out of expected range
+here
+		x,y:
+ -1.098278, -6.433938 
+ 1940.627163, 709.076057
+dist_xy2c: 6.527004 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125645 taken successfully.
+peak = 82737.09874224087 brightness appears out of expected range
+peak = 82262.90476453169 brightness appears out of expected range
+peak = 81093.6351074313 brightness appears out of expected range
+peak = 75600.51742524598 brightness appears out of expected range
+peak = 74597.27850012571 brightness appears out of expected range
+here
+		x,y:
+ -1.103389, -6.435790 
+ 1940.610533, 709.070414
+dist_xy2c: 6.529691 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125654 taken successfully.
+peak = 82839.09644207425 brightness appears out of expected range
+peak = 82293.14911665214 brightness appears out of expected range
+peak = 81319.22971020547 brightness appears out of expected range
+peak = 75478.47543113226 brightness appears out of expected range
+peak = 74581.32487715644 brightness appears out of expected range
+here
+		x,y:
+ 2.242152, -6.275860 
+ 2035.070637, 713.562994
+dist_xy2c: 6.664357 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125703 taken successfully.
+peak = 82816.69029160307 brightness appears out of expected range
+peak = 82270.84835749793 brightness appears out of expected range
+peak = 79536.09891456178 brightness appears out of expected range
+peak = 75541.71275293277 brightness appears out of expected range
+peak = 74530.77783671596 brightness appears out of expected range
+here
+		x,y:
+ 5.095724, -4.215142 
+ 2115.659117, 771.775573
+dist_xy2c: 6.613156 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125712 taken successfully.
+peak = 82853.66018310309 brightness appears out of expected range
+peak = 82307.35279403567 brightness appears out of expected range
+peak = 80612.77804830097 brightness appears out of expected range
+peak = 75474.16380320046 brightness appears out of expected range
+peak = 74713.76642287735 brightness appears out of expected range
+here
+		x,y:
+ 6.308299, -0.911480 
+ 2149.970377, 865.142646
+dist_xy2c: 6.373809 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125721 taken successfully.
+peak = 82331.05178957598 brightness appears out of expected range
+peak = 82898.6373015834 brightness appears out of expected range
+peak = 78209.84713814975 brightness appears out of expected range
+peak = 75675.20058655975 brightness appears out of expected range
+peak = 74950.76981188564 brightness appears out of expected range
+here
+		x,y:
+ 5.468250, 2.501984 
+ 2126.307511, 961.628115
+dist_xy2c: 6.013459 mm
+phi:  167.7146 deg
+(th, ph): 236.5526, 151.9271
+Sucessful reply from PB
+Photo #20230629-125730 taken successfully.
+peak = 82837.70074615903 brightness appears out of expected range
+peak = 82237.77805831404 brightness appears out of expected range
+peak = 78363.10837806991 brightness appears out of expected range
+peak = 75255.58839559136 brightness appears out of expected range
+peak = 74481.01359330295 brightness appears out of expected range
+here
+		x,y:
+ 2.852172, 4.874676 
+ 2052.361951, 1028.662997
+dist_xy2c: 5.647774 mm
+phi:  138.0647 deg
+(th, ph): 282.3939, 131.3017
+Sucessful reply from PB
+Photo #20230629-125739 taken successfully.
+peak = 82750.45138564408 brightness appears out of expected range
+peak = 82276.51824039624 brightness appears out of expected range
+peak = 80173.41785856707 brightness appears out of expected range
+peak = 75236.67291701726 brightness appears out of expected range
+peak = 74761.6948325559 brightness appears out of expected range
+here
+		x,y:
+ -0.625415, 5.375782 
+ 1953.978205, 1042.760067
+dist_xy2c: 5.412040 mm
+phi:  126.9631 deg
+(th, ph): 324.4432, 121.6075
+Sucessful reply from PB
+Photo #20230629-125748 taken successfully.
+peak = 82792.19535040528 brightness appears out of expected range
+peak = 82201.39421672479 brightness appears out of expected range
+peak = 79827.87432887242 brightness appears out of expected range
+peak = 75732.71471886053 brightness appears out of expected range
+peak = 75160.6524401343 brightness appears out of expected range
+here
+		x,y:
+ 2.687935, 4.950188 
+ 2047.705961, 1030.789108
+dist_xy2c: 5.632881 mm
+phi:  137.2819 deg
+(th, ph): 284.5718, 130.6371
+Sucessful reply from PB
+Photo #20230629-125757 taken successfully.
+peak = 82795.01934109328 brightness appears out of expected range
+peak = 82284.36770399267 brightness appears out of expected range
+peak = 79636.93568433991 brightness appears out of expected range
+peak = 75607.01652337669 brightness appears out of expected range
+peak = 74709.22568978685 brightness appears out of expected range
+here
+		x,y:
+ 5.375174, 2.655466 
+ 2123.660112, 965.957255
+dist_xy2c: 5.995331 mm
+phi:  164.8183 deg
+(th, ph): 238.9605, 150.5750
+Sucessful reply from PB
+Photo #20230629-125805 taken successfully.
+peak = 82840.90046373161 brightness appears out of expected range
+peak = 82321.82346211646 brightness appears out of expected range
+peak = 79889.66782686472 brightness appears out of expected range
+peak = 75754.55530714718 brightness appears out of expected range
+peak = 75112.71540070596 brightness appears out of expected range
+here
+		x,y:
+ 6.316324, -0.733820 
+ 2150.151462, 870.144198
+dist_xy2c: 6.358809 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125814 taken successfully.
+peak = 82648.03116377964 brightness appears out of expected range
+peak = 82313.9741898512 brightness appears out of expected range
+peak = 80429.24432159628 brightness appears out of expected range
+peak = 75607.3594130258 brightness appears out of expected range
+peak = 75172.67047733504 brightness appears out of expected range
+here
+		x,y:
+ 5.212575, -4.060752 
+ 2118.846034, 776.095935
+dist_xy2c: 6.607620 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125823 taken successfully.
+peak = 82839.37724668309 brightness appears out of expected range
+peak = 82243.26134540845 brightness appears out of expected range
+peak = 80487.3312822813 brightness appears out of expected range
+peak = 75494.59739034028 brightness appears out of expected range
+peak = 74660.819880372 brightness appears out of expected range
+here
+		x,y:
+ 2.415177, -6.214810 
+ 2039.939368, 715.280905
+dist_xy2c: 6.667604 mm
+phi:  nan deg
+(th, ph): nan, nan
+Sucessful reply from PB
+Photo #20230629-125832 taken successfully.
+peak = 82836.62620089228 brightness appears out of expected range
+peak = 82274.08901692592 brightness appears out of expected range
+peak = 80963.18132406118 brightness appears out of expected range
+peak = 75378.43811058304 brightness appears out of expected range
+peak = 74763.2447274443 brightness appears out of expected range
+here
+		x,y:
+ -1.101836, -6.435685 
+ 1940.640320, 709.068238
+dist_xy2c: 6.529325 mm
+phi:  nan deg
+(th, ph): nan, nan
+
+>>  Mount move #1: ['0', '0']
+
+starting positioners loop for MOUNT in ['0', '0']
+Slewing to home position...
+Mount stopped at home position
+home at (181.15, 90.0) deg
+Sucessful reply from PB
+Photo #20230629-125905 taken successfully.
+here

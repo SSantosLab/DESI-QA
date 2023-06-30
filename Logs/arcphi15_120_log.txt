@@ -1,0 +1,1597 @@
+----------------
+['positioners', 'cam', 'xytest']
+arc15_120-20230630-114505
+!! Number of Cycle(s): 50
+
+---------------------------------------------------------------------- 
+	# movetables/arcph15_120cap.txt
+ ----------------------------------------------------------------------
+Successfully connected to CEM120
+Altitude Limit set to -89 degrees
+Slew rate set to MAX (960x)
+SSH started
+Connection started
+Code 20: device already closed.
+Code 20: driver already closed.
+{'camerasFound': 1,
+ 'updated': True,
+ 'usbInfo': [{'cameraFound': True,
+              'cameraType': 'STF',
+              'deviceType': 'USB1',
+              'name': 'SBIG STF-8300 CCD Camera',
+              'serialNumber': '83F011779'}]}
+----------------------------------------
+session imgs in:  /home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505
+>> Repeating cycle 50 times
+ Loop positioner size: 850
+
+>>  Mount move #0: ['90', '90']
+
+starting positioners loop for MOUNT in ['90', '90']
+Slewing to home position...
+Mount stopped at home position
+home at (163.59, 90.0) deg
+Moving to specified angle...
+All movement stopped
+Moving to specified angle...
+All movement stopped
+Sucessful reply from PB
+Photo #20230630-114649 taken successfully.
+peak = 84596.15146878672 brightness appears out of expected range
+peak = 81861.83829636843 brightness appears out of expected range
+peak = 79971.61263518261 brightness appears out of expected range
+peak = 74727.38149109497 brightness appears out of expected range
+peak = 73303.94669009006 brightness appears out of expected range
+here
+		x,y:
+ 0.324338, 0.808440 
+ 1985.690429, 915.957775
+dist_xy2c: 0.871074 mm
+phi:  16.4838 deg
+(th, ph): 347.5340, 15.5466
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114649.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114659 taken successfully.
+peak = 84287.7669007671 brightness appears out of expected range
+peak = 81858.10029483381 brightness appears out of expected range
+peak = 79983.68868676315 brightness appears out of expected range
+peak = 74564.37210014231 brightness appears out of expected range
+peak = 73087.10657042776 brightness appears out of expected range
+here
+		x,y:
+ -0.009460, 1.758809 
+ 1976.163566, 942.842523
+dist_xy2c: 1.758835 mm
+phi:  33.7675 deg
+(th, ph): 8.8301, 32.6811
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114659.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114709 taken successfully.
+peak = 84196.28907795157 brightness appears out of expected range
+peak = 81821.2536792904 brightness appears out of expected range
+peak = 79345.45861246831 brightness appears out of expected range
+peak = 74515.5902089852 brightness appears out of expected range
+peak = 72637.83019305563 brightness appears out of expected range
+here
+		x,y:
+ -0.630578, 2.545633 
+ 1958.517307, 965.101888
+dist_xy2c: 2.622570 mm
+phi:  51.3692 deg
+(th, ph): 11.0855, 49.8802
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114709.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114718 taken successfully.
+peak = 84269.5609478768 brightness appears out of expected range
+peak = 81805.72047868457 brightness appears out of expected range
+peak = 78540.61092389013 brightness appears out of expected range
+peak = 74765.50682316472 brightness appears out of expected range
+peak = 72242.1072545433 brightness appears out of expected range
+here
+		x,y:
+ -1.472848, 3.097219 
+ 1934.346789, 980.564905
+dist_xy2c: 3.429584 mm
+phi:  69.0717 deg
+(th, ph): 12.6070, 67.0612
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114718.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114728 taken successfully.
+peak = 84382.47411176628 brightness appears out of expected range
+peak = 81755.17847827157 brightness appears out of expected range
+peak = 79842.49330396521 brightness appears out of expected range
+peak = 74670.37871452521 brightness appears out of expected range
+peak = 72368.52834424945 brightness appears out of expected range
+here
+		x,y:
+ -2.466851, 3.326280 
+ 1906.563493, 987.240753
+dist_xy2c: 4.141194 mm
+phi:  86.4109 deg
+(th, ph): 14.5249, 83.7499
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114728.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114738 taken successfully.
+peak = 84319.22440531959 brightness appears out of expected range
+peak = 81863.30064299112 brightness appears out of expected range
+peak = 79985.17788181707 brightness appears out of expected range
+peak = 74718.19946174309 brightness appears out of expected range
+peak = 72323.59764727791 brightness appears out of expected range
+here
+		x,y:
+ -3.472008, 3.236095 
+ 1877.991942, 984.633108
+dist_xy2c: 4.746277 mm
+phi:  103.3854 deg
+(th, ph): 16.3099, 99.8751
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114738.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114748 taken successfully.
+peak = 84211.45749219698 brightness appears out of expected range
+peak = 81769.34274870499 brightness appears out of expected range
+peak = 80729.78819320914 brightness appears out of expected range
+peak = 74775.82514613587 brightness appears out of expected range
+peak = 71886.66631659055 brightness appears out of expected range
+here
+		x,y:
+ -4.391129, 2.821317 
+ 1851.935828, 972.872790
+dist_xy2c: 5.219372 mm
+phi:  119.2946 deg
+(th, ph): 18.7396, 114.6646
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114748.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114756 taken successfully.
+peak = 84382.85368150349 brightness appears out of expected range
+peak = 81819.69580853933 brightness appears out of expected range
+peak = 80377.46269010691 brightness appears out of expected range
+peak = 74666.91775695882 brightness appears out of expected range
+peak = 72232.40232662145 brightness appears out of expected range
+here
+		x,y:
+ -5.124485, 2.132682 
+ 1831.086622, 953.328095
+dist_xy2c: 5.550557 mm
+phi:  133.1806 deg
+(th, ph): 22.3278, 127.1042
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114756.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114805 taken successfully.
+peak = 84251.58192163323 brightness appears out of expected range
+peak = 81772.35520063544 brightness appears out of expected range
+peak = 82039.8945456194 brightness appears out of expected range
+peak = 74702.9246796145 brightness appears out of expected range
+peak = 71978.38922311964 brightness appears out of expected range
+here
+		x,y:
+ -5.587381, 1.241542 
+ 1817.680031, 927.938663
+dist_xy2c: 5.723657 mm
+phi:  142.2791 deg
+(th, ph): 28.3528, 134.8306
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114805.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114815 taken successfully.
+peak = 84264.0635083507 brightness appears out of expected range
+peak = 82056.3012630542 brightness appears out of expected range
+peak = 81865.40777730923 brightness appears out of expected range
+peak = 74725.13975666312 brightness appears out of expected range
+peak = 72018.8547363094 brightness appears out of expected range
+here
+		x,y:
+ -5.170959, 2.070681 
+ 1829.816713, 951.596246
+dist_xy2c: 5.570147 mm
+phi:  134.1229 deg
+(th, ph): 22.6704, 127.9246
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114815.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114825 taken successfully.
+peak = 84156.118418948 brightness appears out of expected range
+peak = 81858.22148251907 brightness appears out of expected range
+peak = 80605.41851749358 brightness appears out of expected range
+peak = 74774.61363184419 brightness appears out of expected range
+peak = 72202.74434476835 brightness appears out of expected range
+here
+		x,y:
+ -4.450901, 2.780309 
+ 1850.201205, 971.689424
+dist_xy2c: 5.247917 mm
+phi:  120.3712 deg
+(th, ph): 18.9494, 115.6507
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114825.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114835 taken successfully.
+peak = 84115.48665909773 brightness appears out of expected range
+peak = 81764.07105007498 brightness appears out of expected range
+peak = 81021.42830857665 brightness appears out of expected range
+peak = 74802.54762464127 brightness appears out of expected range
+peak = 72048.2587537481 brightness appears out of expected range
+here
+		x,y:
+ -3.539339, 3.217718 
+ 1875.932780, 984.032802
+dist_xy2c: 4.783370 mm
+phi:  104.5249 deg
+(th, ph): 16.4491, 100.9487
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114835.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114845 taken successfully.
+peak = 84478.4504225197 brightness appears out of expected range
+peak = 81835.36139467123 brightness appears out of expected range
+peak = 79536.95247780373 brightness appears out of expected range
+peak = 74823.49728872288 brightness appears out of expected range
+peak = 71898.50278493036 brightness appears out of expected range
+here
+		x,y:
+ -2.529159, 3.336154 
+ 1904.545319, 987.389079
+dist_xy2c: 4.186474 mm
+phi:  87.5929 deg
+(th, ph): 14.5151, 84.8819
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114845.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114855 taken successfully.
+peak = 84332.75373285584 brightness appears out of expected range
+peak = 81834.23851452667 brightness appears out of expected range
+peak = 79410.31545197422 brightness appears out of expected range
+peak = 74808.5815678391 brightness appears out of expected range
+peak = 72087.82889685797 brightness appears out of expected range
+here
+		x,y:
+ -1.538057, 3.123774 
+ 1932.515147, 981.324530
+dist_xy2c: 3.481894 mm
+phi:  70.2754 deg
+(th, ph): 12.7322, 68.2290
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114855.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114905 taken successfully.
+peak = 84210.41074327019 brightness appears out of expected range
+peak = 81784.98260891839 brightness appears out of expected range
+peak = 79638.83481216221 brightness appears out of expected range
+peak = 74958.12936085396 brightness appears out of expected range
+peak = 72074.97309256087 brightness appears out of expected range
+here
+		x,y:
+ -0.681961, 2.600926 
+ 1956.937352, 966.606405
+dist_xy2c: 2.688845 mm
+phi:  52.7640 deg
+(th, ph): 11.0414, 51.2418
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114905.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114915 taken successfully.
+peak = 84382.04953138903 brightness appears out of expected range
+peak = 81709.00420729976 brightness appears out of expected range
+peak = 79202.1857421899 brightness appears out of expected range
+peak = 74781.07559514075 brightness appears out of expected range
+peak = 72072.8529103084 brightness appears out of expected range
+here
+		x,y:
+ -0.037847, 1.824261 
+ 1975.209992, 944.624847
+dist_xy2c: 1.824654 mm
+phi:  35.0751 deg
+(th, ph): 8.7735, 33.9636
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114915.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114925 taken successfully.
+peak = 84191.08725079447 brightness appears out of expected range
+peak = 81838.5630876446 brightness appears out of expected range
+peak = 79669.45517853506 brightness appears out of expected range
+peak = 74875.86745543848 brightness appears out of expected range
+peak = 72000.61689752381 brightness appears out of expected range
+here
+		x,y:
+ 0.321346, 0.883418 
+ 1985.362850, 917.969261
+dist_xy2c: 0.940049 mm
+phi:  17.8055 deg
+(th, ph): 351.2809, 16.8830
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114925.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114935 taken successfully.
+peak = 84459.70669489684 brightness appears out of expected range
+peak = 81776.47881536985 brightness appears out of expected range
+peak = 79448.33293432163 brightness appears out of expected range
+peak = 74750.39075605865 brightness appears out of expected range
+peak = 72023.19397989205 brightness appears out of expected range
+here
+		x,y:
+ 0.330281, 0.887471 
+ 1985.381747, 917.975760
+dist_xy2c: 0.946937 mm
+phi:  17.9362 deg
+(th, ph): 351.0339, 17.0162
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114935.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114945 taken successfully.
+peak = 84088.37297426011 brightness appears out of expected range
+peak = 81855.35342803794 brightness appears out of expected range
+peak = 79862.85745288205 brightness appears out of expected range
+peak = 74984.21304139933 brightness appears out of expected range
+peak = 71877.78668075407 brightness appears out of expected range
+here
+		x,y:
+ 0.011147, 1.764315 
+ 1976.281147, 942.776110
+dist_xy2c: 1.764350 mm
+phi:  33.8807 deg
+(th, ph): 8.0807, 32.7884
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114945.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-114955 taken successfully.
+peak = 84155.6069597666 brightness appears out of expected range
+peak = 81762.81417058794 brightness appears out of expected range
+peak = 79454.67685020487 brightness appears out of expected range
+peak = 74986.59106396728 brightness appears out of expected range
+peak = 71838.28288638107 brightness appears out of expected range
+here
+		x,y:
+ -0.622991, 2.548795 
+ 1958.567913, 965.110506
+dist_xy2c: 2.623828 mm
+phi:  51.3912 deg
+(th, ph): 10.8924, 49.9060
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-114955.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115004 taken successfully.
+peak = 84195.2343885944 brightness appears out of expected range
+peak = 81756.47357570009 brightness appears out of expected range
+peak = 78519.34106906955 brightness appears out of expected range
+peak = 74730.3349169099 brightness appears out of expected range
+peak = 71863.28283962536 brightness appears out of expected range
+here
+		x,y:
+ -1.481866, 3.090777 
+ 1934.429431, 980.553833
+dist_xy2c: 3.427657 mm
+phi:  69.0226 deg
+(th, ph): 12.8135, 67.0184
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115004.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115014 taken successfully.
+peak = 84433.49397583317 brightness appears out of expected range
+peak = 81837.2597708488 brightness appears out of expected range
+peak = 80117.05604888637 brightness appears out of expected range
+peak = 74924.60714063943 brightness appears out of expected range
+peak = 71875.13034804579 brightness appears out of expected range
+here
+		x,y:
+ -2.449715, 3.334408 
+ 1906.666572, 987.273047
+dist_xy2c: 4.137558 mm
+phi:  86.3133 deg
+(th, ph): 14.3164, 83.6595
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115014.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115022 taken successfully.
+peak = 84177.4720500819 brightness appears out of expected range
+peak = 81732.91482561933 brightness appears out of expected range
+peak = 80031.59346479202 brightness appears out of expected range
+peak = 74730.55150255557 brightness appears out of expected range
+peak = 71789.56921040778 brightness appears out of expected range
+here
+		x,y:
+ -3.467628, 3.238326 
+ 1878.028262, 984.650306
+dist_xy2c: 4.744597 mm
+phi:  103.3324 deg
+(th, ph): 16.2799, 99.8267
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115022.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115032 taken successfully.
+peak = 84251.8341814872 brightness appears out of expected range
+peak = 81818.2401862018 brightness appears out of expected range
+peak = 81086.16170177865 brightness appears out of expected range
+peak = 74817.2551874741 brightness appears out of expected range
+peak = 71948.76052884893 brightness appears out of expected range
+here
+		x,y:
+ -4.389341, 2.823320 
+ 1851.954587, 972.912757
+dist_xy2c: 5.218951 mm
+phi:  119.2749 deg
+(th, ph): 18.7181, 114.6502
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115032.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115041 taken successfully.
+peak = 84122.03988948275 brightness appears out of expected range
+peak = 81778.62927860652 brightness appears out of expected range
+peak = 80574.96425337637 brightness appears out of expected range
+peak = 74867.52924560774 brightness appears out of expected range
+peak = 72025.92800442177 brightness appears out of expected range
+here
+		x,y:
+ -5.126589, 2.132394 
+ 1831.114143, 953.365297
+dist_xy2c: 5.552389 mm
+phi:  133.2671 deg
+(th, ph): 22.2989, 127.1804
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115041.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115050 taken successfully.
+peak = 84264.15974908872 brightness appears out of expected range
+peak = 81748.86206429922 brightness appears out of expected range
+peak = 81878.78483021568 brightness appears out of expected range
+peak = 75032.55741201532 brightness appears out of expected range
+peak = 71743.05294014305 brightness appears out of expected range
+here
+		x,y:
+ -5.597352, 1.238015 
+ 1817.702582, 927.994460
+dist_xy2c: 5.732628 mm
+phi:  142.8161 deg
+(th, ph): 28.1817, 135.2651
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115050.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115058 taken successfully.
+peak = 84238.81010877782 brightness appears out of expected range
+peak = 81867.54656091472 brightness appears out of expected range
+peak = 81924.22772240338 brightness appears out of expected range
+peak = 74759.98543615556 brightness appears out of expected range
+peak = 72148.23512692799 brightness appears out of expected range
+here
+		x,y:
+ -5.161564, 2.076616 
+ 1829.832992, 951.634413
+dist_xy2c: 5.563639 mm
+phi:  133.8125 deg
+(th, ph): 22.7212, 127.6507
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115058.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115108 taken successfully.
+peak = 84202.02516661322 brightness appears out of expected range
+peak = 81860.36171948923 brightness appears out of expected range
+peak = 80934.31651213265 brightness appears out of expected range
+peak = 74921.08246811254 brightness appears out of expected range
+peak = 71750.51306437682 brightness appears out of expected range
+here
+		x,y:
+ -4.437003, 2.788456 
+ 1850.244752, 971.736319
+dist_xy2c: 5.240466 mm
+phi:  120.0860 deg
+(th, ph): 18.9296, 115.3920
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115108.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115115 taken successfully.
+peak = 84401.27004514931 brightness appears out of expected range
+peak = 81780.38276012478 brightness appears out of expected range
+peak = 81075.64270561718 brightness appears out of expected range
+peak = 74799.0661419323 brightness appears out of expected range
+peak = 71985.30885513015 brightness appears out of expected range
+here
+		x,y:
+ -3.533568, 3.220410 
+ 1875.974153, 984.045029
+dist_xy2c: 4.780915 mm
+phi:  104.4479 deg
+(th, ph): 16.4167, 100.8773
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115115.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115124 taken successfully.
+peak = 84229.79281419414 brightness appears out of expected range
+peak = 81650.4605369034 brightness appears out of expected range
+peak = 79629.83309287684 brightness appears out of expected range
+peak = 74839.26735741989 brightness appears out of expected range
+peak = 72070.13861112557 brightness appears out of expected range
+here
+		x,y:
+ -2.527824, 3.335893 
+ 1904.612774, 987.397074
+dist_xy2c: 4.185461 mm
+phi:  87.5642 deg
+(th, ph): 14.5165, 84.8565
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115124.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115134 taken successfully.
+peak = 84090.31957980455 brightness appears out of expected range
+peak = 81748.56631201223 brightness appears out of expected range
+peak = 79405.39783318058 brightness appears out of expected range
+peak = 74796.22613737122 brightness appears out of expected range
+peak = 71906.0878040172 brightness appears out of expected range
+here
+		x,y:
+ -1.541011, 3.121232 
+ 1932.575975, 981.325895
+dist_xy2c: 3.480920 mm
+phi:  70.2571 deg
+(th, ph): 12.8065, 68.2072
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115134.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115143 taken successfully.
+peak = 84221.68092906105 brightness appears out of expected range
+peak = 81818.887514083 brightness appears out of expected range
+peak = 79491.00165494646 brightness appears out of expected range
+peak = 74736.84068456537 brightness appears out of expected range
+peak = 72069.87319567897 brightness appears out of expected range
+here
+		x,y:
+ -0.680398, 2.600166 
+ 1956.961959, 966.575167
+dist_xy2c: 2.687714 mm
+phi:  52.7424 deg
+(th, ph): 11.0273, 51.2185
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115143.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115153 taken successfully.
+peak = 84059.11436583477 brightness appears out of expected range
+peak = 81781.3404789663 brightness appears out of expected range
+peak = 79166.53485232296 brightness appears out of expected range
+peak = 74805.94346961411 brightness appears out of expected range
+peak = 71986.65999731106 brightness appears out of expected range
+here
+		x,y:
+ -0.029276, 1.826353 
+ 1975.242137, 944.583370
+dist_xy2c: 1.826587 mm
+phi:  35.1149 deg
+(th, ph): 8.4761, 34.0013
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115153.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115201 taken successfully.
+peak = 84063.0642090967 brightness appears out of expected range
+peak = 81806.17819341998 brightness appears out of expected range
+peak = 79554.16809786145 brightness appears out of expected range
+peak = 74816.00968464185 brightness appears out of expected range
+peak = 72020.1142945348 brightness appears out of expected range
+here
+		x,y:
+ 0.331021, 0.886391 
+ 1985.374938, 917.932342
+dist_xy2c: 0.946183 mm
+phi:  17.9176 deg
+(th, ph): 350.9499, 17.0016
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115201.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115210 taken successfully.
+peak = 84377.30303704982 brightness appears out of expected range
+peak = 81751.5145740707 brightness appears out of expected range
+peak = 79618.94040887221 brightness appears out of expected range
+peak = 74533.82404961155 brightness appears out of expected range
+peak = 72163.40709303934 brightness appears out of expected range
+here
+		x,y:
+ 0.319104, 0.881251 
+ 1985.367952, 917.939589
+dist_xy2c: 0.937246 mm
+phi:  17.7492 deg
+(th, ph): 351.2918, 16.8288
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115210.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115220 taken successfully.
+peak = 84236.14684573286 brightness appears out of expected range
+peak = 81798.9852384876 brightness appears out of expected range
+peak = 78802.1129005623 brightness appears out of expected range
+peak = 74667.33592868055 brightness appears out of expected range
+peak = 72316.09997216893 brightness appears out of expected range
+here
+		x,y:
+ 0.003028, 1.756898 
+ 1976.306949, 942.688062
+dist_xy2c: 1.756901 mm
+phi:  33.7366 deg
+(th, ph): 8.4510, 32.6434
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115220.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115230 taken successfully.
+peak = 84202.37695457853 brightness appears out of expected range
+peak = 81777.4131654768 brightness appears out of expected range
+peak = 79449.81842207453 brightness appears out of expected range
+peak = 74746.75689289298 brightness appears out of expected range
+peak = 71977.27768013827 brightness appears out of expected range
+here
+		x,y:
+ -0.626738, 2.545539 
+ 1958.596266, 965.084560
+dist_xy2c: 2.621559 mm
+phi:  51.3472 deg
+(th, ph): 11.0171, 49.8595
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115230.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115238 taken successfully.
+peak = 84375.662772932 brightness appears out of expected range
+peak = 81745.31558271559 brightness appears out of expected range
+peak = 78391.03561192131 brightness appears out of expected range
+peak = 74756.23598051051 brightness appears out of expected range
+peak = 72040.6561728898 brightness appears out of expected range
+here
+		x,y:
+ -1.467803, 3.096039 
+ 1934.480445, 980.526835
+dist_xy2c: 3.426354 mm
+phi:  68.9980 deg
+(th, ph): 12.5797, 66.9894
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115238.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115247 taken successfully.
+peak = 84151.81613542757 brightness appears out of expected range
+peak = 81747.71295805022 brightness appears out of expected range
+peak = 80088.5454002317 brightness appears out of expected range
+peak = 74542.68080353588 brightness appears out of expected range
+peak = 72302.50985533769 brightness appears out of expected range
+here
+		x,y:
+ -2.443672, 3.336059 
+ 1906.710338, 987.253844
+dist_xy2c: 4.135314 mm
+phi:  86.2559 deg
+(th, ph): 14.2657, 83.6037
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115247.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115255 taken successfully.
+peak = 84126.64735982554 brightness appears out of expected range
+peak = 81799.085714276 brightness appears out of expected range
+peak = 80001.26582266497 brightness appears out of expected range
+peak = 74793.5775014017 brightness appears out of expected range
+peak = 71956.69323528987 brightness appears out of expected range
+here
+		x,y:
+ -3.472746, 3.235183 
+ 1878.079755, 984.664267
+dist_xy2c: 4.746195 mm
+phi:  103.3795 deg
+(th, ph): 16.3253, 99.8727
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115255.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115304 taken successfully.
+peak = 84334.85577058754 brightness appears out of expected range
+peak = 81742.12032669842 brightness appears out of expected range
+peak = 81106.6856824657 brightness appears out of expected range
+peak = 74716.38478293363 brightness appears out of expected range
+peak = 72054.76427725742 brightness appears out of expected range
+here
+		x,y:
+ -4.385837, 2.824663 
+ 1852.020555, 972.933341
+dist_xy2c: 5.216732 mm
+phi:  119.1961 deg
+(th, ph): 18.7250, 114.5741
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115304.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115313 taken successfully.
+peak = 84191.5763910109 brightness appears out of expected range
+peak = 81818.03937778789 brightness appears out of expected range
+peak = 80682.26378576258 brightness appears out of expected range
+peak = 74549.09861704282 brightness appears out of expected range
+peak = 72350.29930416477 brightness appears out of expected range
+here
+		x,y:
+ -5.117420, 2.137812 
+ 1831.159199, 953.406986
+dist_xy2c: 5.546010 mm
+phi:  132.9688 deg
+(th, ph): 22.3497, 126.9154
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115313.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115322 taken successfully.
+peak = 84284.75891699929 brightness appears out of expected range
+peak = 81903.9335912669 brightness appears out of expected range
+peak = 81827.54692358442 brightness appears out of expected range
+peak = 74694.41398587021 brightness appears out of expected range
+peak = 72258.59880296426 brightness appears out of expected range
+here
+		x,y:
+ -5.594779, 1.241133 
+ 1817.709718, 928.049214
+dist_xy2c: 5.730791 mm
+phi:  142.7025 deg
+(th, ph): 28.1924, 135.1758
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115322.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115331 taken successfully.
+peak = 84034.26407796153 brightness appears out of expected range
+peak = 81889.68712680438 brightness appears out of expected range
+peak = 81565.48892142523 brightness appears out of expected range
+peak = 74723.49767385914 brightness appears out of expected range
+peak = 72019.01069135434 brightness appears out of expected range
+here
+		x,y:
+ -5.165142, 2.075783 
+ 1829.898321, 951.697495
+dist_xy2c: 5.566648 mm
+phi:  133.9555 deg
+(th, ph): 22.6767, 127.7772
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115331.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115340 taken successfully.
+peak = 84202.13473243614 brightness appears out of expected range
+peak = 81764.39849812657 brightness appears out of expected range
+peak = 81064.86204364403 brightness appears out of expected range
+peak = 74747.7469520545 brightness appears out of expected range
+peak = 72066.11391982553 brightness appears out of expected range
+here
+		x,y:
+ -4.440007, 2.786714 
+ 1850.301878, 971.761662
+dist_xy2c: 5.242083 mm
+phi:  120.1523 deg
+(th, ph): 18.9337, 115.4481
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115340.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115349 taken successfully.
+peak = 84041.83897539924 brightness appears out of expected range
+peak = 81779.27551871081 brightness appears out of expected range
+peak = 81407.95083288898 brightness appears out of expected range
+peak = 74834.44577742378 brightness appears out of expected range
+peak = 71974.57316136219 brightness appears out of expected range
+here
+		x,y:
+ -3.534000, 3.218894 
+ 1876.035154, 984.040492
+dist_xy2c: 4.780213 mm
+phi:  104.4243 deg
+(th, ph): 16.4445, 100.8568
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115349.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115359 taken successfully.
+peak = 84294.27259447977 brightness appears out of expected range
+peak = 81792.8941123623 brightness appears out of expected range
+peak = 80050.84952934195 brightness appears out of expected range
+peak = 74726.88179398811 brightness appears out of expected range
+peak = 72133.52416872617 brightness appears out of expected range
+here
+		x,y:
+ -2.513510, 3.341036 
+ 1904.708020, 987.381947
+dist_xy2c: 4.180940 mm
+phi:  87.4495 deg
+(th, ph): 14.3791, 84.7430
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115359.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115409 taken successfully.
+peak = 84250.96390753887 brightness appears out of expected range
+peak = 81734.43518831294 brightness appears out of expected range
+peak = 79998.19032354486 brightness appears out of expected range
+peak = 74758.47826435794 brightness appears out of expected range
+peak = 71931.0600649786 brightness appears out of expected range
+here
+		x,y:
+ -1.525624, 3.125940 
+ 1932.638992, 981.269981
+dist_xy2c: 3.478366 mm
+phi:  70.1962 deg
+(th, ph): 12.5770, 68.1500
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115409.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115418 taken successfully.
+peak = 84207.4827274278 brightness appears out of expected range
+peak = 81842.23500124009 brightness appears out of expected range
+peak = 79441.56261369305 brightness appears out of expected range
+peak = 74753.39700191458 brightness appears out of expected range
+peak = 71928.17981635389 brightness appears out of expected range
+here
+		x,y:
+ -0.669235, 2.602682 
+ 1957.012223, 966.515120
+dist_xy2c: 2.687346 mm
+phi:  52.7352 deg
+(th, ph): 10.7880, 51.2109
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115418.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115426 taken successfully.
+peak = 84201.72848562426 brightness appears out of expected range
+peak = 81757.19617886405 brightness appears out of expected range
+peak = 78469.09741036971 brightness appears out of expected range
+peak = 74701.14904755118 brightness appears out of expected range
+peak = 72074.41789630178 brightness appears out of expected range
+here
+		x,y:
+ -0.022386, 1.826823 
+ 1975.295233, 944.528779
+dist_xy2c: 1.826960 mm
+phi:  35.1249 deg
+(th, ph): 8.2546, 34.0086
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115426.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115435 taken successfully.
+peak = 84260.780839125 brightness appears out of expected range
+peak = 81806.55067311072 brightness appears out of expected range
+peak = 79485.61833369522 brightness appears out of expected range
+peak = 74694.14362856824 brightness appears out of expected range
+peak = 71981.99381134 brightness appears out of expected range
+here
+		x,y:
+ 0.329918, 0.883793 
+ 1985.404004, 917.886651
+dist_xy2c: 0.943364 mm
+phi:  17.8616 deg
+(th, ph): 350.8850, 16.9471
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115435.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115444 taken successfully.
+peak = 84199.46789640079 brightness appears out of expected range
+peak = 81897.08971515301 brightness appears out of expected range
+peak = 79504.33427341544 brightness appears out of expected range
+peak = 74669.75046366683 brightness appears out of expected range
+peak = 71941.40370013782 brightness appears out of expected range
+here
+		x,y:
+ 0.336954, 0.886765 
+ 1985.401152, 917.877395
+dist_xy2c: 0.948625 mm
+phi:  17.9734 deg
+(th, ph): 350.6846, 17.0488
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115444.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115453 taken successfully.
+peak = 84246.52290874321 brightness appears out of expected range
+peak = 81802.6045550952 brightness appears out of expected range
+peak = 78230.8911081703 brightness appears out of expected range
+peak = 74468.76443571887 brightness appears out of expected range
+peak = 72209.75024940037 brightness appears out of expected range
+here
+		x,y:
+ 0.010196, 1.756891 
+ 1976.372657, 942.622375
+dist_xy2c: 1.756921 mm
+phi:  33.7366 deg
+(th, ph): 8.2170, 32.6438
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115453.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115503 taken successfully.
+peak = 84246.01637975896 brightness appears out of expected range
+peak = 81834.63374858252 brightness appears out of expected range
+peak = 80036.79259346769 brightness appears out of expected range
+peak = 74660.94518689332 brightness appears out of expected range
+peak = 72228.50174504495 brightness appears out of expected range
+here
+		x,y:
+ -0.617289, 2.546316 
+ 1958.695056, 965.023385
+dist_xy2c: 2.620071 mm
+phi:  51.3178 deg
+(th, ph): 10.8309, 49.8290
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115503.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115512 taken successfully.
+peak = 84277.14927868453 brightness appears out of expected range
+peak = 81843.56899763242 brightness appears out of expected range
+peak = 78941.42915585868 brightness appears out of expected range
+peak = 74786.51020937423 brightness appears out of expected range
+peak = 72182.68877393579 brightness appears out of expected range
+here
+		x,y:
+ -1.461297, 3.092919 
+ 1934.675734, 980.444088
+dist_xy2c: 3.420751 mm
+phi:  68.8691 deg
+(th, ph): 12.5738, 66.8648
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115512.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115522 taken successfully.
+peak = 84221.09521457489 brightness appears out of expected range
+peak = 81807.03444598992 brightness appears out of expected range
+peak = 80062.4100555073 brightness appears out of expected range
+peak = 74630.0862064871 brightness appears out of expected range
+peak = 72059.6364634607 brightness appears out of expected range
+here
+		x,y:
+ -2.437906, 3.335532 
+ 1906.893899, 987.249424
+dist_xy2c: 4.131484 mm
+phi:  86.1583 deg
+(th, ph): 14.2572, 83.5085
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115522.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115531 taken successfully.
+peak = 84221.078409818 brightness appears out of expected range
+peak = 81843.49636013576 brightness appears out of expected range
+peak = 80113.75371457185 brightness appears out of expected range
+peak = 74601.71540464624 brightness appears out of expected range
+peak = 72235.31686399975 brightness appears out of expected range
+here
+		x,y:
+ -3.458098, 3.241187 
+ 1878.253005, 984.707660
+dist_xy2c: 4.739592 mm
+phi:  103.1794 deg
+(th, ph): 16.2527, 99.6829
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115531.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115541 taken successfully.
+peak = 84226.24096904253 brightness appears out of expected range
+peak = 81765.07497138495 brightness appears out of expected range
+peak = 80414.9771305318 brightness appears out of expected range
+peak = 74779.88256673496 brightness appears out of expected range
+peak = 71922.58933281465 brightness appears out of expected range
+here
+		x,y:
+ -4.378893, 2.828491 
+ 1852.175824, 973.020006
+dist_xy2c: 5.212971 mm
+phi:  119.0518 deg
+(th, ph): 18.7162, 114.4453
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115541.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115549 taken successfully.
+peak = 84159.21240613371 brightness appears out of expected range
+peak = 81763.91862980505 brightness appears out of expected range
+peak = 81335.58547877932 brightness appears out of expected range
+peak = 74669.26903415068 brightness appears out of expected range
+peak = 72416.03819648892 brightness appears out of expected range
+here
+		x,y:
+ -5.113116, 2.144144 
+ 1831.276763, 953.584044
+dist_xy2c: 5.544484 mm
+phi:  132.8905 deg
+(th, ph): 22.3053, 126.8522
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115549.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115558 taken successfully.
+peak = 84164.15095540411 brightness appears out of expected range
+peak = 81875.74477566917 brightness appears out of expected range
+peak = 81827.62545637123 brightness appears out of expected range
+peak = 74628.66913722016 brightness appears out of expected range
+peak = 72435.04803140857 brightness appears out of expected range
+here
+		x,y:
+ -5.596834, 1.244758 
+ 1817.783131, 928.219079
+dist_xy2c: 5.733583 mm
+phi:  142.8730 deg
+(th, ph): 28.0906, 135.3116
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115558.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115607 taken successfully.
+peak = 84180.42467077854 brightness appears out of expected range
+peak = 81804.35212841761 brightness appears out of expected range
+peak = 81083.363411748 brightness appears out of expected range
+peak = 74494.94221562886 brightness appears out of expected range
+peak = 72187.15226070359 brightness appears out of expected range
+here
+		x,y:
+ -5.152518, 2.085477 
+ 1830.012784, 951.845601
+dist_xy2c: 5.558566 mm
+phi:  133.5668 deg
+(th, ph): 22.7131, 127.4381
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115607.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115616 taken successfully.
+peak = 84177.08955099624 brightness appears out of expected range
+peak = 81784.88129708453 brightness appears out of expected range
+peak = 80823.48349814766 brightness appears out of expected range
+peak = 74558.91669732863 brightness appears out of expected range
+peak = 72451.74002247726 brightness appears out of expected range
+here
+		x,y:
+ -4.439341, 2.786739 
+ 1850.464016, 971.837622
+dist_xy2c: 5.241533 mm
+phi:  120.1324 deg
+(th, ph): 18.9396, 115.4290
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115616.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115625 taken successfully.
+peak = 84269.4671259041 brightness appears out of expected range
+peak = 81765.17353046311 brightness appears out of expected range
+peak = 80336.51973382031 brightness appears out of expected range
+peak = 74628.78338720997 brightness appears out of expected range
+peak = 72265.50707751296 brightness appears out of expected range
+here
+		x,y:
+ -3.532452, 3.218128 
+ 1876.217233, 984.091314
+dist_xy2c: 4.778552 mm
+phi:  104.3769 deg
+(th, ph): 16.4645, 100.8086
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115625.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115634 taken successfully.
+peak = 84152.28029923503 brightness appears out of expected range
+peak = 81752.59467241827 brightness appears out of expected range
+peak = 79991.39282854863 brightness appears out of expected range
+peak = 74561.45247867495 brightness appears out of expected range
+peak = 72241.46309004117 brightness appears out of expected range
+here
+		x,y:
+ -2.509976, 3.338755 
+ 1904.888071, 987.358820
+dist_xy2c: 4.176993 mm
+phi:  87.3463 deg
+(th, ph): 14.4128, 84.6440
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115634.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115643 taken successfully.
+peak = 84160.04596662287 brightness appears out of expected range
+peak = 81809.49916661307 brightness appears out of expected range
+peak = 80378.88829298239 brightness appears out of expected range
+peak = 74624.46438297526 brightness appears out of expected range
+peak = 72093.05283834155 brightness appears out of expected range
+here
+		x,y:
+ -1.529376, 3.118279 
+ 1932.834149, 981.206070
+dist_xy2c: 3.473134 mm
+phi:  70.0744 deg
+(th, ph): 12.7538, 68.0329
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115643.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115652 taken successfully.
+peak = 84192.71512242279 brightness appears out of expected range
+peak = 81755.2673588166 brightness appears out of expected range
+peak = 80076.96851511725 brightness appears out of expected range
+peak = 74626.61654886682 brightness appears out of expected range
+peak = 72363.79878976251 brightness appears out of expected range
+here
+		x,y:
+ -0.672166, 2.594057 
+ 1957.112727, 966.361478
+dist_xy2c: 2.679727 mm
+phi:  52.5766 deg
+(th, ph): 10.9892, 51.0540
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115652.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115702 taken successfully.
+peak = 84199.32455117472 brightness appears out of expected range
+peak = 81765.8442888502 brightness appears out of expected range
+peak = 78301.40552839077 brightness appears out of expected range
+peak = 74529.04681884627 brightness appears out of expected range
+peak = 72199.25100656191 brightness appears out of expected range
+here
+		x,y:
+ -0.027484, 1.816605 
+ 1975.382281, 944.350082
+dist_xy2c: 1.816813 mm
+phi:  34.9252 deg
+(th, ph): 8.5624, 33.8107
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115702.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115710 taken successfully.
+peak = 84086.28113069403 brightness appears out of expected range
+peak = 81780.84170797885 brightness appears out of expected range
+peak = 78055.91915584444 brightness appears out of expected range
+peak = 74535.89639589612 brightness appears out of expected range
+peak = 72424.70113653132 brightness appears out of expected range
+here
+		x,y:
+ 0.334834, 0.878467 
+ 1985.441097, 917.688641
+dist_xy2c: 0.940116 mm
+phi:  17.8055 deg
+(th, ph): 350.4070, 16.8843
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115710.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115719 taken successfully.
+peak = 84021.69645050647 brightness appears out of expected range
+peak = 81807.98051892206 brightness appears out of expected range
+peak = 78262.81182067301 brightness appears out of expected range
+peak = 74602.24082794781 brightness appears out of expected range
+peak = 72199.84238427362 brightness appears out of expected range
+here
+		x,y:
+ 0.327491, 0.875841 
+ 1985.433259, 917.706775
+dist_xy2c: 0.935066 mm
+phi:  17.7116 deg
+(th, ph): 350.6391, 16.7867
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115719.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115728 taken successfully.
+peak = 84078.2565790149 brightness appears out of expected range
+peak = 81883.04528272148 brightness appears out of expected range
+peak = 77699.7261204796 brightness appears out of expected range
+peak = 74635.24160316748 brightness appears out of expected range
+peak = 72069.74429099787 brightness appears out of expected range
+here
+		x,y:
+ 0.021220, 1.753948 
+ 1976.486922, 942.444661
+dist_xy2c: 1.754076 mm
+phi:  33.6746 deg
+(th, ph): 7.8973, 32.5885
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115728.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115737 taken successfully.
+peak = 84195.20565098674 brightness appears out of expected range
+peak = 81819.90093938219 brightness appears out of expected range
+peak = 80234.98513064497 brightness appears out of expected range
+peak = 74570.31933718538 brightness appears out of expected range
+peak = 72162.36353839262 brightness appears out of expected range
+here
+		x,y:
+ -0.614216, 2.542603 
+ 1958.801418, 964.927743
+dist_xy2c: 2.615739 mm
+phi:  51.2223 deg
+(th, ph): 10.8386, 49.7403
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115737.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115745 taken successfully.
+peak = 83956.9025174549 brightness appears out of expected range
+peak = 81845.32842242415 brightness appears out of expected range
+peak = 79717.97212487774 brightness appears out of expected range
+peak = 74488.13062063338 brightness appears out of expected range
+peak = 72309.32045174201 brightness appears out of expected range
+here
+		x,y:
+ -1.457239, 3.091209 
+ 1934.767915, 980.384138
+dist_xy2c: 3.417473 mm
+phi:  68.7892 deg
+(th, ph): 12.5656, 66.7920
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115745.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115754 taken successfully.
+peak = 84175.93513266055 brightness appears out of expected range
+peak = 81831.13789376288 brightness appears out of expected range
+peak = 79947.01674608706 brightness appears out of expected range
+peak = 74518.15298961954 brightness appears out of expected range
+peak = 72159.6569920774 brightness appears out of expected range
+here
+		x,y:
+ -2.443956, 3.331237 
+ 1906.951881, 987.246517
+dist_xy2c: 4.131593 mm
+phi:  86.1583 deg
+(th, ph): 14.3586, 83.5112
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115754.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115803 taken successfully.
+peak = 84184.30909009335 brightness appears out of expected range
+peak = 81802.48913833771 brightness appears out of expected range
+peak = 80158.05325518393 brightness appears out of expected range
+peak = 74642.65807223965 brightness appears out of expected range
+peak = 71884.01983563507 brightness appears out of expected range
+here
+		x,y:
+ -3.450467, 3.244431 
+ 1878.313270, 984.717832
+dist_xy2c: 4.736249 mm
+phi:  103.0793 deg
+(th, ph): 16.2121, 99.5869
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115803.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115812 taken successfully.
+peak = 84077.56955643548 brightness appears out of expected range
+peak = 81842.73316145406 brightness appears out of expected range
+peak = 80388.47265558841 brightness appears out of expected range
+peak = 74577.90842662936 brightness appears out of expected range
+peak = 72280.12714847528 brightness appears out of expected range
+here
+		x,y:
+ -4.366196, 2.834465 
+ 1852.203920, 973.015027
+dist_xy2c: 5.205560 mm
+phi:  118.7769 deg
+(th, ph): 18.7186, 114.1922
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115812.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115821 taken successfully.
+peak = 83894.74508513128 brightness appears out of expected range
+peak = 81838.50793021817 brightness appears out of expected range
+peak = 81424.64143806479 brightness appears out of expected range
+peak = 74656.21788994377 brightness appears out of expected range
+peak = 71973.94630333334 brightness appears out of expected range
+here
+		x,y:
+ -5.112518, 2.145181 
+ 1831.316277, 953.625170
+dist_xy2c: 5.544334 mm
+phi:  132.8905 deg
+(th, ph): 22.2963, 126.8460
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115821.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115830 taken successfully.
+peak = 84011.00358646146 brightness appears out of expected range
+peak = 81816.46702043236 brightness appears out of expected range
+peak = 82012.76709988278 brightness appears out of expected range
+peak = 74530.91696646703 brightness appears out of expected range
+peak = 72076.05684662858 brightness appears out of expected range
+here
+		x,y:
+ -5.580237, 1.253741 
+ 1817.809086, 928.246714
+dist_xy2c: 5.719346 mm
+phi:  142.0269 deg
+(th, ph): 28.3264, 134.6231
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115830.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115839 taken successfully.
+peak = 83987.00397666101 brightness appears out of expected range
+peak = 81795.22266465687 brightness appears out of expected range
+peak = 81140.46987291986 brightness appears out of expected range
+peak = 74622.34471779187 brightness appears out of expected range
+peak = 72186.05109621793 brightness appears out of expected range
+here
+		x,y:
+ -5.146756, 2.088383 
+ 1830.036691, 951.855481
+dist_xy2c: 5.554318 mm
+phi:  133.3616 deg
+(th, ph): 22.7559, 127.2607
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115839.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115848 taken successfully.
+peak = 84043.40037597044 brightness appears out of expected range
+peak = 81784.49577141517 brightness appears out of expected range
+peak = 80823.72679873287 brightness appears out of expected range
+peak = 74660.82846550958 brightness appears out of expected range
+peak = 71926.81629068083 brightness appears out of expected range
+here
+		x,y:
+ -4.431792, 2.790628 
+ 1850.525637, 971.867842
+dist_xy2c: 5.237212 mm
+phi:  119.9669 deg
+(th, ph): 18.9386, 115.2793
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115848.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115857 taken successfully.
+peak = 83976.9961763055 brightness appears out of expected range
+peak = 81726.93319358988 brightness appears out of expected range
+peak = 80128.35932371578 brightness appears out of expected range
+peak = 74536.51316334702 brightness appears out of expected range
+peak = 72102.58847620065 brightness appears out of expected range
+here
+		x,y:
+ -3.520970, 3.223123 
+ 1876.272494, 984.091198
+dist_xy2c: 4.773442 mm
+phi:  104.2173 deg
+(th, ph): 16.4064, 100.6602
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115857.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115905 taken successfully.
+peak = 84205.05673177613 brightness appears out of expected range
+peak = 81799.12224476079 brightness appears out of expected range
+peak = 80025.68688914488 brightness appears out of expected range
+peak = 74589.09362612241 brightness appears out of expected range
+peak = 72222.32008198087 brightness appears out of expected range
+here
+		x,y:
+ -2.513934, 3.335775 
+ 1904.943119, 987.361045
+dist_xy2c: 4.176991 mm
+phi:  87.3463 deg
+(th, ph): 14.4808, 84.6440
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115905.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115914 taken successfully.
+peak = 84105.25058062773 brightness appears out of expected range
+peak = 81784.17293104737 brightness appears out of expected range
+peak = 80428.96851605481 brightness appears out of expected range
+peak = 74693.8379374437 brightness appears out of expected range
+peak = 72189.80688514386 brightness appears out of expected range
+here
+		x,y:
+ -1.523977, 3.119372 
+ 1932.890761, 981.188128
+dist_xy2c: 3.471741 mm
+phi:  70.0439 deg
+(th, ph): 12.6833, 68.0017
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115914.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115923 taken successfully.
+peak = 84026.01967816068 brightness appears out of expected range
+peak = 81728.774068943 brightness appears out of expected range
+peak = 80146.87751270721 brightness appears out of expected range
+peak = 74597.398899585 brightness appears out of expected range
+peak = 71960.15626984964 brightness appears out of expected range
+here
+		x,y:
+ -0.658553, 2.599211 
+ 1957.163099, 966.341972
+dist_xy2c: 2.681341 mm
+phi:  52.6055 deg
+(th, ph): 10.6599, 51.0873
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115923.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115932 taken successfully.
+peak = 84221.2834703079 brightness appears out of expected range
+peak = 81765.99799784327 brightness appears out of expected range
+peak = 78993.67306092355 brightness appears out of expected range
+peak = 74590.60710107615 brightness appears out of expected range
+peak = 72222.60593850298 brightness appears out of expected range
+here
+		x,y:
+ -0.022014, 1.815296 
+ 1975.438388, 944.265776
+dist_xy2c: 1.815430 mm
+phi:  34.8952 deg
+(th, ph): 8.4099, 33.7837
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115932.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115941 taken successfully.
+peak = 83776.3723596037 brightness appears out of expected range
+peak = 81835.71018559918 brightness appears out of expected range
+peak = 77761.30093835814 brightness appears out of expected range
+peak = 74653.21294932786 brightness appears out of expected range
+peak = 72134.64852202275 brightness appears out of expected range
+here
+		x,y:
+ 0.344107, 0.879622 
+ 1985.472213, 917.614378
+dist_xy2c: 0.944534 mm
+phi:  17.8990 deg
+(th, ph): 350.0202, 16.9698
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115941.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115950 taken successfully.
+peak = 83819.57954467705 brightness appears out of expected range
+peak = 81806.74557176296 brightness appears out of expected range
+peak = 77754.27683843496 brightness appears out of expected range
+peak = 74736.20961136436 brightness appears out of expected range
+peak = 71988.56011319821 brightness appears out of expected range
+here
+		x,y:
+ 0.336437, 0.875646 
+ 1985.473917, 917.602946
+dist_xy2c: 0.938054 mm
+phi:  17.7680 deg
+(th, ph): 350.2008, 16.8445
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115950.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-115959 taken successfully.
+peak = 84192.54978110423 brightness appears out of expected range
+peak = 81811.02360971949 brightness appears out of expected range
+peak = 78059.30051395562 brightness appears out of expected range
+peak = 74517.94531189904 brightness appears out of expected range
+peak = 72068.59130390166 brightness appears out of expected range
+here
+		x,y:
+ 0.017878, 1.749712 
+ 1976.507237, 942.379520
+dist_xy2c: 1.749804 mm
+phi:  33.5918 deg
+(th, ph): 8.0666, 32.5053
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-115959.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120008 taken successfully.
+peak = 83973.36372479913 brightness appears out of expected range
+peak = 81849.89233954984 brightness appears out of expected range
+peak = 79898.2872331766 brightness appears out of expected range
+peak = 74555.90535800913 brightness appears out of expected range
+peak = 72013.68867214932 brightness appears out of expected range
+here
+		x,y:
+ -0.598386, 2.548469 
+ 1958.845307, 964.894652
+dist_xy2c: 2.617777 mm
+phi:  51.2664 deg
+(th, ph): 10.4463, 49.7820
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120008.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120017 taken successfully.
+peak = 84196.51706136626 brightness appears out of expected range
+peak = 81824.80753401273 brightness appears out of expected range
+peak = 80174.39409197986 brightness appears out of expected range
+peak = 74546.21098384302 brightness appears out of expected range
+peak = 72217.20101160236 brightness appears out of expected range
+here
+		x,y:
+ -1.454022, 3.090935 
+ 1934.828688, 980.361012
+dist_xy2c: 3.415854 mm
+phi:  68.7523 deg
+(th, ph): 12.5390, 66.7560
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120017.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120025 taken successfully.
+peak = 83868.27922324184 brightness appears out of expected range
+peak = 81805.89447468639 brightness appears out of expected range
+peak = 79941.12636627085 brightness appears out of expected range
+peak = 74537.60741173346 brightness appears out of expected range
+peak = 72176.60882262739 brightness appears out of expected range
+here
+		x,y:
+ -2.427047, 3.339148 
+ 1906.969271, 987.231647
+dist_xy2c: 4.128010 mm
+phi:  86.0664 deg
+(th, ph): 14.1528, 83.4222
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120025.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120034 taken successfully.
+peak = 84105.07328486421 brightness appears out of expected range
+peak = 81890.72184138687 brightness appears out of expected range
+peak = 80204.66384380966 brightness appears out of expected range
+peak = 74450.16110543108 brightness appears out of expected range
+peak = 72310.56699465739 brightness appears out of expected range
+here
+		x,y:
+ -3.457832, 3.240173 
+ 1878.346368, 984.723952
+dist_xy2c: 4.738705 mm
+phi:  103.1499 deg
+(th, ph): 16.2730, 99.6574
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120034.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120043 taken successfully.
+peak = 83751.9756889403 brightness appears out of expected range
+peak = 81750.4010124796 brightness appears out of expected range
+peak = 80247.83281477288 brightness appears out of expected range
+peak = 74517.45791671457 brightness appears out of expected range
+peak = 71971.06936167848 brightness appears out of expected range
+here
+		x,y:
+ -4.365180, 2.834994 
+ 1852.256715, 973.042652
+dist_xy2c: 5.204997 mm
+phi:  118.7573 deg
+(th, ph): 18.7177, 114.1730
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120043.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120052 taken successfully.
+peak = 83998.82515457872 brightness appears out of expected range
+peak = 81808.75119414476 brightness appears out of expected range
+peak = 81774.67046074323 brightness appears out of expected range
+peak = 74632.78252530514 brightness appears out of expected range
+peak = 72410.54672665142 brightness appears out of expected range
+here
+		x,y:
+ -5.106443, 2.148508 
+ 1831.347282, 953.645956
+dist_xy2c: 5.540022 mm
+phi:  132.6798 deg
+(th, ph): 22.3337, 126.6678
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120052.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120101 taken successfully.
+peak = 83998.57411302613 brightness appears out of expected range
+peak = 81795.6966602553 brightness appears out of expected range
+peak = 81850.77236674953 brightness appears out of expected range
+peak = 74640.94690994004 brightness appears out of expected range
+peak = 72064.82522128202 brightness appears out of expected range
+here
+		x,y:
+ -5.578292, 1.255998 
+ 1817.834885, 928.295672
+dist_xy2c: 5.717943 mm
+phi:  141.9525 deg
+(th, ph): 28.3352, 134.5558
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120101.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120110 taken successfully.
+peak = 83932.84516533447 brightness appears out of expected range
+peak = 81821.51542915379 brightness appears out of expected range
+peak = 81105.06127468184 brightness appears out of expected range
+peak = 74572.02518209 brightness appears out of expected range
+peak = 72012.55172268579 brightness appears out of expected range
+here
+		x,y:
+ -5.143295, 2.090242 
+ 1830.076999, 951.878095
+dist_xy2c: 5.551810 mm
+phi:  133.2435 deg
+(th, ph): 22.7794, 127.1563
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120110.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120119 taken successfully.
+peak = 84065.0004904974 brightness appears out of expected range
+peak = 81744.09544494699 brightness appears out of expected range
+peak = 80583.84246430475 brightness appears out of expected range
+peak = 74554.8283897399 brightness appears out of expected range
+peak = 72035.72850942957 brightness appears out of expected range
+here
+		x,y:
+ -4.427621, 2.792639 
+ 1850.552824, 971.877037
+dist_xy2c: 5.234755 mm
+phi:  119.8744 deg
+(th, ph): 18.9404, 115.1943
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120119.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120128 taken successfully.
+peak = 83995.20801267859 brightness appears out of expected range
+peak = 81829.1438540678 brightness appears out of expected range
+peak = 80166.09459692697 brightness appears out of expected range
+peak = 74592.66517572563 brightness appears out of expected range
+peak = 72115.14957946195 brightness appears out of expected range
+here
+		x,y:
+ -3.508586, 3.228961 
+ 1876.310604, 984.092580
+dist_xy2c: 4.768266 mm
+phi:  104.0578 deg
+(th, ph): 16.3341, 100.5101
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120128.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120137 taken successfully.
+peak = 83919.61436378238 brightness appears out of expected range
+peak = 81862.30786875058 brightness appears out of expected range
+peak = 79937.40154913264 brightness appears out of expected range
+peak = 74536.78724470692 brightness appears out of expected range
+peak = 71904.812021521 brightness appears out of expected range
+here
+		x,y:
+ -2.504474, 3.339711 
+ 1904.997899, 987.362066
+dist_xy2c: 4.174454 mm
+phi:  87.2774 deg
+(th, ph): 14.3791, 84.5804
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120137.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120145 taken successfully.
+peak = 83995.34949644134 brightness appears out of expected range
+peak = 81801.39060694707 brightness appears out of expected range
+peak = 80406.05623909467 brightness appears out of expected range
+peak = 74509.50093778045 brightness appears out of expected range
+peak = 72038.35140426697 brightness appears out of expected range
+here
+		x,y:
+ -1.526289, 3.117582 
+ 1932.903752, 981.177287
+dist_xy2c: 3.471150 mm
+phi:  70.0317 deg
+(th, ph): 12.7380, 67.9885
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120145.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120154 taken successfully.
+peak = 84082.49140780512 brightness appears out of expected range
+peak = 81818.16232297069 brightness appears out of expected range
+peak = 79842.13267788474 brightness appears out of expected range
+peak = 74508.88652972659 brightness appears out of expected range
+peak = 72183.96897531109 brightness appears out of expected range
+here
+		x,y:
+ -0.663801, 2.594832 
+ 1957.194108, 966.306658
+dist_xy2c: 2.678392 mm
+phi:  52.5478 deg
+(th, ph): 10.8284, 51.0266
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120154.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120203 taken successfully.
+peak = 84241.41436167277 brightness appears out of expected range
+peak = 81791.80291776228 brightness appears out of expected range
+peak = 79014.90395385522 brightness appears out of expected range
+peak = 74700.7866310281 brightness appears out of expected range
+peak = 72149.92567500111 brightness appears out of expected range
+here
+		x,y:
+ -0.019862, 1.815106 
+ 1975.447382, 944.235550
+dist_xy2c: 1.815214 mm
+phi:  34.8952 deg
+(th, ph): 8.3451, 33.7795
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120203.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120212 taken successfully.
+peak = 84067.71596454992 brightness appears out of expected range
+peak = 81849.7332154932 brightness appears out of expected range
+peak = 77552.94370178062 brightness appears out of expected range
+peak = 74502.9323709928 brightness appears out of expected range
+peak = 72150.96637040956 brightness appears out of expected range
+here
+		x,y:
+ 0.328667, 0.870815 
+ 1985.464693, 917.563578
+dist_xy2c: 0.930775 mm
+phi:  17.6172 deg
+(th, ph): 350.3508, 16.7036
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120212.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120221 taken successfully.
+peak = 83983.42808244101 brightness appears out of expected range
+peak = 81780.58830684383 brightness appears out of expected range
+peak = 77725.46395192634 brightness appears out of expected range
+peak = 74561.57509901404 brightness appears out of expected range
+peak = 72037.03437733425 brightness appears out of expected range
+here
+		x,y:
+ 0.338826, 0.875019 
+ 1985.478742, 917.556170
+dist_xy2c: 0.938329 mm
+phi:  17.7680 deg
+(th, ph): 350.0580, 16.8498
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120221.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-120230 taken successfully.
+peak = 84125.50820585624 brightness appears out of expected range
+peak = 81790.92995065624 brightness appears out of expected range
+peak = 78083.6694577549 brightness appears out of expected range
+peak = 74595.96368724691 brightness appears out of expected range
+peak = 71979.10369655966 brightness appears out of expected range
+here
+		x,y:
+ 0.016886, 1.748182 
+ 1976.528914, 942.359934
+dist_xy2c: 1.748264 mm
+phi:  33.5608 deg
+(th, ph): 8.1209, 32.4754
+/home/msdos/DESI-QA/sbigpics/arc15_120-20230630-114505/20230630-120230.fits deleted successfully

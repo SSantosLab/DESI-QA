@@ -24,6 +24,7 @@ from spotfinder import spotfinder
 import xylib as xylib
 import test_spotfinder as ts
 import tslib as tslib
+from astropy.io import fits
 
 
 # I/O Session: 
@@ -524,22 +525,23 @@ if __name__=='__main__':
                 #       - the spot was detected
                 #       - next move is not passing physical limits
                 get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
+                ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+
+                # Case to catch software error that produces a blank image
+                while (np.unique(ff)==[0]).all():
+                    print("Software error, taking image again")
+                    os.remove(picpath+'/'+mvlabel+'.fits')
+                    print(picpath+'/'+mvlabel+'.fits deleted successfully')
+                    
+                    get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
+                    ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+
+
                 centroidall = ts.get_spot(f"{mvlabel}.fits", 
                                         f"sbigpics/{session_label}", 
                                         expected_spot_count=5,
                                         verbose=False)
-                centroids = ts.get_spotpos("4852", centroidall, reg=reg)
-
-                while len(centroids)!=5: # This is to catch any instances where the camera takes a flat image
-                    # repeat get_pic and retrieving centroids
-                    print("No centroids found, taking another image")
-                    get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
-                    centroidall = ts.get_spot(f"{mvlabel}.fits", 
-                                            f"sbigpics/{session_label}", 
-                                            expected_spot_count=5,
-                                            verbose=False)
-                    centroids = ts.get_spotpos("4852", centroidall, reg=reg)                    
-
+                centroids = ts.get_spotpos("4852", centroidall, reg=reg)                  
                 
                 fidmask = ts.select_fidregion(centroidall)
                 xfid, yfid = ts.get_xyfid(centroidall, fidmask)
@@ -559,7 +561,9 @@ if __name__=='__main__':
                         xytgt=0, dbname=dbname)
 
                 # Add a condition here to delete the .fits file
-
+                if (not session_label.startswith('curreposition')):
+                    os.remove(picpath+'/'+mvlabel+'.fits')
+                    print(picpath+'/'+mvlabel+'.fits deleted successfully')
 
                 # placeholder: _last_position = []
                 # sanity_check_for_phys_lim(_last_position, next_pos, arccenter_posid, returns:sys_status)

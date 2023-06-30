@@ -1,0 +1,740 @@
+----------------
+['positioners', 'cam']
+PhiBacklashTest-20230629-155628
+!! Number of Cycle(s): 10
+
+---------------------------------------------------------------------- 
+	# movetables/PhiBacklashTest.txt
+ ----------------------------------------------------------------------
+Successfully connected to CEM120
+Altitude Limit set to -89 degrees
+Slew rate set to MAX (960x)
+SSH started
+Connection started
+Code 20: device already closed.
+Code 20: driver already closed.
+{'camerasFound': 1,
+ 'updated': True,
+ 'usbInfo': [{'cameraFound': True,
+              'cameraType': 'STF',
+              'deviceType': 'USB1',
+              'name': 'SBIG STF-8300 CCD Camera',
+              'serialNumber': '83F011779'}]}
+----------------------------------------
+session imgs in:  /home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230629-155628
+>> Repeating cycle 10 times
+ Loop positioner size: 360
+
+>>  Mount move #0: ['90', '90']
+
+starting positioners loop for MOUNT in ['90', '90']
+Slewing to home position...
+Mount stopped at home position
+home at (225.62, 90.0) deg
+Moving to specified angle...
+All movement stopped
+Moving to specified angle...
+All movement stopped
+Sucessful reply from PB
+Photo #20230629-155815 taken successfully.
+peak = 82905.2947865523 brightness appears out of expected range
+peak = 82440.34104587187 brightness appears out of expected range
+peak = 80074.46530605362 brightness appears out of expected range
+peak = 75700.40817955128 brightness appears out of expected range
+peak = 73481.7584008255 brightness appears out of expected range
+here
+		x,y:
+ 0.379116, 1.118576 
+ 1983.131988, 922.829787
+dist_xy2c: 1.181076 mm
+phi:  22.4670 deg
+(th, ph): 357.9643, 21.5269
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230629-155628/20230629-155815.fits deleted successfully
+Sucessful reply from PB
+Photo #20230629-155824 taken successfully.
+peak = 82947.75129915036 brightness appears out of expected range
+peak = 82260.2350303882 brightness appears out of expected range
+peak = 79051.10050091016 brightness appears out of expected range
+peak = 75244.32501784698 brightness appears out of expected range
+peak = 72085.87242058878 brightness appears out of expected range
+here
+		x,y:
+ 0.432841, 0.736712 
+ 1985.254195, 912.313273
+dist_xy2c: 0.854456 mm
+phi:  16.1576 deg
+(th, ph): 338.4762, 15.2238
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230629-155628/20230629-155824.fits deleted successfully
+Sucessful reply from PB
+Photo #20230629-155833 taken successfully.
+peak = 82969.57532454577 brightness appears out of expected range
+peak = 82195.36037767788 brightness appears out of expected range
+peak = 79789.1927158995 brightness appears out of expected range
+peak = 75483.82521239748 brightness appears out of expected range
+peak = 72417.26137460294 brightness appears out of expected range
+here
+		x,y:
+ 0.409157, 0.968653 
+ 1984.134253, 918.662923
+dist_xy2c: 1.051522 mm
+phi:  19.9484 deg
+(th, ph): 351.0565, 19.0340
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230629-155628/20230629-155833.fits deleted successfully
+Sucessful reply from PB
+Photo #20230629-155842 taken successfully.
+peak = 82930.57987333309 brightness appears out of expected range
+peak = 82253.01418920286 brightness appears out of expected range
+peak = 79308.10281207591 brightness appears out of expected range
+peak = 75443.71008668104 brightness appears out of expected range
+peak = 72342.89955666738 brightness appears out of expected range
+here
+		x,y:
+ 0.466305, 0.695505 
+ 1985.498804, 910.826325
+dist_xy2c: 0.837358 mm
+phi:  15.8248 deg
+(th, ph): 334.5614, 14.8912
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230629-155628/20230629-155842.fits deleted successfully
+Sucessful reply from PB
+Photo #20230629-155851 taken successfully.
+peak = 82879.18489930146 brightness appears out of expected range
+peak = 82176.74001627332 brightness appears out of expected range
+peak = 78611.13527018191 brightness appears out of expected range
+peak = 75355.41420215032 brightness appears out of expected range
+peak = 72263.86625530827 brightness appears out of expected range
+here
+		x,y:
+ 0.391735, 1.037242 
+ 1983.731502, 920.643473
+dist_xy2c: 1.108750 mm
+phi:  21.0607 deg
+(th, ph): 354.5156, 20.1358
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230629-155628/20230629-155851.fits deleted successfully
+Sucessful reply from PB
+Photo #20230629-155900 taken successfully.
+peak = 82833.14008107445 brightness appears out of expected range
+peak = 82490.17860437933 brightness appears out of expected range
+peak = 78963.66086996127 brightness appears out of expected range
+peak = 75432.52594416463 brightness appears out of expected range
+peak = 72614.59048835063 brightness appears out of expected range
+here
+		x,y:
+ 0.460330, 0.653947 
+ 1985.648868, 909.797825
+dist_xy2c: 0.799719 mm
+phi:  15.0940 deg
+(th, ph): 332.0809, 14.1572
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230629-155628/20230629-155900.fits deleted successfully
+Sucessful reply from PB
+Photo #20230629-155909 taken successfully.
+peak = 82929.09931137315 brightness appears out of expected range
+peak = 82504.47036827807 brightness appears out of expected range
+peak = 80740.9518825079 brightness appears out of expected range
+peak = 75440.9306518199 brightness appears out of expected range
+peak = 72501.7541985881 brightness appears out of expected range
+here
+		x,y:
+ 0.367507, 1.119203 
+ 1983.109114, 922.989617
+dist_xy2c: 1.177997 mm
+phi:  22.4069 deg
+(th, ph): 358.4478, 21.4677
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230629-155628/20230629-155909.fits deleted successfully
+Sucessful reply from PB
+Photo #20230629-155918 taken successfully.
+peak = 83006.7786320766 brightness appears out of expected range
+peak = 82196.86575268819 brightness appears out of expected range
+peak = 80282.0652114373 brightness appears out of expected range
+peak = 75214.74382243799 brightness appears out of expected range
+peak = 71816.35874524078 brightness appears out of expected range
+here
+		x,y:
+ 0.454218, 0.549881 
+ 1985.885032, 907.042734
+dist_xy2c: 0.713220 mm
+phi:  13.4434 deg
+(th, ph): 324.6132, 12.4589
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230629-155628/20230629-155918.fits deleted successfully
+Sucessful reply from PB
+Photo #20230629-155927 taken successfully.
+peak = 82872.87147446869 brightness appears out of expected range
+peak = 82287.62054366588 brightness appears out of expected range
+peak = 80010.83709166673 brightness appears out of expected range
+peak = 75505.99154723725 brightness appears out of expected range
+peak = 72629.1717263804 brightness appears out of expected range
+here
+		x,y:
+ 0.331633, 1.228377 
+ 1982.152131, 926.102739
+dist_xy2c: 1.272356 mm
+phi:  24.2307 deg
+(th, ph): 1.2186, 23.2822
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230629-155628/20230629-155927.fits deleted successfully
+Sucessful reply from PB
+Photo #20230629-155935 taken successfully.
+peak = 82879.9870897865 brightness appears out of expected range
+peak = 82309.19620363563 brightness appears out of expected range
+peak = 80120.57409486666 brightness appears out of expected range
+peak = 75428.10946638149 brightness appears out of expected range
+peak = 72310.16011446794 brightness appears out of expected range
+here
+		x,y:
+ 0.465519, 0.518454 
+ 1985.965782, 906.045169
+dist_xy2c: 0.696780 mm
+phi:  13.1192 deg
+(th, ph): 321.6036, 12.1338
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230629-155628/20230629-155935.fits deleted successfully
+----------------
+['positioners', 'cam']
+PhiBacklashTest-20230630-092803
+!! Number of Cycle(s): 10
+
+---------------------------------------------------------------------- 
+	# movetables/PhiBacklashTest.txt
+ ----------------------------------------------------------------------
+Successfully connected to CEM120
+Altitude Limit set to -89 degrees
+Slew rate set to MAX (960x)
+SSH started
+Connection started
+Code 20: device already closed.
+Code 20: driver already closed.
+{'camerasFound': 1,
+ 'updated': True,
+ 'usbInfo': [{'cameraFound': True,
+              'cameraType': 'STF',
+              'deviceType': 'USB1',
+              'name': 'SBIG STF-8300 CCD Camera',
+              'serialNumber': '83F011779'}]}
+----------------------------------------
+session imgs in:  /home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803
+Mount table not found! Using home
+>> Repeating cycle 10 times
+ Loop positioner size: 370
+
+>>  Mount move #0: (0, 0)
+
+starting positioners loop for MOUNT in (0, 0)
+Slewing to home position...
+Mount stopped at home position
+home at (129.24, 90.0) deg
+Sucessful reply from PB
+Photo #20230630-092807 taken successfully.
+peak = 83331.61428140682 brightness appears out of expected range
+peak = 82746.54007404242 brightness appears out of expected range
+peak = 77307.10816221178 brightness appears out of expected range
+peak = 73929.48518996562 brightness appears out of expected range
+peak = 69888.42455059238 brightness appears out of expected range
+here
+		x,y:
+ 0.037355, -0.303618 
+ 1975.164183, 883.386580
+dist_xy2c: 0.305908 mm
+phi:  5.5572 deg
+(th, ph): 154.8944, 3.5392
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092807.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-092815 taken successfully.
+peak = 83289.10302289229 brightness appears out of expected range
+peak = 82617.57419000137 brightness appears out of expected range
+peak = 78628.40003077213 brightness appears out of expected range
+peak = 73946.45589142143 brightness appears out of expected range
+peak = 70153.43631625157 brightness appears out of expected range
+here
+		x,y:
+ 0.209493, 0.316995 
+ 1980.253023, 901.043698
+dist_xy2c: 0.379964 mm
+phi:  7.0217 deg
+(th, ph): 307.7794, 5.4709
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092815.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-092824 taken successfully.
+peak = 83286.78768306535 brightness appears out of expected range
+peak = 82751.64195328417 brightness appears out of expected range
+peak = 76828.16205763283 brightness appears out of expected range
+peak = 73930.57591299007 brightness appears out of expected range
+peak = 69852.34088664646 brightness appears out of expected range
+here
+		x,y:
+ 0.029285, -0.305761 
+ 1975.211034, 883.449040
+dist_xy2c: 0.307160 mm
+phi:  5.5572 deg
+(th, ph): 153.6608, 3.5761
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092824.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-092833 taken successfully.
+peak = 83320.49039102125 brightness appears out of expected range
+peak = 82750.06921912786 brightness appears out of expected range
+peak = 78039.25484556104 brightness appears out of expected range
+peak = 73898.17973654014 brightness appears out of expected range
+peak = 70198.48743698308 brightness appears out of expected range
+here
+		x,y:
+ 0.254778, 0.849544 
+ 1981.533378, 916.111073
+dist_xy2c: 0.886926 mm
+phi:  16.7840 deg
+(th, ph): 353.1487, 15.8543
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092833.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-092842 taken successfully.
+peak = 83313.24095088373 brightness appears out of expected range
+peak = 82679.68613534575 brightness appears out of expected range
+peak = 76852.92828459227 brightness appears out of expected range
+peak = 74003.33492854435 brightness appears out of expected range
+peak = 69721.80830022972 brightness appears out of expected range
+here
+		x,y:
+ 0.032519, -0.304242 
+ 1975.212935, 883.451929
+dist_xy2c: 0.305975 mm
+phi:  5.5572 deg
+(th, ph): 153.9981, 3.5412
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092842.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-092851 taken successfully.
+peak = 83355.45582455776 brightness appears out of expected range
+peak = 82707.8518133914 brightness appears out of expected range
+peak = 78663.11242459957 brightness appears out of expected range
+peak = 73865.62845129253 brightness appears out of expected range
+peak = 69999.3222534597 brightness appears out of expected range
+here
+		x,y:
+ 0.218359, 1.381921 
+ 1980.178388, 931.021368
+dist_xy2c: 1.399066 mm
+phi:  26.6964 deg
+(th, ph): 5.1152, 25.7205
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092851.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-092900 taken successfully.
+peak = 83297.99604225291 brightness appears out of expected range
+peak = 82745.481439689 brightness appears out of expected range
+peak = 76912.50767321602 brightness appears out of expected range
+peak = 73849.23221689127 brightness appears out of expected range
+peak = 69943.41467177725 brightness appears out of expected range
+here
+		x,y:
+ 0.032152, -0.305303 
+ 1975.196134, 883.419041
+dist_xy2c: 0.306991 mm
+phi:  5.5572 deg
+(th, ph): 154.1604, 3.5712
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092900.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-092909 taken successfully.
+peak = 83331.19216061107 brightness appears out of expected range
+peak = 82733.94306117459 brightness appears out of expected range
+peak = 76739.62828265366 brightness appears out of expected range
+peak = 73937.21618858652 brightness appears out of expected range
+peak = 69906.43065334663 brightness appears out of expected range
+here
+		x,y:
+ 0.078713, 1.892649 
+ 1976.235163, 945.472811
+dist_xy2c: 1.894285 mm
+phi:  36.4669 deg
+(th, ph): 4.2318, 35.3244
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092909.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-092918 taken successfully.
+peak = 83335.877887696 brightness appears out of expected range
+peak = 82752.7235944887 brightness appears out of expected range
+peak = 76942.4485221035 brightness appears out of expected range
+peak = 74115.43793164445 brightness appears out of expected range
+peak = 69891.84699172774 brightness appears out of expected range
+here
+		x,y:
+ 0.044096, -0.299745 
+ 1975.212268, 883.432366
+dist_xy2c: 0.302971 mm
+phi:  5.4977 deg
+(th, ph): 155.5061, 3.4516
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092918.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-092927 taken successfully.
+peak = 83318.95905885557 brightness appears out of expected range
+peak = 82648.45074117975 brightness appears out of expected range
+peak = 78388.40267036264 brightness appears out of expected range
+peak = 73809.87241434344 brightness appears out of expected range
+peak = 70274.30459858404 brightness appears out of expected range
+here
+		x,y:
+ -0.156471, 2.374115 
+ 1969.813518, 959.205808
+dist_xy2c: 2.379266 mm
+phi:  46.2986 deg
+(th, ph): 3.9987, 44.9409
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092927.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-092935 taken successfully.
+peak = 83309.13523017065 brightness appears out of expected range
+peak = 82490.15753141497 brightness appears out of expected range
+peak = 76790.4040067792 brightness appears out of expected range
+peak = 73972.59429944505 brightness appears out of expected range
+peak = 69913.97313413996 brightness appears out of expected range
+here
+		x,y:
+ 0.037825, -0.302862 
+ 1975.197739, 883.417033
+dist_xy2c: 0.305215 mm
+phi:  5.5572 deg
+(th, ph): 154.8263, 3.5186
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092935.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-092944 taken successfully.
+peak = 83291.70131772301 brightness appears out of expected range
+peak = 82767.14966883538 brightness appears out of expected range
+peak = 78073.8857834577 brightness appears out of expected range
+peak = 73754.53419341375 brightness appears out of expected range
+peak = 70050.86033180877 brightness appears out of expected range
+here
+		x,y:
+ -0.456088, 2.813750 
+ 1961.094577, 971.524261
+dist_xy2c: 2.850474 mm
+phi:  56.2135 deg
+(th, ph): 3.5562, 54.5947
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092944.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-092954 taken successfully.
+Edge hot spot
+peak = 83340.94374567419 brightness appears out of expected range
+peak = 82814.84799121808 brightness appears out of expected range
+peak = 77454.8138243386 brightness appears out of expected range
+peak = 73911.00602113889 brightness appears out of expected range
+peak = 69921.11390967484 brightness appears out of expected range
+here
+		x,y:
+ 0.036263, -0.304186 
+ 1975.176783, 883.389957
+dist_xy2c: 0.306340 mm
+phi:  5.5572 deg
+(th, ph): 154.7862, 3.5520
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-092954.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093002 taken successfully.
+peak = 83260.22750911694 brightness appears out of expected range
+peak = 82777.91804863715 brightness appears out of expected range
+peak = 78125.9044734848 brightness appears out of expected range
+peak = 73982.04679888237 brightness appears out of expected range
+peak = 70000.18673754497 brightness appears out of expected range
+here
+		x,y:
+ -0.835270, 3.194402 
+ 1950.246365, 982.231317
+dist_xy2c: 3.301800 mm
+phi:  66.1527 deg
+(th, ph): 3.4223, 64.2406
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093002.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093012 taken successfully.
+peak = 83265.23276622937 brightness appears out of expected range
+peak = 82735.2512145616 brightness appears out of expected range
+peak = 77259.58322417852 brightness appears out of expected range
+peak = 74015.99013816765 brightness appears out of expected range
+peak = 70107.0571411279 brightness appears out of expected range
+here
+		x,y:
+ 0.038568, -0.302905 
+ 1975.194127, 883.404803
+dist_xy2c: 0.305350 mm
+phi:  5.5572 deg
+(th, ph): 154.9976, 3.5227
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093012.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093020 taken successfully.
+peak = 83317.87468784113 brightness appears out of expected range
+peak = 82621.02863457683 brightness appears out of expected range
+peak = 78360.59472456043 brightness appears out of expected range
+peak = 74011.24820718651 brightness appears out of expected range
+peak = 70062.34353298835 brightness appears out of expected range
+here
+		x,y:
+ -1.282955, 3.495189 
+ 1937.846996, 990.874937
+dist_xy2c: 3.723214 mm
+phi:  75.9718 deg
+(th, ph): 3.6126, 73.7250
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093020.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093029 taken successfully.
+peak = 83305.57220775679 brightness appears out of expected range
+peak = 82721.29488501814 brightness appears out of expected range
+peak = 77181.3577604577 brightness appears out of expected range
+peak = 73903.02083561786 brightness appears out of expected range
+peak = 69840.28756528028 brightness appears out of expected range
+here
+		x,y:
+ 0.042686, -0.301952 
+ 1975.191688, 883.378573
+dist_xy2c: 0.304954 mm
+phi:  5.5572 deg
+(th, ph): 155.6883, 3.5109
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093029.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093038 taken successfully.
+peak = 83337.06068898673 brightness appears out of expected range
+peak = 82731.86160525131 brightness appears out of expected range
+peak = 78425.0617315611 brightness appears out of expected range
+peak = 73809.7639562191 brightness appears out of expected range
+peak = 70018.40475317703 brightness appears out of expected range
+here
+		x,y:
+ -1.764268, 3.718925 
+ 1924.140276, 997.158088
+dist_xy2c: 4.116193 mm
+phi:  85.7620 deg
+(th, ph): 3.6805, 83.1292
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093038.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093047 taken successfully.
+peak = 83356.30046792686 brightness appears out of expected range
+peak = 82765.39467371127 brightness appears out of expected range
+peak = 77362.04981130754 brightness appears out of expected range
+peak = 74019.39842856664 brightness appears out of expected range
+peak = 69837.25850530589 brightness appears out of expected range
+here
+		x,y:
+ 0.045043, -0.300698 
+ 1975.183168, 883.380413
+dist_xy2c: 0.304053 mm
+phi:  5.4977 deg
+(th, ph): 155.9332, 3.4840
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093047.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093056 taken successfully.
+peak = 83351.50207854269 brightness appears out of expected range
+peak = 82610.06208873983 brightness appears out of expected range
+peak = 78515.88073205807 brightness appears out of expected range
+peak = 73995.00580066539 brightness appears out of expected range
+peak = 69822.95839061498 brightness appears out of expected range
+here
+		x,y:
+ -2.272766, 3.856489 
+ 1909.654442, 1000.997031
+dist_xy2c: 4.476379 mm
+phi:  95.4686 deg
+(th, ph): 3.8104, 92.3914
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093056.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093105 taken successfully.
+Edge hot spot
+peak = 83303.98630792627 brightness appears out of expected range
+peak = 82729.57732450584 brightness appears out of expected range
+peak = 77273.06903456405 brightness appears out of expected range
+peak = 73968.85217053282 brightness appears out of expected range
+peak = 70076.16369467835 brightness appears out of expected range
+here
+		x,y:
+ 0.043096, -0.301469 
+ 1975.175251, 883.379694
+dist_xy2c: 0.304534 mm
+phi:  5.4977 deg
+(th, ph): 155.6714, 3.4984
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093105.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093114 taken successfully.
+peak = 83343.80439736477 brightness appears out of expected range
+peak = 82689.23872441678 brightness appears out of expected range
+peak = 78388.10934724193 brightness appears out of expected range
+peak = 73921.21907884437 brightness appears out of expected range
+peak = 69908.11838433066 brightness appears out of expected range
+here
+		x,y:
+ -2.825078, 3.897596 
+ 1894.195005, 1002.246902
+dist_xy2c: 4.813763 mm
+phi:  105.4680 deg
+(th, ph): 4.1866, 101.8375
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093114.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093123 taken successfully.
+peak = 83262.96637255843 brightness appears out of expected range
+peak = 82652.76385520727 brightness appears out of expected range
+peak = 76821.12078197811 brightness appears out of expected range
+peak = 73938.1782844675 brightness appears out of expected range
+peak = 69838.98996689443 brightness appears out of expected range
+here
+		x,y:
+ 0.037417, -0.302412 
+ 1975.214130, 883.442270
+dist_xy2c: 0.304718 mm
+phi:  5.4977 deg
+(th, ph): 154.6356, 3.5038
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093123.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093132 taken successfully.
+peak = 83323.89289962477 brightness appears out of expected range
+peak = 82539.71247301131 brightness appears out of expected range
+peak = 79043.8712795776 brightness appears out of expected range
+peak = 74050.14364260426 brightness appears out of expected range
+peak = 70080.72023314482 brightness appears out of expected range
+here
+		x,y:
+ -3.353936, 3.851374 
+ 1879.105630, 1000.871300
+dist_xy2c: 5.107051 mm
+phi:  115.2013 deg
+(th, ph): 4.4949, 110.9059
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093132.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093142 taken successfully.
+peak = 83367.20163552715 brightness appears out of expected range
+peak = 82554.85625300475 brightness appears out of expected range
+peak = 76779.89167722163 brightness appears out of expected range
+peak = 74079.41900809831 brightness appears out of expected range
+peak = 69771.45735936415 brightness appears out of expected range
+here
+		x,y:
+ 0.049899, -0.297216 
+ 1975.227842, 883.437450
+dist_xy2c: 0.301376 mm
+phi:  5.4376 deg
+(th, ph): 156.2532, 3.4034
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093142.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093150 taken successfully.
+peak = 83366.37882681147 brightness appears out of expected range
+peak = 82764.03443213787 brightness appears out of expected range
+peak = 78604.80736374682 brightness appears out of expected range
+peak = 74121.3373380517 brightness appears out of expected range
+peak = 69895.48151689017 brightness appears out of expected range
+here
+		x,y:
+ -3.869737, 3.710114 
+ 1864.561818, 996.900673
+dist_xy2c: 5.360953 mm
+phi:  124.8339 deg
+(th, ph): 5.0180, 119.6964
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093150.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093159 taken successfully.
+peak = 83308.4349834903 brightness appears out of expected range
+peak = 82493.47854836182 brightness appears out of expected range
+peak = 76873.18470890704 brightness appears out of expected range
+peak = 74053.29354573275 brightness appears out of expected range
+peak = 70283.0682174908 brightness appears out of expected range
+here
+		x,y:
+ 0.044248, -0.299797 
+ 1975.215352, 883.430368
+dist_xy2c: 0.303044 mm
+phi:  5.4977 deg
+(th, ph): 155.5519, 3.4538
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093159.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093208 taken successfully.
+peak = 83376.9613166727 brightness appears out of expected range
+peak = 82582.40238130558 brightness appears out of expected range
+peak = 78591.552984568 brightness appears out of expected range
+peak = 73955.1946210741 brightness appears out of expected range
+peak = 70125.05592224457 brightness appears out of expected range
+here
+		x,y:
+ -4.347022, 3.484092 
+ 1850.903551, 990.423081
+dist_xy2c: 5.570951 mm
+phi:  134.1628 deg
+(th, ph): 5.7642, 127.9585
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093208.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093217 taken successfully.
+peak = 83358.98197033808 brightness appears out of expected range
+peak = 82742.3426999875 brightness appears out of expected range
+peak = 76772.6366915797 brightness appears out of expected range
+peak = 74007.35933287625 brightness appears out of expected range
+peak = 69817.03418238128 brightness appears out of expected range
+here
+		x,y:
+ 0.050584, -0.296937 
+ 1975.212697, 883.429921
+dist_xy2c: 0.301214 mm
+phi:  5.4376 deg
+(th, ph): 156.3482, 3.3985
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093217.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093225 taken successfully.
+peak = 83323.90197219378 brightness appears out of expected range
+peak = 82481.6759710894 brightness appears out of expected range
+peak = 79591.90511144554 brightness appears out of expected range
+peak = 73936.93746848532 brightness appears out of expected range
+peak = 70085.48944800373 brightness appears out of expected range
+here
+		x,y:
+ -4.783760, 3.178508 
+ 1838.593538, 981.802508
+dist_xy2c: 5.743455 mm
+phi:  143.4656 deg
+(th, ph): 6.7752, 135.7949
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093225.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093234 taken successfully.
+peak = 83337.48025697886 brightness appears out of expected range
+peak = 82781.17598297932 brightness appears out of expected range
+peak = 76704.65692342255 brightness appears out of expected range
+peak = 73950.50379576819 brightness appears out of expected range
+peak = 70134.99772185671 brightness appears out of expected range
+here
+		x,y:
+ 0.049305, -0.297553 
+ 1975.205137, 883.425286
+dist_xy2c: 0.301610 mm
+phi:  5.4376 deg
+(th, ph): 156.1927, 3.4105
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093234.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093243 taken successfully.
+peak = 83347.99853628916 brightness appears out of expected range
+peak = 82550.45156802966 brightness appears out of expected range
+peak = 79971.40230117342 brightness appears out of expected range
+peak = 74017.4756606815 brightness appears out of expected range
+peak = 69905.87233572894 brightness appears out of expected range
+here
+		x,y:
+ -5.152604, 2.805226 
+ 1827.976299, 971.145708
+dist_xy2c: 5.866738 mm
+phi:  151.8481 deg
+(th, ph): 8.4041, 142.3234
+/home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-092803/20230630-093243.fits deleted successfully
+Sucessful reply from PB
+Photo #20230630-093252 taken successfully.
+here
+----------------
+['positioners', 'cam']
+PhiBacklashTest-20230630-095329
+!! Number of Cycle(s): 10
+
+---------------------------------------------------------------------- 
+	# movetables/PhiBacklashTest.txt
+ ----------------------------------------------------------------------
+Successfully connected to CEM120
+Altitude Limit set to -89 degrees
+Slew rate set to MAX (960x)
+SSH started
+Connection started
+Code 20: device already closed.
+Code 20: driver already closed.
+{'camerasFound': 1,
+ 'updated': True,
+ 'usbInfo': [{'cameraFound': True,
+              'cameraType': 'STF',
+              'deviceType': 'USB1',
+              'name': 'SBIG STF-8300 CCD Camera',
+              'serialNumber': '83F011779'}]}
+----------------------------------------
+session imgs in:  /home/msdos/DESI-QA/sbigpics/PhiBacklashTest-20230630-095329
+Mount table not found! Using home
+>> Repeating cycle 10 times
+ Loop positioner size: 370
+
+>>  Mount move #0: (0, 0)
+
+starting positioners loop for MOUNT in (0, 0)
+Slewing to home position...
+Mount stopped at home position
+home at (135.61, 90.0) deg
