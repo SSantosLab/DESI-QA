@@ -287,7 +287,7 @@ def getAlphas(df,backlash = 1.9,ramp=1.995):
 
     for k in range(max(df['ArcSession'])+1):
         arcs = df.loc[df['ArcSession']==k].reset_index(drop=True)
-        xc2_pix,yc2_pix = arcs['xc2 pix'].loc[0],arcs['yc2 pix'].loc[0]
+        xc2_pix,yc2_pix = arcs['xc2pix'].loc[0],arcs['yc2pix'].loc[0]
         
         alpha_arr = np.append(alpha_arr , np.nan)
         req_arr = np.append(req_arr , np.nan)
@@ -331,3 +331,112 @@ def getMeans(df,label='Alpha'):
         means = np.append(means, np.mean(maskedDF[label]))
         stds = np.append(stds, np.std(maskedDF[label],ddof=1))
     return session_means,session_stds,means,stds
+
+def toNumpy(series):
+    '''
+    function to return series in np.datetime64 format
+    series is the df['move'] pandas series
+    '''
+    years = series.str[:4].to_numpy(dtype=int)
+    months = series.str[4:6].to_numpy(dtype=int)
+    days = series.str[6:8].to_numpy(dtype=int)
+    hours = series.str[9:11].to_numpy(dtype=int)
+    minutes = series.str[11:13].to_numpy(dtype=int)
+    seconds = series.str[13:15].to_numpy(dtype=int)
+
+    time=np.array([],dtype=np.datetime64)
+
+    for j in range(len(years)):
+        time = np.append(time,pd.Timestamp(year=years[j], month=months[j], day=days[j], hour=hours[j],minute=minutes[j],second=seconds[j]))
+    return pd.Series(time)
+
+def importToDf(datapath,fidpath,testStart,testFinish):
+    
+    '''
+    Function to take path to database and fiducial database, and returned dataframe of combined data
+    '''
+    
+    # Importing different databases
+    db = pd.read_csv(datapath)
+    get_timecol(db)
+
+    fiddb = pd.read_csv(fidpath)
+    get_timecol(fiddb)
+
+    # Because query_time uses label (not mvlabel or move), if initial selection is OK, then you can
+    # join using db.insert(len(db.columns))
+    mask1 = query_time(db, datemin=testStart,datemax=testFinish)
+    mask2 = query_time(fiddb, datemin=testStart,datemax=testFinish)
+
+    # Creating masks
+    df = db[mask1].reset_index(drop=True)
+    fiddf = fiddb[mask2].reset_index(drop=True)
+
+    del db, fiddb
+
+    # Inserting pix2mm and sigpix2mm
+    if aligned(df,'move',fiddf,'mvlabel'):
+        df.insert(len(df.columns),"fidx0",fiddf['x0'])
+        df.insert(len(df.columns),"fidy0",fiddf['y0'])
+        df.insert(len(df.columns),"fidx1",fiddf['x1'])
+        df.insert(len(df.columns),"fidy1",fiddf['y1'])
+        df.insert(len(df.columns),"fidx2",fiddf['x2'])
+        df.insert(len(df.columns),"fidy2",fiddf['y2'])
+        df.insert(len(df.columns),"fidx3",fiddf['x3'])
+        df.insert(len(df.columns),"fidy3",fiddf['y3'])
+        df.insert(len(df.columns),"pix2mm",fiddf['pix2mm'])
+        df.insert(len(df.columns),"sigpix2mm",fiddf['sigpix2mm'])
+        del fiddf
+    else:
+        print("Movelabels are not aligned - inspect your movelabels and try again")
+        return -1
+
+    # Find sessions for each arcsequence
+    sessions = getSessions(df)
+
+    # Make an arcnum session column and add it to the df
+    sessionLabels = makeSessionLabels(sessions)
+
+    # Add session labels to the df
+    df.insert(len(df.columns),'ArcSession',sessionLabels)
+
+    #Find centers for each arcsequence
+    xc2_arr,yc2_arr,R2_arr,xc2_pix_arr,yc2_pix_arr = phi_centers(df,sessions)
+
+    # Store centers in df
+    df.insert(len(df.columns),'xc2mm',xc2_arr)
+    df.insert(len(df.columns),'yc2mm',yc2_arr)
+    df.insert(len(df.columns),'R2mm',R2_arr)
+    df.insert(len(df.columns),'xc2pix',xc2_pix_arr)
+    df.insert(len(df.columns),'yc2pix',yc2_pix_arr)
+
+    # Change datatype of df['move'] column
+    df['move'] = toNumpy(df['move'])
+
+    # Calculate x and y positions in mm
+    x_mm = df['xpix']*df['pix2mm']
+    y_mm = df['ypix']*df['pix2mm']
+
+    # Insert x and y positions to df
+    df.insert(12,'x_mm',x_mm)
+    df.insert(13,'y_mm',y_mm)
+
+    # Insert mount config into df in string form
+    df.insert(len(df.columns),'MountConfiguration',set_MountConfig_String(df))
+
+    # Compute alpha individually
+    alpha_arr, req_arr, obs_arr = getAlphas(df)
+
+    # Insert alpha to df
+    df.insert(len(df.columns),'Alpha',alpha_arr)
+    df.insert(len(df.columns),'RequestedMove',req_arr)
+    df.insert(len(df.columns),'ObservedMove',obs_arr)
+
+    # Compute mean and std of alpha of each session
+    mean_alpha_session,std_alpha_session, mean_alpha, std_alpha= getMeans(df)
+
+    # Insert alpha session mean and std to df
+    df.insert(len(df.columns),'MeanAlpha',mean_alpha_session)
+    df.insert(len(df.columns),'StdAlpha',std_alpha_session)
+    
+    return df
