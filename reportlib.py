@@ -144,6 +144,18 @@ def angle_between(c, p1, p2):
     angle = np.arccos(cosine_angle)
     return np.degrees(angle)
 
+def angle_between_extended(c, p1, p2):
+    # p1, p2 are points; c is center
+    # To be used for angles greater than 180 degrees. If less than, you can use either this function or angle_between
+    a = np.array(p1)
+    b = np.array(c)
+    c = np.array(p2)
+    ba = a - b
+    bc = c - b
+    angle = np.degrees(np.arctan2(bc[1], bc[0])-np.arctan2(ba[1], ba[0]))
+    if angle<0:
+        angle = angle+360
+    return angle
 
 def get_moveDirection(label,ABS=False):
     '''
@@ -217,14 +229,33 @@ def aligned(df1,df1_label,df2,df2_label):
                 return False
         return True
     
-def getSessions(df):
+def getSessionsArc(df):
     '''
     Function to get indices of single arc sequences
-    Returns session_ranges array, which contains all indices where a new arcsequence session either started or stopped
+    Returns session_ranges array, which contains all indices where a new arcsequence session has started, and the termination of the full sequence (final move)
     '''
     session_ranges = np.array([-1],dtype=int)
     for i in range(len(df)-1):
         if (df.loc[i]['direction']!=df.loc[i+1]['direction']) and (df.loc[i]['direction']=='ccw') and (df.loc[i+1]['direction']=='cw'):
+            session_ranges = np.append(session_ranges,i)
+    session_ranges = np.append(session_ranges,len(df)-1)
+    return session_ranges
+
+def getSessionsBacklash(df,motor):
+    '''
+    Function to get indices of single arc sequences during a backlash sequence
+    Returns session_ranges array, which contains all indices where a new arcsequence session either started or stopped
+    '''
+    if motor=='phi':
+        lims = [0,180]
+    elif motor=='theta':
+        lims = [0,360]
+    else:
+        print("Incorrect motor specifier")
+        return -1
+    session_ranges = np.array([-1],dtype=int)
+    for i in range(len(df)-1):
+        if (df.loc[i]['angle']==lims[1]) and (df.loc[i+1]['angle']==lims[0]):
             session_ranges = np.append(session_ranges,i)
     session_ranges = np.append(session_ranges,len(df)-1)
     return session_ranges
@@ -350,10 +381,25 @@ def toNumpy(series):
         time = np.append(time,pd.Timestamp(year=years[j], month=months[j], day=days[j], hour=hours[j],minute=minutes[j],second=seconds[j]))
     return pd.Series(time)
 
-def importToDf(datapath,fidpath,testStart,testFinish):
+
+def computeBacklash(df,sessions,ramp=1.995):
+    '''
+    Function to compute backlash
+    '''
+    backlash = np.array([],dtype=float) # Initialize array
+
+    for j in range(len(sessions)-1):
+        singleDF = getOneSession(df,j,sessions).reset_index(drop=True)
+        backlash = np.append(backlash,np.nan)
+        for k in range(getDiff(sessions,j)-2):
+            backlash = np.append(backlash,singleDF.loc[k+1]['ObservedMove']-(singleDF.loc[k+1]['angle']+2*ramp))
+    return backlash
+
+def importToDf(datapath,fidpath,testStart,testFinish,testType="arc",motor=None):
     
     '''
     Function to take path to database and fiducial database, and returned dataframe of combined data
+    testype is one of 'arc', or 'backlash'
     '''
     
     # Importing different databases
@@ -391,8 +437,20 @@ def importToDf(datapath,fidpath,testStart,testFinish):
         print("Movelabels are not aligned - inspect your movelabels and try again")
         return -1
 
-    # Find sessions for each arcsequence
-    sessions = getSessions(df)
+    # Add session labels
+    print("Adding session labels for testType="+str(testType))
+        
+    if testType=='arc':
+        # Find sessions for each arcsequence    
+        sessions = getSessionsArc(df)
+
+    elif testType=='backlash' and (motor=='theta' or motor=='phi'):
+        #Find sessions for each arcsequence
+        sessions = getSessionsBacklash(df,motor)
+
+    else:
+        print("Incorrect specifier for testType or motor\n testType must be either \'arc\' or \'backlash\'\n motor must be either \'theta\' or \'phi\'")
+        return -1
 
     # Make an arcnum session column and add it to the df
     sessionLabels = makeSessionLabels(sessions)
@@ -438,5 +496,14 @@ def importToDf(datapath,fidpath,testStart,testFinish):
     # Insert alpha session mean and std to df
     df.insert(len(df.columns),'MeanAlpha',mean_alpha_session)
     df.insert(len(df.columns),'StdAlpha',std_alpha_session)
-    
-    return df
+
+    if testType=='backlash':
+        # Calculate backlash
+        backlash = computeBacklash(df,sessions)
+
+        # Add backlash to df
+        df.insert(len(df.columns),'Backlash',backlash)
+
+        return df
+    else:
+       return df

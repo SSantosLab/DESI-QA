@@ -528,20 +528,28 @@ if __name__=='__main__':
                 ff = fits.getdata(picpath+'/'+mvlabel+".fits")
 
                 # Case to catch software error that produces a blank image
-                while (np.unique(ff)==[0]).all():
-                    print("Software error, taking image again")
-                    os.remove(picpath+'/'+mvlabel+'.fits')
-                    print(picpath+'/'+mvlabel+'.fits deleted successfully')
-                    
-                    get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
-                    ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+                
 
 
                 centroidall = ts.get_spot(f"{mvlabel}.fits", 
                                         f"sbigpics/{session_label}", 
                                         expected_spot_count=5,
                                         verbose=False)
-                centroids = ts.get_spotpos("4852", centroidall, reg=reg)                  
+                centroids = ts.get_spotpos("4852", centroidall, reg=reg)  
+
+                # Conditional statement to catch the times when the camera takes images with little/no data
+                while (len(centroids)!=5) or (np.unique(ff)==[0]).all() or (np.unique(ff)[-10:]<45000).any():
+                    print("Software error, taking image again")
+                    os.remove(picpath+'/'+mvlabel+'.fits')
+                    print(picpath+'/'+mvlabel+'.fits deleted successfully')
+                    
+                    get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun) 
+                    ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+                    centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                        f"sbigpics/{session_label}", 
+                                        expected_spot_count=5,
+                                        verbose=False)
+                    centroids = ts.get_spotpos("4852", centroidall, reg=reg)           
                 
                 fidmask = ts.select_fidregion(centroidall)
                 xfid, yfid = ts.get_xyfid(centroidall, fidmask)
