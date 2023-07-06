@@ -31,7 +31,3 @@ cw cruise phi 150
 ccw cruise phi 150
 cw cruise phi 160
 ccw cruise phi 160
-cw cruise phi 170
-ccw cruise phi 170
-cw cruise phi 180
-ccw cruise phi 180

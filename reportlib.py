@@ -236,7 +236,7 @@ def getSessionsArc(df):
     '''
     session_ranges = np.array([-1],dtype=int)
     for i in range(len(df)-1):
-        if (df.loc[i]['direction']!=df.loc[i+1]['direction']) and (df.loc[i]['direction']=='ccw') and (df.loc[i+1]['direction']=='cw'):
+        if (df.loc[i+1]['angle']==0) and (df.loc[i]['direction']=='ccw') and (df.loc[i+1]['direction']=='cw'):
             session_ranges = np.append(session_ranges,i)
     session_ranges = np.append(session_ranges,len(df)-1)
     return session_ranges
