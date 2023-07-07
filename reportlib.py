@@ -273,20 +273,27 @@ def getDiff(sessions,k):
     return sessions[k+1]-sessions[k]+1
 
 
-def phi_centers(df,sessions):
+def phi_centers(df,sessions,testType):
     '''
     Function to calculate the center of a given arcsequence
     Uses the mean value of the pix2mm values from that session to calculate the center point
     '''
-    xc2_arr,yc2_arr,R2_arr,xc2_pix_arr,yc2_pix_arr,pix2mm_arr = np.array([],dtype=float),np.array([],dtype=float),np.array([],dtype=float),np.array([],dtype=float),np.array([],dtype=float),np.array([],dtype=float)
-    for j in range(len(sessions)-1):
-        singleDF = getOneSession(df,j,sessions)
-        xc2, yc2, R2 = [i*singleDF['pix2mm'].mean() for i in fc.get_circle(singleDF)]
-        for k in range(getDiff(sessions,j)-1):
-            pix2mm_arr = np.append(pix2mm_arr,singleDF['pix2mm'].mean())
-            pix2mm = pix2mm_arr[-1] # FAO
-            xc2_arr,yc2_arr,R2_arr = np.append(xc2_arr ,xc2), np.append(yc2_arr ,yc2), np.append(R2_arr ,R2)
-            xc2_pix_arr, yc2_pix_arr = np.append(xc2_pix_arr, xc2/pix2mm), np.append(yc2_pix_arr, yc2/pix2mm)
+    if testType=="RS":
+        xc2, yc2, R2 = [i*df['pix2mm'].mean() for i in fc.get_circle(df)]
+        pix2mm = df['pix2mm'].mean()
+        length = len(df)
+        xc2_arr,yc2_arr,R2_arr = np.repeat(xc2, length), np.repeat(yc2, length), np.repeat(R2, length)
+        xc2_pix_arr, yc2_pix_arr = np.repeat(xc2/pix2mm, length), np.repeat(yc2/pix2mm, length)
+    else:
+        xc2_arr,yc2_arr,R2_arr,xc2_pix_arr,yc2_pix_arr,pix2mm_arr = np.array([],dtype=float),np.array([],dtype=float),np.array([],dtype=float),np.array([],dtype=float),np.array([],dtype=float),np.array([],dtype=float)
+        for j in range(len(sessions)-1):
+            singleDF = getOneSession(df,j,sessions)
+            xc2, yc2, R2 = [i*singleDF['pix2mm'].mean() for i in fc.get_circle(singleDF)]
+            for k in range(getDiff(sessions,j)-1):
+                pix2mm_arr = np.append(pix2mm_arr,singleDF['pix2mm'].mean())
+                pix2mm = pix2mm_arr[-1] # FAO
+                xc2_arr,yc2_arr,R2_arr = np.append(xc2_arr ,xc2), np.append(yc2_arr ,yc2), np.append(R2_arr ,R2)
+                xc2_pix_arr, yc2_pix_arr = np.append(xc2_pix_arr, xc2/pix2mm), np.append(yc2_pix_arr, yc2/pix2mm)
     return xc2_arr,yc2_arr,R2_arr,xc2_pix_arr,yc2_pix_arr
 
 def set_MountConfig_String(df):
@@ -382,18 +389,36 @@ def toNumpy(series):
     return pd.Series(time)
 
 
-def computeBacklash(df,sessions,ramp=1.995):
+def computeBacklash(df,sessions,testType=None,ramp=1.995):
     '''
     Function to compute backlash
     '''
     backlash = np.array([],dtype=float) # Initialize array
-
-    for j in range(len(sessions)-1):
-        singleDF = getOneSession(df,j,sessions).reset_index(drop=True)
+    if testType=="RS":
+        # singleDF = getOneSession(df,j,sessions).reset_index(drop=True)
         backlash = np.append(backlash,np.nan)
-        for k in range(getDiff(sessions,j)-2):
-            backlash = np.append(backlash,singleDF.loc[k+1]['ObservedMove']-(singleDF.loc[k+1]['angle']+2*ramp))
+        for k in range(len(df)-1):
+            backlash = np.append(backlash,df.loc[k+1]['ObservedMove']-(df.loc[k+1]['angle']+2*ramp))
+    else:
+        for j in range(len(sessions)-1):
+            singleDF = getOneSession(df,j,sessions).reset_index(drop=True)
+            backlash = np.append(backlash,np.nan)
+            for k in range(getDiff(sessions,j)-2):
+                backlash = np.append(backlash,singleDF.loc[k+1]['ObservedMove']-(singleDF.loc[k+1]['angle']+2*ramp))
     return backlash
+
+def getSessionsBacklashRS(df,motor):
+    '''
+    Function to get indices of single arc sequences using the RS theta sequence
+    Returns session_ranges array, which contains all indices where a new arcsequence session has started, 
+    and the termination of the full sequence (final move)
+    '''
+    session_ranges = np.array([-1,0],dtype=int)
+    # for j in range(1,len(df)):
+    #     if j%2==0:
+    #         session_ranges = np.append(session_ranges,j)
+    session_ranges = np.append(session_ranges,len(df)-1)
+    return session_ranges
 
 def importToDf(datapath,fidpath,testStart,testFinish,testType="arc",motor=None):
     
@@ -444,22 +469,28 @@ def importToDf(datapath,fidpath,testStart,testFinish,testType="arc",motor=None):
         # Find sessions for each arcsequence    
         sessions = getSessionsArc(df)
 
-    elif testType=='backlash' and (motor=='theta' or motor=='phi'):
+    elif testType=='backlasharc' and (motor=='theta' or motor=='phi'):
         #Find sessions for each arcsequence
         sessions = getSessionsBacklash(df,motor)
 
+    elif testType=='RS' and (motor=='theta' or motor=='phi'):
+        #Find sessions for each arcsequence
+        sessions = getSessionsBacklashRS(df,motor)
+
     else:
-        print("Incorrect specifier for testType or motor\n testType must be either \'arc\' or \'backlash\'\n motor must be either \'theta\' or \'phi\'")
+        print("Incorrect specifier for testType or motor\n testType must be either \'arc\' or \'backlasharc\'\n motor must be either \'theta\' or \'phi\'")
         return -1
 
     # Make an arcnum session column and add it to the df
     sessionLabels = makeSessionLabels(sessions)
 
+    print(sessionLabels)
+
     # Add session labels to the df
     df.insert(len(df.columns),'ArcSession',sessionLabels)
 
     #Find centers for each arcsequence
-    xc2_arr,yc2_arr,R2_arr,xc2_pix_arr,yc2_pix_arr = phi_centers(df,sessions)
+    xc2_arr,yc2_arr,R2_arr,xc2_pix_arr,yc2_pix_arr = phi_centers(df,sessions,testType)
 
     # Store centers in df
     df.insert(len(df.columns),'xc2mm',xc2_arr)
@@ -505,5 +536,14 @@ def importToDf(datapath,fidpath,testStart,testFinish,testType="arc",motor=None):
         df.insert(len(df.columns),'Backlash',backlash)
 
         return df
+    elif testType=='RS':
+        # Calculate backlash
+        backlash = computeBacklash(df,sessions,testType=testType)
+
+        # Add backlash to df
+        df.insert(len(df.columns),'Backlash',backlash)
+
+        return df
     else:
        return df
+
