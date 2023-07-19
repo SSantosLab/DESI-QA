@@ -153,9 +153,10 @@ def angle_between_extended(c, p1, p2):
     ba = a - b
     bc = c - b
     angle = np.degrees(np.arctan2(bc[1], bc[0])-np.arctan2(ba[1], ba[0]))
-    if angle<0:
-        angle = angle+360
-    return angle
+    if bc[1]<0:
+        return 360+angle
+    else:
+        return angle
 
 def get_moveDirection(label,ABS=False):
     '''
@@ -314,7 +315,7 @@ def makeSessionLabels(sessions):
         testArr = np.append(testArr,np.repeat(j, getDiff(sessions,j)-1))
     return testArr
 
-def getAlphas(df,backlash = 1.9,ramp=1.995):
+def getAlphas(df,backlash = 1.9,ramp=1.995,testType=None,motor=None):
     '''
     Function to return arrays of alpha, required move [degrees], and observed move [degrees]
     '''
@@ -346,8 +347,10 @@ def getAlphas(df,backlash = 1.9,ramp=1.995):
             else:
                 alpha_arr = np.append(alpha_arr,angle_between((xc2_pix,yc2_pix),(x_previous, y_previous),(x_current, y_current))/(arcs.loc[current]['angle']+2*ramp))
                 req_arr = np.append(req_arr,arcs.loc[current]['angle']+2*ramp)
-
-            obs_arr = np.append(obs_arr, angle_between((xc2_pix,yc2_pix),(x_previous, y_previous),(x_current, y_current)))
+            if testType=="RS" and motor=='theta':
+                obs_arr = np.append(obs_arr, angle_between_extended((xc2_pix,yc2_pix),(x_previous, y_previous),(x_current, y_current)))
+            else:
+                obs_arr = np.append(obs_arr, angle_between((xc2_pix,yc2_pix),(x_previous, y_previous),(x_current, y_current)))
     return alpha_arr, req_arr, obs_arr
 
 def getMeans(df,label='Alpha'):
@@ -514,7 +517,7 @@ def importToDf(datapath,fidpath,testStart,testFinish,testType="arc",motor=None):
     df.insert(len(df.columns),'MountConfiguration',set_MountConfig_String(df))
 
     # Compute alpha individually
-    alpha_arr, req_arr, obs_arr = getAlphas(df)
+    alpha_arr, req_arr, obs_arr = getAlphas(df,testType=testType,motor=motor)
 
     # Insert alpha to df
     df.insert(len(df.columns),'Alpha',alpha_arr)
@@ -535,7 +538,6 @@ def importToDf(datapath,fidpath,testStart,testFinish,testType="arc",motor=None):
         # Add backlash to df
         df.insert(len(df.columns),'Backlash',backlash)
 
-        return df
     elif testType=='RS':
         # Calculate backlash
         backlash = computeBacklash(df,sessions,testType=testType)
@@ -543,7 +545,131 @@ def importToDf(datapath,fidpath,testStart,testFinish,testType="arc",motor=None):
         # Add backlash to df
         df.insert(len(df.columns),'Backlash',backlash)
 
-        return df
+    return df
+
+def importToDfBacklash(datapath,fidpath,testStart,testFinish,testType="arc",motor=None):
+    
+    '''
+    Function to take path to database and fiducial database, and returned dataframe of combined data
+    testype is one of 'arc', or 'backlash'
+    '''
+    
+    # Importing different databases
+    db = pd.read_csv(datapath)
+    get_timecol(db)
+
+    fiddb = pd.read_csv(fidpath)
+    get_timecol(fiddb)
+
+    # Because query_time uses label (not mvlabel or move), if initial selection is OK, then you can
+    # join using db.insert(len(db.columns))
+    mask1 = query_time(db, datemin=testStart,datemax=testFinish)
+    mask2 = query_time(fiddb, datemin=testStart,datemax=testFinish)
+
+    # Creating masks
+    df = db[mask1].reset_index(drop=True)
+    fiddf = fiddb[mask2].reset_index(drop=True)
+
+    del db, fiddb
+
+    # Inserting pix2mm and sigpix2mm
+    if aligned(df,'move',fiddf,'mvlabel'):
+        df.insert(len(df.columns),"fidx0",fiddf['x0'])
+        df.insert(len(df.columns),"fidy0",fiddf['y0'])
+        df.insert(len(df.columns),"fidx1",fiddf['x1'])
+        df.insert(len(df.columns),"fidy1",fiddf['y1'])
+        df.insert(len(df.columns),"fidx2",fiddf['x2'])
+        df.insert(len(df.columns),"fidy2",fiddf['y2'])
+        df.insert(len(df.columns),"fidx3",fiddf['x3'])
+        df.insert(len(df.columns),"fidy3",fiddf['y3'])
+        df.insert(len(df.columns),"pix2mm",fiddf['pix2mm'])
+        df.insert(len(df.columns),"sigpix2mm",fiddf['sigpix2mm'])
+        del fiddf
     else:
-       return df
+        print("Movelabels are not aligned - inspect your movelabels and try again")
+        return -1
+
+    # Add session labels
+    print("Adding session labels for testType="+str(testType))
+        
+    if testType=='arc':
+        # Find sessions for each arcsequence    
+        sessions = getSessionsArc(df)
+
+    elif testType=='backlasharc' and (motor=='theta' or motor=='phi'):
+        #Find sessions for each arcsequence
+        sessions = getSessionsBacklash(df,motor)
+
+    elif testType=='RS' and (motor=='theta' or motor=='phi'):
+        #Find sessions for each arcsequence
+        sessions = getSessionsBacklashRS(df,motor)
+
+    else:
+        print("Incorrect specifier for testType or motor\n testType must be either \'arc\' or \'backlasharc\'\n motor must be either \'theta\' or \'phi\'")
+        return -1
+
+    # Make an arcnum session column and add it to the df
+    sessionLabels = makeSessionLabels(sessions)
+
+    # print(sessionLabels)
+
+    # Add session labels to the df
+    df.insert(len(df.columns),'ArcSession',sessionLabels)
+
+    #Find centers for each arcsequence
+    xc2_arr,yc2_arr,R2_arr,xc2_pix_arr,yc2_pix_arr = phi_centers(df,sessions,testType)
+
+    # Store centers in df
+    df.insert(len(df.columns),'xc2mm',xc2_arr)
+    df.insert(len(df.columns),'yc2mm',yc2_arr)
+    df.insert(len(df.columns),'R2mm',R2_arr)
+    df.insert(len(df.columns),'xc2pix',xc2_pix_arr)
+    df.insert(len(df.columns),'yc2pix',yc2_pix_arr)
+
+    # Change datatype of df['move'] column
+    df['move'] = toNumpy(df['move'])
+
+    # Calculate x and y positions in mm
+    x_mm = df['xpix']*df['pix2mm']
+    y_mm = df['ypix']*df['pix2mm']
+
+    # Insert x and y positions to df
+    df.insert(12,'x_mm',x_mm)
+    df.insert(13,'y_mm',y_mm)
+
+    # Insert mount config into df in string form
+    df.insert(len(df.columns),'MountConfiguration',set_MountConfig_String(df))
+
+    ###
+
+    # Compute alpha individually
+    alpha_arr, req_arr, obs_arr = getAlphas(df,testType=testType,motor=motor)
+
+    # Insert alpha to df
+    df.insert(len(df.columns),'Alpha',alpha_arr)
+    df.insert(len(df.columns),'RequestedMove',req_arr)
+    df.insert(len(df.columns),'ObservedMove',obs_arr)
+
+    # Compute mean and std of alpha of each session
+    mean_alpha_session,std_alpha_session, mean_alpha, std_alpha= getMeans(df)
+
+    # Insert alpha session mean and std to df
+    df.insert(len(df.columns),'MeanAlpha',mean_alpha_session)
+    df.insert(len(df.columns),'StdAlpha',std_alpha_session)
+
+    if testType=='backlash':
+        # Calculate backlash
+        backlash = computeBacklash(df,sessions)
+
+        # Add backlash to df
+        df.insert(len(df.columns),'Backlash',backlash)
+
+    elif testType=='RS':
+        # Calculate backlash
+        backlash = computeBacklash(df,sessions,testType=testType)
+
+        # Add backlash to df
+        df.insert(len(df.columns),'Backlash',backlash)
+
+    return df
 

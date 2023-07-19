@@ -357,10 +357,10 @@ if __name__=='__main__':
     pix2mm = 0.03536752443853155 #0.035337
     # todo, pass this as dictionary per positioner
     posid = '4852' # string
-    hardstop_ang = {"4852": -162.99595} # in deg
-    R1 = {"4852": 2.9470324} # R theta
-    R2 = {"4852": 3.0708875} # R phi
-    center = {"4852":[69.91353, 31.52234]}#[ 69.91212, 31.49481]}
+    hardstop_ang = {"4852": -163.00351} # in deg
+    R1 = {"4852": 2.9484298 } # R theta
+    R2 = {"4852": 3.0704984} # R phi
+    center = {"4852":[69.92967, 31.54416]}#[ 69.91212, 31.49481]}
 
     pos_speed = {"4852":{"cruise": 33, "spinramp": 12, }}#"spindown": 12}}
     pos_backlash = {"4852": 2.2}
