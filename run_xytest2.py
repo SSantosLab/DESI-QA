@@ -19,6 +19,8 @@ from src.phandler import ShellHandler
 import sbigCam as sbc
 from spotfinder import spotfinder
 import xylib as xylib
+import test_spotfinder as ts
+import tslib as tslib
 
 
 def start_cam(exposure_time=3000, is_dark=False):
@@ -365,6 +367,15 @@ if __name__=='__main__':
     pos_speed = {"4852":{"cruise": 33, "spinramp": 12, }}#"spindown": 12}}
     pos_backlash = {"4852": 1.9}
 
+    # Region of interest for positioner
+
+    # SM: I increased these limits (within reason) to encompass all configs of the single positioner
+    # I think initial limits were determined off of restrictive bounds.
+    # New limits were determined using arctheta sequence from 2023-06-14 12:19:00 -> x:[1750,2200], y:[700,1100], 
+    # and accounting for variance in x & y pixels in different configs -> delta_x:10, delta_y:50 [pixels]
+    # IF adding another positioner, we would have to make more restrictive bounds, or think of a new way to do this
+    reg = {'4852': { 'x':[1740,2210], 'y':[650,1150]}}
+
     # Todo: copy session config to remote
     #  session db should have
     #    session_label, pos_speed, pos_ramp, dev_bb, R1_pos, R2_pos, center_pos,
@@ -374,7 +385,6 @@ if __name__=='__main__':
 
     #todo: activate a flag for xy in ini file
     xyflag = True
-
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--config', '-c', dest='config', 
@@ -404,6 +414,11 @@ if __name__=='__main__':
 
     # if haspos: 
     movetablefn = cfg.get('run', 'movetable') 
+    try: 
+        ncycle = cfg.getint('run', 'repeatcycle')
+    except Exception as err:
+        ncycle = 1
+        print(f">> Err: {err}\n>> ncycle set as 1 ")
     
     # if hasmount: 
     mounttablefn = cfg.get('run', 'mounttable')
@@ -418,6 +433,8 @@ if __name__=='__main__':
     print("--"*8)
     print(pipeline)
     print(session_label, '\n')
+    print(f"!! Number of Cycle(s): {ncycle}")
+    print()
     print("--"*35,f"\n\t# {movetablefn}\n","--"*35 )
 
     dbname = "output/database.csv"
@@ -426,10 +443,13 @@ if __name__=='__main__':
     # -------------------------------------
     # Session Setup
     
+    # Start mount
+    cem120 = start_mount()
+
     # Connecting to PB
     sh = connect2pb()
 
-    if hascam:# and (not dryrun):
+    if hascam and (not dryrun):
         cam = start_cam()
 
     picpath = os.path.join(rootout, session_label)
@@ -452,6 +472,14 @@ if __name__=='__main__':
         movetable = read_xytable(movetablefn)
     else:
         movetable = read_movetable(movetablefn)
+    n_posmov = len(movetable)
+
+    # Repeat cycle
+    if isinstance(ncycle, int):
+        print(f">> Repeating cycle {ncycle} times")
+        movetable = movetable * ncycle
+        assert isinstance(movetable, list), "move table is not a list"
+        assert len(movetable) == n_posmov * ncycle, "move table is not the right size"
     
     print(f" Loop positioner size: {len(movetable)}" )
 
@@ -462,12 +490,15 @@ if __name__=='__main__':
 
     n_corrections = 0 # todo, read from ini file
     for i, imount in enumerate(mounttable):
+        print(f"\n>>  Mount move #{i}: {imount}\n")
         if imount !=0:  
-            sys.exit("NotImplemented: Only position 0 for mount is allowed now")
-        else: 
-            mtang1, mtang2 = 0,0 
             print(f"starting positioners loop for MOUNT in {imount}")
-            movemount(imount)        
+            mtang1, mtang2 = movemount(imount, cem120)
+        else:
+            mtang1, mtang2 = 0, 0
+
+            print(f"starting positioners loop for MOUNT in {imount}")
+            movemount(imount, cem120)      
 
         for j, imove in enumerate(movetable):
 
@@ -486,8 +517,19 @@ if __name__=='__main__':
 
                 prevdir = {'theta':'ccw', 'phi':'ccw'} # Assuming parked at hardstop
                 get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
+                ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+
                 centroids = get_spot(f"{mvlabel}.fits", 
-                                     f"sbigpics/{session_label}", verbose=False)
+                                     f"sbigpics/{session_label}", verbose=False,reg=reg)
+
+                while (len(centroids)!=5) or (np.unique(ff)==[0]).all() or (np.unique(ff)[-10:]<45000).any():
+                    print("Software error, taking image again")
+                    os.remove(picpath+'/'+mvlabel+'.fits')
+                    print(picpath+'/'+mvlabel+'.fits deleted successfully')
+                    
+                    get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun) 
+                    ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+                    centroids = ts.get_spotpos("4852", centroidall, reg=reg)   
 
                 # todo: should be positioner-wise
                 # TODO: assuming a single positioner    
@@ -546,15 +588,32 @@ if __name__=='__main__':
 
             # getting picture after trying to perform the 2 arms moves!        
             get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
+            ff = fits.getdata(picpath+'/'+mvlabel+".fits")
             centroids = get_spot(f"{mvlabel}.fits", 
-                                 f"sbigpics/{session_label}", verbose=False)
+                                 f"sbigpics/{session_label}", verbose=False,reg=reg)
+            # Conditional statement to catch the times when the camera takes images with little/no data
+            while (len(centroids)!=5) or (np.unique(ff)==[0]).all() or (np.unique(ff)[-10:]<45000).any():
+                print("Software error, taking image again")
+                os.remove(picpath+'/'+mvlabel+'.fits')
+                print(picpath+'/'+mvlabel+'.fits deleted successfully')
+                
+                get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun) 
+                ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+
+                centroids = ts.get_spotpos("4852", centroidall, reg=reg)    
+
+            fidmask = ts.select_fidregion(centroidall)
+            xfid, yfid = ts.get_xyfid(centroidall, fidmask)
+            pix2mm, sigpix2mm  = ts.get_pix2mm(xfid, yfid)
+            tslib.write_fiddb(session_label, mvlabel, xfid, yfid, pix2mm, sigpix2mm)
+
             
             # todo: Adapt for multiple 
             x_here = centroids['x'][0] 
             y_here = centroids['y'][0] 
             xpos, ypos = xylib.refpix2pos(pix2mm, xc,yc, x_here, y_here)
             # print(f"curpos: ({xpos} {ypos}) ({xc}, {yc})")
-            print_info(centroids, posid)
+            netphi, dist2center = print_info(centroids, posid)
 
 
             # todo: assuming centroids is len(1) lists
@@ -586,6 +645,9 @@ if __name__=='__main__':
                     if (np.hypot(xpos-x_tgt, ypos-ytgt)<=0.100):
                         # save_to_database
                         break 
+
+            os.remove(picpath+'/'+mvlabel+'.fits')
+            print(picpath+'/'+mvlabel+'.fits deleted successfully')
                         
 
             """
