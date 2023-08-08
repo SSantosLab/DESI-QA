@@ -1,11 +1,9 @@
-"""
 
-todo: 
-    deal with more positioners 
-    pass canbus and devbycan
-    now, all positioners are doing the same moves!
-    
-"""
+# todo: 
+#     deal with more positioners 
+#     pass canbus and devbycan
+#     now, all positioners are doing the same moves!
+
 import numpy as np
 from csv import reader
 import configparser
@@ -21,7 +19,11 @@ from spotfinder import spotfinder
 import xylib as xylib
 import test_spotfinder as ts
 import tslib as tslib
-
+import subprocess
+import pandas as pd
+import reportlib as rl
+import getArcVals as gAV
+from astropy.io import fits
 
 def start_cam(exposure_time=3000, is_dark=False):
     """Initialize sbigcam
@@ -49,26 +51,62 @@ def get_picture(cam, imgname, rootout=None, dryrun=False):
     print(f'Photo #{imgname} taken successfully.')
 
 
-def start_mount():
+# Mount Session
+def start_mount(port='/dev/ttyUSB0'):
     """
     Instantiate the ts mount class
     returns:
         cem120 (serial obj): object for moving mount class
 
     """
-    cem120 = cf.initialize_mount("/dev/ttyUSB0")
+    cem120 = cf.initialize_mount(port)
+    cf.set_alt_lim(cem120, -89)
+    cf.slew_rate(cem120, 9)
     return cem120
 
+    
+def mount_posdown(cem120):
+    """positioners down sequence, from home position
 
+    Args:
+        cem120 (_type_, optional): cem120 object (from Tsmount Class).
+    """
+    cf.home(cem120)
+    cf.move_90(cem120, 0., 1, 0)
+    cf.move_90(cem120, (cf.get_ra_dec(cem120)[0]-324000)%1296000, 0, 1) 
 
-def movemount(mtpos):
+def mount_posup(cem120):
+    """positioners up sequence, from home position
+    
+    Args:
+        cem120 (object): cem120 object (from Tsmount Class).
+    """
+    cf.home(cem120)
+
+    # Position 8 - U   -> HOME->7->8 CAM UP  eixo 1  = x
+    cf.move_90(cem120, 0., 1, 1)
+    cf.move_90(cem120, (cf.get_ra_dec(cem120)[0]-324000)%1296000, 0, 1) 
+
+def movemount(mtpos, cem120):
     """Place holder for mount
     input:
-        mtpos (): list (?) with the mount position
+        mtpos (): row (?) with the mount position
+        move mount as Mount_[NOTSAFE].ipynb
+    example: position up 
+    #CAM UP
     """
+    mtpos = tuple(np.array(mtpos, dtype=float))
 
-    pass
-
+    if mtpos==(90,90):
+        mount_posdown(cem120)
+    elif mtpos==(-90,90) or mtpos==(90,-90):
+        mount_posup(cem120)
+    elif mtpos==(0,0):
+        cf.home(cem120)
+    else:
+        raise NotImplementedError("Only 0, 90, -90 positions are allowed now")
+        
+    return mtpos
 
 def connect2pb():
     """Starts ShellHandler and returns the sh object
@@ -125,10 +163,10 @@ def read_mounttable(ifn):
         print("Mount table not found! Using home")
         return [0]
     mountlines = reader(open(ifn), skipinitialspace=True, delimiter=' ')
-    mounttable = [ i for i in movelines]
-    for i, row in enumerate(movetable):
-        assert len(row)==1, \
-               f"Error: mount row {i} with {len(row)} Columns; should be 1!"
+    mounttable = [ i for i in mountlines]
+    for i, row in enumerate(mounttable):
+        assert len(row)==2, \
+               f"Error: mount row {i} with {len(row)} Columns; should be 2!"
     return mounttable
 
 def ramp_angle(defcruise, deframp):
@@ -330,6 +368,7 @@ def write_db(session_label, mtang1, mtang2, mvlabel, posid, imove, cent, xytgt=0
 
 def print_info(centroids, posid):
 
+
     # -------------------------------------------------------------------------    
     # For users: 
     x_here = centroids['x'][0]
@@ -339,10 +378,44 @@ def print_info(centroids, posid):
     rc = np.hypot(x_pos, y_pos)
     r1, r2 = R1[posid], R2[posid]
     arccos_arg = (r1**2 + r2**2 -rc**2)/(2*r1*r2)
-    netphi = np.rad2deg(np.arccos(np.round(arccos_arg, 4)))
+    # guessing if it is 180 or 0:
+    if np.isclose(arccos_arg, 1):
+        if rc >1.5* r1:
+            netphi = 180.
+        elif rc < 0.5 * r1:
+            netphi = 0.0
+    else:        
+        netphi = np.rad2deg(np.arccos(np.round(arccos_arg, 4)))
     print(f"\t\tx,y:\n {x_pos:4.6f}, {y_pos:4.6f} \n {x_here:.6f}, {y_here:.6f}")
     print(f"dist_xy2c: {rc:.6f} mm\nphi: {netphi: .4f} deg")
-    # ------------------------------------------------------------------------
+    return netphi, rc
+
+
+# SM TODO - write these three functions
+# done
+def updateCenter(center,xfid,yfid,xfid_old,yfid_old,pix2mm,pix2mm_old):
+    xfid,yfid,xfid_old,yfid_old = np.array(xfid,dtype=float)*pix2mm,np.array(yfid,dtype=float)*pix2mm,np.array(xfid_old,dtype=float)*pix2mm_old,np.array(yfid_old,dtype=float)*pix2mm_old
+    x_offset,y_offset = np.array([],dtype=float),np.array([],dtype=float)
+
+    for i in range(len(xfid)):
+        x_offset = np.append(x_offset,xfid[i]-xfid_old[i])
+        y_offset = np.append(y_offset,yfid[i]-yfid_old[i])
+
+    x_offset_mean,y_offset_mean = np.mean(x_offset),np.mean(y_offset)
+    center[0] = center[0]+x_offset_mean
+    center[1] = center[1]+y_offset_mean
+    print("Updating center")
+    return center 
+
+# Done
+def updateR(R1,R2,pix2mm,pix2mm_old):
+    R1_new = R1 * pix2mm/pix2mm_old
+    R2_new = R2 * pix2mm/pix2mm_old
+    print("Updating R's of positioner")
+    return R1_new,R2_new
+
+
+# def updateAngle(hardstop_ang,xfid,yfid,xfid_old,yfid_old,pix2mm,pix2mm_old):
 
 
 if __name__=='__main__':
@@ -359,13 +432,13 @@ if __name__=='__main__':
     pix2mm = 0.03536752443853155 #0.035337
     # todo, pass this as dictionary per positioner
     posid = '4852' # string
-    hardstop_ang = {"4852": -163.88353} # in deg
-    R1 = {"4852": 2.9134069  } # R theta
-    R2 = {"4852":  3.0696125} # R phi
-    center = {"4852": [69.96182, 30.92488]} # in mm
+    hardstop_ang = {posid: -163.88353} # in deg
+    R1 = {posid: 2.9134069  } # R theta
+    R2 = {posid:  3.0696125} # R phi
+    center = {posid: [69.96182, 30.92488]} # in mm
 
-    pos_speed = {"4852":{"cruise": 33, "spinramp": 12, }}#"spindown": 12}}
-    pos_backlash = {"4852": 1.9}
+    pos_speed = {posid:{"cruise": 33, "spinramp": 12, }}#"spindown": 12}}
+    pos_backlash = {posid: 1.9}
 
     # Region of interest for positioner
 
@@ -374,7 +447,7 @@ if __name__=='__main__':
     # New limits were determined using arctheta sequence from 2023-06-14 12:19:00 -> x:[1750,2200], y:[700,1100], 
     # and accounting for variance in x & y pixels in different configs -> delta_x:10, delta_y:50 [pixels]
     # IF adding another positioner, we would have to make more restrictive bounds, or think of a new way to do this
-    reg = {'4852': { 'x':[1740,2210], 'y':[650,1150]}}
+    reg = {posid: { 'x':[1740,2210], 'y':[650,1150]}}
 
     # Todo: copy session config to remote
     #  session db should have
@@ -449,8 +522,7 @@ if __name__=='__main__':
     # Connecting to PB
     sh = connect2pb()
 
-    if hascam and (not dryrun):
-        cam = start_cam()
+
 
     picpath = os.path.join(rootout, session_label)
 
@@ -483,24 +555,68 @@ if __name__=='__main__':
     
     print(f" Loop positioner size: {len(movetable)}" )
 
-    x_here = None
-    y_here = None
     prevdir = {'theta':None, 'phi':None}
     nextdir = None
 
     n_corrections = 0 # todo, read from ini file
-    for i, imount in enumerate(mounttable):
+    for i, imount in enumerate(mounttable): # For each mount configuration
+        x_here,y_here = None,None # This should be inside mount loop
         print(f"\n>>  Mount move #{i}: {imount}\n")
         if imount !=0:  
             print(f"starting positioners loop for MOUNT in {imount}")
             mtang1, mtang2 = movemount(imount, cem120)
+            print("Sleep for 30s to let mount rest")
+            time.sleep(30) # Wait 30s
         else:
             mtang1, mtang2 = 0, 0
-
             print(f"starting positioners loop for MOUNT in {imount}")
-            movemount(imount, cem120)      
+            movemount(imount, cem120)   
+            print("Sleep for 30s to let mount rest")
+            time.sleep(30) # Wait 30s
 
-        for j, imove in enumerate(movetable):
+        print("-----"*10,"\nRunning arcsequences for",[mtang1,mtang2],"mount configuration")
+        # Run Arctheta and phi run_ang.py
+        if mtang1 == 0 and mtang2 == 0: # Mount is in horizon
+            subprocess.call(["python","run_ang.py","-c","conf/arcph15.ini"])
+            subprocess.call(["python","run_ang.py","-c","conf/arcth30.ini"])
+        elif (mtang1==90 and mtang2==90) or (mtang1==-90 and mtang2==-90): # Mount is in positioner down
+            subprocess.call(["python","run_ang.py","-c","conf/arcph15_posdown.ini"])
+            subprocess.call(["python","run_ang.py","-c","conf/arcth30_posdown.ini"])
+        elif (mtang1==90 and mtang2==-90) or (mtang1==-90 and mtang2==90): # Mount is in positioner up
+            subprocess.call(["python","run_ang.py","-c","conf/arcph15_posup.ini"])
+            subprocess.call(["python","run_ang.py","-c","conf/arcth30_posup.ini"])
+        else:
+            raise NotImplementedError("Mount position not supported")
+
+        if hascam and (not dryrun):
+            cam = start_cam()
+
+        print("Reading dates to get calibration values")
+        #Get two most recent unique dates from the database, store them as date1 and date2 for the below call
+        time.sleep(2)
+        df = pd.read_csv("/home/msdos/DESI-QA/output/database.csv",usecols=[0,3])[-43:]
+        reducedCol = rl.toNumpy(df['label'].str[8:])
+        dates = np.unique(reducedCol)
+        assert len(dates)==2, \
+            f"Length of dates array incorrect: length should be 2, measured length is {len(dates)}"
+        if dates[0]>dates[1]:
+            date1 = dates[1]
+            date2 = dates[0]
+        else:
+            date1 = dates[0]
+            date2 = dates[1]
+
+        del df
+        # Get relevant values of R1 and R2, Hardstop angle, and xc, yc for that configuration using the session labels 
+        R1[posid], R2[posid], xc, yc, xc2, yc2, hardstop_ang[posid] = gAV.main(str(date2),str(date1))
+        center[posid] = [xc,yc]
+        # Run a 30 degree cw move for both theta and phi arms to move off of home, set prevdir
+        send_posmove("cw cruise phi 30 000", verbose=False)
+        send_posmove("cw cruise theta 30 000", verbose=False)
+        prevdir = {'theta':'cw', 'phi':'cw'}
+
+
+        for j, imove in enumerate(movetable): # For each move in the movetable
 
             #MOVE THIS BECAUSE OF ROWS
             mvlabel = time.strftime("%Y%m%d-%H%M%S")
@@ -515,12 +631,15 @@ if __name__=='__main__':
             if (x_here is None) or (y_here is None):
                 print("Find current position XY; Assuming last ")
 
-                prevdir = {'theta':'ccw', 'phi':'ccw'} # Assuming parked at hardstop
+                # prevdir = {'theta':'ccw', 'phi':'ccw'} # Assuming parked at hardstop - NOPE, CAN'T DO THAT, I THINK THIS SHOULD BE CW
                 get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
                 ff = fits.getdata(picpath+'/'+mvlabel+".fits")
 
-                centroids = get_spot(f"{mvlabel}.fits", 
-                                     f"sbigpics/{session_label}", verbose=False,reg=reg)
+                centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                        f"sbigpics/{session_label}", 
+                                        expected_spot_count=5,
+                                        verbose=False)
+                centroids = ts.get_spotpos("4852", centroidall, reg=reg)
 
                 while (len(centroids)!=5) or (np.unique(ff)==[0]).all() or (np.unique(ff)[-10:]<45000).any():
                     print("Software error, taking image again")
@@ -529,17 +648,26 @@ if __name__=='__main__':
                     
                     get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun) 
                     ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+                    centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                        f"sbigpics/{session_label}", 
+                                        expected_spot_count=5,
+                                        verbose=False)
                     centroids = ts.get_spotpos("4852", centroidall, reg=reg)   
 
                 # todo: should be positioner-wise
                 # TODO: assuming a single positioner    
                 x_here = centroids['x'][0] 
-                y_here = centroids['y'][0]                 
+                y_here = centroids['y'][0]
+                x_home,y_home = x_here,y_here
+                fidmask = ts.select_fidregion(centroidall)
+                xfid_old, yfid_old = ts.get_xyfid(centroidall, fidmask)
+                pix2mm_old, sigpix2mm_old  = ts.get_pix2mm(xfid_old, yfid_old)                
 
             # todo: id-wise this should be outside the loop
             xc, yc = center[posid] 
             xpos, ypos = xylib.refpix2pos(pix2mm, xc,yc, x_here, y_here)
-            print(f"\n\nxy here: {xpos:.4f} {ypos:.4f}\n\n")
+            print("\n\nxy here:",end="")
+            print(xpos, ypos,"\n\n")
 
             rows = xylib.calc_movetables(hardstop_ang[posid],
                                          R1[posid],R2[posid], 
@@ -589,8 +717,11 @@ if __name__=='__main__':
             # getting picture after trying to perform the 2 arms moves!        
             get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
             ff = fits.getdata(picpath+'/'+mvlabel+".fits")
-            centroids = get_spot(f"{mvlabel}.fits", 
-                                 f"sbigpics/{session_label}", verbose=False,reg=reg)
+            centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                        f"sbigpics/{session_label}", 
+                                        expected_spot_count=5,
+                                        verbose=False)
+            centroids = ts.get_spotpos(posid, centroidall, reg=reg)
             # Conditional statement to catch the times when the camera takes images with little/no data
             while (len(centroids)!=5) or (np.unique(ff)==[0]).all() or (np.unique(ff)[-10:]<45000).any():
                 print("Software error, taking image again")
@@ -600,7 +731,11 @@ if __name__=='__main__':
                 get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun) 
                 ff = fits.getdata(picpath+'/'+mvlabel+".fits")
 
-                centroids = ts.get_spotpos("4852", centroidall, reg=reg)    
+                centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                        f"sbigpics/{session_label}", 
+                                        expected_spot_count=5,
+                                        verbose=False)
+                centroids = ts.get_spotpos(posid, centroidall, reg=reg)    
 
             fidmask = ts.select_fidregion(centroidall)
             xfid, yfid = ts.get_xyfid(centroidall, fidmask)
@@ -644,12 +779,19 @@ if __name__=='__main__':
                     i_corr +=1
                     if (np.hypot(xpos-x_tgt, ypos-ytgt)<=0.100):
                         # save_to_database
-                        break 
+                        break
 
             os.remove(picpath+'/'+mvlabel+'.fits')
             print(picpath+'/'+mvlabel+'.fits deleted successfully')
                         
 
+            # SM TODO - done, except hardstop angle which i am leaving for now
+            # UPDATE xc,yc,Rtheta,Rphi,hardstop angle here
+            center[posid] = updateCenter(center[posid],xfid,yfid,xfid_old,yfid_old,pix2mm,pix2mm_old)
+            R1[posid],R2[posid] = updateR(R1[posid],R2[posid],pix2mm,pix2mm_old)
+            # hardstop_ang[posid] = updateAngle(hardstop_ang[posid],xfid,yfid,xfid_old,yfid_old,pix2mm,pix2mm_old) # Left out for now
+
+            xfid_old,yfid_old = xfid,yfid
             """
             todo: correction move here, after the target
             while corrections:
@@ -657,8 +799,341 @@ if __name__=='__main__':
             """
 
 
-    if hascam and (not dryrun):
-        cam.close_camera()
+        print("Sending positioner to home after finished with",[mtang1,mtang2],"mount configuration")
+
+        # Send positioner to (-6,0)
+        x_tgt, y_tgt = -6,0
+
+        rows = xylib.calc_movetables(hardstop_ang[posid],
+                                         R1[posid],R2[posid], 
+                                         xpos,ypos,
+                                         x_tgt,y_tgt)
+        
+        if len(rows[0])==0:
+            print("No Move!")
+
+        # Move WITHOUT updating targets
+        mvlabel = time.strftime("%Y%m%d-%H%M%S")
+        ihash = np.random.randint(100000,1000000-1 )
+        n_rows = len(rows)
+        for ii, irow in enumerate(rows): 
+            if ii == n_rows-1: 
+                xytgt = 1
+            else:
+                xytgt =0
+
+            _dir, _motor, _ang = irow
+            # todo : change to creep if it is a correction move
+            ispeed = 'cruise'
+            
+            mv2 = argscorrection(_dir, ispeed, _motor, float(_ang), 
+                                  pos_speed[posid], prevdir, 
+                                  val_backlash=pos_backlash[posid]) 
+            _dir, ispeed, _motor, _ang =  mv2
+
+            mvargs = f"{_dir} {ispeed} {_motor} {_ang:.5f} {ihash}"
+            # print(prevdir)
+            print(mvargs)
+            prevdir.update({_motor:_dir})
+
+            #fao
+            # sys.exit(1)
+            # ----- move it ------------------------------------
+            send_posmove(mvargs, verbose=False)    
+            sys_status = confirm_move(ihash, get_remotehash(sh))
+            
+            if not sys_status:
+                print("PB not replied")
+                sys.exit(1) 
+
+        #fao
+        time.sleep(0.3) # trying to solve central fit issue
+
+
+        # Move positioner 180-hardstop_angle degrees in ccw direction
+
+
+        _dir, _motor, _ang = 'ccw','theta',str(180+hardstop_ang[posid])
+        # todo : change to creep if it is a correction move
+        ispeed = 'cruise'
+        
+        mv2 = argscorrection(_dir, ispeed, _motor, float(_ang), 
+                              pos_speed[posid], prevdir, 
+                              val_backlash=pos_backlash[posid]) 
+        _dir, ispeed, _motor, _ang =  mv2
+
+        mvargs = f"{_dir} {ispeed} {_motor} {_ang:.5f} {ihash}"
+        # print(prevdir)
+        print(mvargs)
+        prevdir.update({_motor:_dir})
+
+        #fao
+        # sys.exit(1)
+        # ----- move it ------------------------------------
+        send_posmove(mvargs, verbose=False)    
+        sys_status = confirm_move(ihash, get_remotehash(sh))
+        
+        if not sys_status:
+            print("PB not replied")
+            sys.exit(1) 
+
+        #fao
+        time.sleep(0.3) # trying to solve central fit issue
+
+        # Close phi arm
+
+        _dir, _motor, _ang = 'ccw','phi','180'
+        # todo : change to creep if it is a correction move
+        ispeed = 'cruise'
+        
+        mv2 = argscorrection(_dir, ispeed, _motor, float(_ang), 
+                              pos_speed[posid], prevdir, 
+                              val_backlash=pos_backlash[posid]) 
+        _dir, ispeed, _motor, _ang =  mv2
+
+        mvargs = f"{_dir} {ispeed} {_motor} {_ang:.5f} {ihash}"
+        # print(prevdir)
+        print(mvargs)
+        prevdir.update({_motor:_dir})
+
+        #fao
+        # sys.exit(1)
+        # ----- move it ------------------------------------
+        send_posmove(mvargs, verbose=False)    
+        sys_status = confirm_move(ihash, get_remotehash(sh))
+        
+        if not sys_status:
+            print("PB not replied")
+            sys.exit(1) 
+
+        #fao
+        time.sleep(0.3) # trying to solve central fit issue
+
+        # Two small corrective 10 degree moves to push to the hardstop
+
+        # Take pic here
+
+        get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
+        ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+        centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                        f"sbigpics/{session_label}", 
+                                        expected_spot_count=5,
+                                        verbose=False)
+        centroids = ts.get_spotpos("4852", centroidall, reg=reg)
+        # Conditional statement to catch the times when the camera takes images with little/no data
+        while (len(centroids)!=5) or (np.unique(ff)==[0]).all() or (np.unique(ff)[-10:]<45000).any():
+            print("Software error, taking image again")
+            os.remove(picpath+'/'+mvlabel+'.fits')
+            print(picpath+'/'+mvlabel+'.fits deleted successfully')
+            
+            get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun) 
+            ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+
+            centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                        f"sbigpics/{session_label}", 
+                                        expected_spot_count=5,
+                                        verbose=False)
+            centroids = ts.get_spotpos("4852", centroidall, reg=reg)
+
+        fidmask = ts.select_fidregion(centroidall)
+        xfid, yfid = ts.get_xyfid(centroidall, fidmask)
+        pix2mm, sigpix2mm  = ts.get_pix2mm(xfid, yfid)
+        
+        # todo: Adapt for multiple 
+        x_here = centroids['x'][0] 
+        y_here = centroids['y'][0] 
+
+        # First move
+
+        _dir, _motor, _ang = 'ccw','theta','10'
+        # todo : change to creep if it is a correction move
+        ispeed = 'cruise'
+        
+        mv2 = argscorrection(_dir, ispeed, _motor, float(_ang), 
+                              pos_speed[posid], prevdir, 
+                              val_backlash=pos_backlash[posid]) 
+        _dir, ispeed, _motor, _ang =  mv2
+
+        mvargs = f"{_dir} {ispeed} {_motor} {_ang:.5f} {ihash}"
+        # print(prevdir)
+        print(mvargs)
+        prevdir.update({_motor:_dir})
+
+        #fao
+        # sys.exit(1)
+        # ----- move it ------------------------------------
+        send_posmove(mvargs, verbose=False)    
+        sys_status = confirm_move(ihash, get_remotehash(sh))
+        
+        if not sys_status:
+            print("PB not replied")
+            sys.exit(1) 
+
+        #fao
+        time.sleep(0.3) # trying to solve central fit issue
+
+        _dir, _motor, _ang = 'ccw','phi','10'
+        # todo : change to creep if it is a correction move
+        ispeed = 'cruise'
+        
+        mv2 = argscorrection(_dir, ispeed, _motor, float(_ang), 
+                              pos_speed[posid], prevdir, 
+                              val_backlash=pos_backlash[posid]) 
+        _dir, ispeed, _motor, _ang =  mv2
+
+        mvargs = f"{_dir} {ispeed} {_motor} {_ang:.5f} {ihash}"
+        # print(prevdir)
+        print(mvargs)
+        prevdir.update({_motor:_dir})
+
+        #fao
+        # sys.exit(1)
+        # ----- move it ------------------------------------
+        send_posmove(mvargs, verbose=False)    
+        sys_status = confirm_move(ihash, get_remotehash(sh))
+        
+        if not sys_status:
+            print("PB not replied")
+            sys.exit(1) 
+
+        #fao
+        time.sleep(0.3) # trying to solve central fit issue
+
+        # take pic here
+
+
+        get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
+        ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+        centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                        f"sbigpics/{session_label}", 
+                                        expected_spot_count=5,
+                                        verbose=False)
+        centroids = ts.get_spotpos("4852", centroidall, reg=reg)
+        # Conditional statement to catch the times when the camera takes images with little/no data
+        while (len(centroids)!=5) or (np.unique(ff)==[0]).all() or (np.unique(ff)[-10:]<45000).any():
+            print("Software error, taking image again")
+            os.remove(picpath+'/'+mvlabel+'.fits')
+            print(picpath+'/'+mvlabel+'.fits deleted successfully')
+            
+            get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun) 
+            ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+            centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                        f"sbigpics/{session_label}", 
+                                        expected_spot_count=5,
+                                        verbose=False)
+            centroids = ts.get_spotpos("4852", centroidall, reg=reg)
+
+        fidmask = ts.select_fidregion(centroidall)
+        xfid, yfid = ts.get_xyfid(centroidall, fidmask)
+        pix2mm, sigpix2mm  = ts.get_pix2mm(xfid, yfid)
+        
+        # todo: Adapt for multiple 
+        x_now = centroids['x'][0] 
+        y_now = centroids['y'][0]
+
+        deltapix = np.sqrt(np.square(x_now-x_here)+np.square(y_now-y_here))
+
+        while deltapix>30:
+            # Do it all again
+
+            print("Unable to reach home, attempting corrective move")
+
+            x_here,y_here = x_now,x_here
+
+            # First move
+
+            _dir, _motor, _ang = 'ccw','theta','10'
+            # todo : change to creep if it is a correction move
+            ispeed = 'cruise'
+            
+            mv2 = argscorrection(_dir, ispeed, _motor, float(_ang), 
+                                  pos_speed[posid], prevdir, 
+                                  val_backlash=pos_backlash[posid]) 
+            _dir, ispeed, _motor, _ang =  mv2
+
+            mvargs = f"{_dir} {ispeed} {_motor} {_ang:.5f} {ihash}"
+            # print(prevdir)
+            print(mvargs)
+            prevdir.update({_motor:_dir})
+
+            #fao
+            # sys.exit(1)
+            # ----- move it ------------------------------------
+            send_posmove(mvargs, verbose=False)    
+            sys_status = confirm_move(ihash, get_remotehash(sh))
+            
+            if not sys_status:
+                print("PB not replied")
+                sys.exit(1) 
+
+            #fao
+            time.sleep(0.3) # trying to solve central fit issue
+
+            _dir, _motor, _ang = 'ccw','phi','10'
+            # todo : change to creep if it is a correction move
+            ispeed = 'cruise'
+            
+            mv2 = argscorrection(_dir, ispeed, _motor, float(_ang), 
+                                  pos_speed[posid], prevdir, 
+                                  val_backlash=pos_backlash[posid]) 
+            _dir, ispeed, _motor, _ang =  mv2
+
+            mvargs = f"{_dir} {ispeed} {_motor} {_ang:.5f} {ihash}"
+            # print(prevdir)
+            print(mvargs)
+            prevdir.update({_motor:_dir})
+
+            #fao
+            # sys.exit(1)
+            # ----- move it ------------------------------------
+            send_posmove(mvargs, verbose=False)    
+            sys_status = confirm_move(ihash, get_remotehash(sh))
+            
+            if not sys_status:
+                print("PB not replied")
+                sys.exit(1) 
+
+            #fao
+            time.sleep(0.3) # trying to solve central fit issue
+
+            # take pic here
+
+
+            get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun)
+            ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+            centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                        f"sbigpics/{session_label}", 
+                                        expected_spot_count=5,
+                                        verbose=False)
+            centroids = ts.get_spotpos("4852", centroidall, reg=reg)
+            # Conditional statement to catch the times when the camera takes images with little/no data
+            while (len(centroids)!=5) or (np.unique(ff)==[0]).all() or (np.unique(ff)[-10:]<45000).any():
+                print("Software error, taking image again")
+                os.remove(picpath+'/'+mvlabel+'.fits')
+                print(picpath+'/'+mvlabel+'.fits deleted successfully')
+                
+                get_picture(cam, mvlabel, rootout=picpath, dryrun=dryrun) 
+                ff = fits.getdata(picpath+'/'+mvlabel+".fits")
+
+                centroidall = ts.get_spot(f"{mvlabel}.fits", 
+                                        f"sbigpics/{session_label}", 
+                                        expected_spot_count=5,
+                                        verbose=False)
+                centroids = ts.get_spotpos("4852", centroidall, reg=reg)
+
+            fidmask = ts.select_fidregion(centroidall)
+            xfid, yfid = ts.get_xyfid(centroidall, fidmask)
+            pix2mm, sigpix2mm  = ts.get_pix2mm(xfid, yfid)
+            
+            # todo: Adapt for multiple 
+            x_now = centroids['x'][0] 
+            y_now = centroids['y'][0]
+
+            deltapix = np.sqrt(np.square(x_now-x_here)+np.square(y_now-y_here))
+
+
+        if hascam and (not dryrun):
+            cam.close_camera()
     # todo generate a log!!!
 
 

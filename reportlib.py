@@ -14,12 +14,15 @@ sys.path.append(f"{root}/output/figures/")
 from spotfinder import spotfinder
 from xylib import calc_movetables as cm
 
-try:
-    sys.path.append(f"{parent}/desiarc/arc")
-    import find_center as fc
-except:
-    sys.path.append(f"{root}/desiarc-main/arc")
-    import find_center as fc
+sys.path.append(f"{parent}/desiarc-main/arc/")
+import find_center as fc
+
+# try:
+#     sys.path.append(f"{parent}/desiarc/arc")
+#     import find_center as fc
+# except:
+#     sys.path.append(f"{root}/desiarc-main/arc")
+#     import find_center as fc
     
 
 plt.rcParams.update({'figure.dpi':120})

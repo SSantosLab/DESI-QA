@@ -89,7 +89,7 @@ def get_picture(cam, imgname, rootout=None, dryrun=False):
 
 
 # Mount Session
-def start_mount(port='/dev/ttyUSB1'):
+def start_mount(port='/dev/ttyUSB0'):
     """
     Instantiate the ts mount class
     returns:
@@ -580,6 +580,3 @@ if __name__=='__main__':
     if hascam and (not dryrun):
         cam.close_camera()
     # todo generate a log!!!
-
-
-   
