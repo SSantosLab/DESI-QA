@@ -566,34 +566,38 @@ if __name__=='__main__':
             print(f"starting positioners loop for MOUNT in {imount}")
             mtang1, mtang2 = movemount(imount, cem120)
             print("Sleep for 30s to let mount rest")
-            time.sleep(30) # Wait 30s
         else:
             mtang1, mtang2 = 0, 0
             print(f"starting positioners loop for MOUNT in {imount}")
             movemount(imount, cem120)   
             print("Sleep for 30s to let mount rest")
-            time.sleep(30) # Wait 30s
 
+        time.sleep(30) # Wait 30s
         print("-----"*10,"\nRunning arcsequences for",[mtang1,mtang2],"mount configuration")
         # Run Arctheta and phi run_ang.py
         if mtang1 == 0 and mtang2 == 0: # Mount is in horizon
             subprocess.call(["python","run_ang.py","-c","conf/arcph15.ini"])
+            time.sleep(30) # Wait 30s
             subprocess.call(["python","run_ang.py","-c","conf/arcth30.ini"])
         elif (mtang1==90 and mtang2==90) or (mtang1==-90 and mtang2==-90): # Mount is in positioner down
             subprocess.call(["python","run_ang.py","-c","conf/arcph15_posdown.ini"])
+            time.sleep(30) # Wait 30s
             subprocess.call(["python","run_ang.py","-c","conf/arcth30_posdown.ini"])
         elif (mtang1==90 and mtang2==-90) or (mtang1==-90 and mtang2==90): # Mount is in positioner up
             subprocess.call(["python","run_ang.py","-c","conf/arcph15_posup.ini"])
+            time.sleep(30) # Wait 30s
             subprocess.call(["python","run_ang.py","-c","conf/arcth30_posup.ini"])
         else:
             raise NotImplementedError("Mount position not supported")
+
+        time.sleep(30) # Wait 30s    
 
         if hascam and (not dryrun):
             cam = start_cam()
 
         print("Reading dates to get calibration values")
         #Get two most recent unique dates from the database, store them as date1 and date2 for the below call
-        time.sleep(2)
+        # time.sleep(2)
         df = pd.read_csv("/home/msdos/DESI-QA/output/database.csv",usecols=[0,3])[-43:]
         reducedCol = rl.toNumpy(df['label'].str[8:])
         dates = np.unique(reducedCol)
@@ -788,7 +792,7 @@ if __name__=='__main__':
             # SM TODO - done, except hardstop angle which i am leaving for now
             # UPDATE xc,yc,Rtheta,Rphi,hardstop angle here
             center[posid] = updateCenter(center[posid],xfid,yfid,xfid_old,yfid_old,pix2mm,pix2mm_old)
-            R1[posid],R2[posid] = updateR(R1[posid],R2[posid],pix2mm,pix2mm_old)
+            # R1[posid],R2[posid] = updateR(R1[posid],R2[posid],pix2mm,pix2mm_old)
             # hardstop_ang[posid] = updateAngle(hardstop_ang[posid],xfid,yfid,xfid_old,yfid_old,pix2mm,pix2mm_old) # Left out for now
 
             xfid_old,yfid_old = xfid,yfid
@@ -809,8 +813,8 @@ if __name__=='__main__':
                                          xpos,ypos,
                                          x_tgt,y_tgt)
         
-        if len(rows[0])==0:
-            print("No Move!")
+        # if len(rows[0])==0:
+        #     print("No Move!")
 
         # Move WITHOUT updating targets
         mvlabel = time.strftime("%Y%m%d-%H%M%S")

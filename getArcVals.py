@@ -175,3 +175,38 @@ def main(date1,date2):
     hardStop = -angle_between(np.array([xc,yc]), np.array([xc+5,yc]), (xc2,yc2))
 
     return R1, R2, xc, yc, xc2, yc2, hardStop
+
+def pix2mm(date1,date2):
+    db = pd.read_csv("/home/msdos/DESI-QA/output/database.csv")
+    get_timecol(db)
+
+    fiddb = pd.read_csv("/home/msdos/DESI-QA/output/fiddb.csv");get_timecol(fiddb)
+
+        # Add date1 and date2 as args
+    
+
+    dateStart = np.array([date1,date2],dtype='datetime64') # arcth time, arcph time, and arcth30small time
+    dateEnd = dateStart+np.timedelta64(4,'m')
+
+    m1 =  query_time(db, datemin=dateStart[0],datemax=dateEnd[0])
+    m1 = (m1) & ( db['label'].str.contains('arcth') )  & (db['motor']=='theta')
+    # m1 = (m1) & (db['direction']=='cw')
+
+    m2 = query_time(db, datemin=dateStart[1],datemax=dateEnd[1])
+    m2 = (m2) & ( db['label'].str.contains('arcph') )
+    
+    m1a =  query_time(fiddb, datemin=dateStart[0],datemax=dateEnd[0])
+    m1a = (m1a) & ( fiddb['label'].str.contains('arcth') )  & (db['motor']=='theta')
+    # m1 = (m1) & (db['direction']=='cw')
+
+    m2a = query_time(fiddb, datemin=dateStart[1],datemax=dateEnd[1])
+    m2a = (m2a) & ( fiddb['label'].str.contains('arcph') )
+
+    # SM TODO - calculate pix2mm from fiducial database
+    # Done, but want to do this in a more elegant way
+    
+    a,b = np.array(fiddb["pix2mm"][m1a]),np.array(fiddb["pix2mm"][m2a])
+    a = np.concatenate((a,b))
+
+    pix2mm = np.median(a)
+    return pix2mm
