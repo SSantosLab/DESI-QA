@@ -591,25 +591,25 @@ if __name__=='__main__':
                 mtang1,mtang2 = lastMount[0].astype(float),lastMount[1].astype(float)
             print("Sleep for 30s to let mount rest")
         del lastMount
-        time.sleep(30) # Wait 30s
+        time.sleep(150) # Wait 30s
         print("-----"*10,"\nRunning arcsequences for",[mtang1,mtang2],"mount configuration")
         # Run Arctheta and phi run_ang.py
         if mtang1 == 0 and mtang2 == 0: # Mount is in horizon
             subprocess.call(["python","run_ang.py","-c","conf/arcph15.ini"])
-            time.sleep(30) # Wait 30s
+            time.sleep(150) # Wait 30s
             subprocess.call(["python","run_ang.py","-c","conf/arcth30.ini"])
         elif (mtang1==90 and mtang2==90) or (mtang1==-90 and mtang2==-90): # Mount is in positioner down
             subprocess.call(["python","run_ang.py","-c","conf/arcph15_posdown.ini"])
-            time.sleep(30) # Wait 30s
+            time.sleep(150) # Wait 30s
             subprocess.call(["python","run_ang.py","-c","conf/arcth30_posdown.ini"])
         elif (mtang1==90 and mtang2==-90) or (mtang1==-90 and mtang2==90): # Mount is in positioner up
             subprocess.call(["python","run_ang.py","-c","conf/arcph15_posup.ini"])
-            time.sleep(30) # Wait 30s
+            time.sleep(150) # Wait 30s
             subprocess.call(["python","run_ang.py","-c","conf/arcth30_posup.ini"])
         else:
             raise NotImplementedError("Mount position not supported")
 
-        time.sleep(30) # Wait 30s    
+        time.sleep(150) # Wait 30s    
 
         if hascam and (not dryrun):
             cam = start_cam()
