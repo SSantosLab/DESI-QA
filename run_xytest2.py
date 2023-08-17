@@ -23,6 +23,7 @@ import subprocess
 import pandas as pd
 import reportlib as rl
 import getArcVals as gAV
+import pandas as pd
 from astropy.io import fits
 
 def start_cam(exposure_time=3000, is_dark=False):
@@ -414,6 +415,11 @@ def updateR(R1,R2,pix2mm,pix2mm_old):
     print("Updating R's of positioner")
     return R1_new,R2_new
 
+def angleChecker(angle):
+    if angle>-170 and angle<-155:
+        return False
+    else:
+        return True
 
 # def updateAngle(hardstop_ang,xfid,yfid,xfid_old,yfid_old,pix2mm,pix2mm_old):
 
@@ -562,16 +568,29 @@ if __name__=='__main__':
     for i, imount in enumerate(mounttable): # For each mount configuration
         x_here,y_here = None,None # This should be inside mount loop
         print(f"\n>>  Mount move #{i}: {imount}\n")
+        ## Command here to read last line of database
+        lastMount = np.array(pd.read_csv("/home/msdos/DESI-QA/output/database.csv",usecols=[1,2]).tail(1),dtype=int)[0].astype(str)
+        # Compare to imount
+        if (lastMount[0]==imount[0] and lastMount[1]==imount[1]):
+            moveit=False
+        else:
+            moveit=True
         if imount !=0:  
             print(f"starting positioners loop for MOUNT in {imount}")
-            mtang1, mtang2 = movemount(imount, cem120)
+            if moveit:
+                mtang1, mtang2 = movemount(imount, cem120)
+            else:
+                mtang1,mtang2 = lastMount[0].astype(float),lastMount[1].astype(float)
             print("Sleep for 30s to let mount rest")
         else:
             mtang1, mtang2 = 0, 0
             print(f"starting positioners loop for MOUNT in {imount}")
-            movemount(imount, cem120)   
+            if moveit:
+                movemount(imount, cem120)
+            else:
+                mtang1,mtang2 = lastMount[0].astype(float),lastMount[1].astype(float)
             print("Sleep for 30s to let mount rest")
-
+        del lastMount
         time.sleep(30) # Wait 30s
         print("-----"*10,"\nRunning arcsequences for",[mtang1,mtang2],"mount configuration")
         # Run Arctheta and phi run_ang.py
@@ -614,6 +633,14 @@ if __name__=='__main__':
         # Get relevant values of R1 and R2, Hardstop angle, and xc, yc for that configuration using the session labels 
         R1[posid], R2[posid], xc, yc, xc2, yc2, hardstop_ang[posid] = gAV.main(str(date2),str(date1))
         center[posid] = [xc,yc]
+
+        if angleChecker(hardstop_ang[posid]):
+            print("Angle calculated incorrectly, exiting program")
+            print("Angle calculated as",hardstop_ang[posid])
+            # Exit program
+            exit()
+
+
         # Run a 30 degree cw move for both theta and phi arms to move off of home, set prevdir
         send_posmove("cw cruise phi 30 000", verbose=False)
         send_posmove("cw cruise theta 30 000", verbose=False)
@@ -789,9 +816,9 @@ if __name__=='__main__':
             print(picpath+'/'+mvlabel+'.fits deleted successfully')
                         
 
-            # SM TODO - done, except hardstop angle which i am leaving for now
+            # SM TODO - done, except hardstop angle which i am leaving out for now
             # UPDATE xc,yc,Rtheta,Rphi,hardstop angle here
-            center[posid] = updateCenter(center[posid],xfid,yfid,xfid_old,yfid_old,pix2mm,pix2mm_old)
+            # center[posid] = updateCenter(center[posid],xfid,yfid,xfid_old,yfid_old,pix2mm,pix2mm_old)
             # R1[posid],R2[posid] = updateR(R1[posid],R2[posid],pix2mm,pix2mm_old)
             # hardstop_ang[posid] = updateAngle(hardstop_ang[posid],xfid,yfid,xfid_old,yfid_old,pix2mm,pix2mm_old) # Left out for now
 

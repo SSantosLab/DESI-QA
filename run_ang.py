@@ -25,6 +25,7 @@ import xylib as xylib
 import test_spotfinder as ts
 import tslib as tslib
 from astropy.io import fits
+import pandas as pd
 
 
 # I/O Session: 
@@ -489,15 +490,28 @@ if __name__=='__main__':
     netphi = 0
     for i, imount in enumerate(mounttable):
         print(f"\n>>  Mount move #{i}: {imount}\n")
+        ## Command here to read last line of database
+        lastMount = np.array(pd.read_csv("/home/msdos/DESI-QA/output/database.csv",usecols=[1,2]).tail(1),dtype=int)[0].astype(str)
+        # Compare to imount
+        if (lastMount[0]==imount[0] and lastMount[1]==imount[1]):
+            moveit=False
+        else:
+            moveit=True
+        
         if imount !=0:  
             print(f"starting positioners loop for MOUNT in {imount}")
-            mtang1, mtang2 = movemount(imount, cem120)
+            if moveit:
+                mtang1, mtang2 = movemount(imount, cem120)
+            else:
+                mtang1,mtang2 = lastMount[0].astype(float),lastMount[1].astype(float)
         else:
             mtang1, mtang2 = 0, 0
 
             print(f"starting positioners loop for MOUNT in {imount}")
-            movemount(imount, cem120)
-
+            if moveit:
+                movemount(imount, cem120)
+            else:
+                mtang1,mtang2 = lastMount[0].astype(float),lastMount[1].astype(float)
 
         for j, imove in enumerate(movetable):
             mvlabel = time.strftime("%Y%m%d-%H%M%S")
