@@ -581,7 +581,7 @@ if __name__=='__main__':
                 mtang1, mtang2 = movemount(imount, cem120)
             else:
                 mtang1,mtang2 = lastMount[0].astype(float),lastMount[1].astype(float)
-            print("Sleep for 30s to let mount rest")
+            print("Sleep for 150s to let mount rest")
         else:
             mtang1, mtang2 = 0, 0
             print(f"starting positioners loop for MOUNT in {imount}")
@@ -589,7 +589,7 @@ if __name__=='__main__':
                 movemount(imount, cem120)
             else:
                 mtang1,mtang2 = lastMount[0].astype(float),lastMount[1].astype(float)
-            print("Sleep for 30s to let mount rest")
+            print("Sleep for 150s to let mount rest")
         del lastMount
         time.sleep(150) # Wait 30s
         print("-----"*10,"\nRunning arcsequences for",[mtang1,mtang2],"mount configuration")
